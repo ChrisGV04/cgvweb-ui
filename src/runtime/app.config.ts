@@ -8,6 +8,12 @@ import { UseFloatingOptions } from "@floating-ui/vue";
 
 // Layout
 
+const container = {
+  base: "mx-auto w-full",
+  constrained: "max-w-7xl",
+  padding: "px-4 sm:px-6 lg:px-8",
+};
+
 // Navigation
 
 // Overlays
@@ -35,6 +41,7 @@ const tooltip = {
 
 export default {
   ui: {
+    container,
     tooltip,
   },
 };

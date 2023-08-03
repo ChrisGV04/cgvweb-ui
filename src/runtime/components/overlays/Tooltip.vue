@@ -10,9 +10,11 @@ import {
 } from "@floating-ui/vue";
 import { defu } from "defu";
 import { computed, ref, type PropType } from "vue";
-import defaultAppConfig from "../../app.config";
+import typeAppConfig from "../../app.config";
+// @ts-expect-error
+import buildAppConfig from "#build/app.config";
 
-type UiConfig = Partial<typeof defaultAppConfig.ui.tooltip>;
+type UiConfig = Partial<typeof typeAppConfig.ui.tooltip>;
 
 const props = defineProps({
   text: String,
@@ -30,7 +32,7 @@ const props = defineProps({
   },
   ui: {
     type: Object as PropType<UiConfig>,
-    default: (): UiConfig => defaultAppConfig.ui.tooltip,
+    default: (): UiConfig => buildAppConfig.ui.tooltip,
   },
 });
 

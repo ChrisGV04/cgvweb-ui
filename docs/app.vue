@@ -6,24 +6,31 @@ const color = computed(() =>
 );
 
 useHead({
-  titleTemplate: (title) =>
-    title && title.includes("CGV WEB UI") ? title : `${title} - CGV WEB UI`,
-  meta: [
-    {
-      name: "viewport",
-      content: "width=device-width, initial-scale=1, maximum-scale=1",
-    },
-    { key: "theme-color", name: "theme-color", content: color },
-  ],
-  link: [{ rel: "icon", type: "image/svg+xml", href: "/icon.svg" }],
-  htmlAttrs: {
-    lang: "en",
-  },
+  meta: [{ key: "theme-color", name: "theme-color", content: color }],
 });
 </script>
 
 <template>
-  <div class="p-20">
-    <UiTooltip text="I am a tooltip!">Hover me</UiTooltip>
+  <div>
+    <TheHeader />
+    <NuxtPage />
   </div>
 </template>
+
+<style>
+.demo-page-title {
+  @apply text-2xl text-gray-900 dark:text-white;
+}
+
+.demo-page-description {
+  @apply text-gray-600 dark:text-gray-400;
+}
+
+.demo-category-container {
+  @apply flex flex-col;
+}
+
+.demo-category-title {
+  @apply text-sm font-medium text-gray-600 dark:text-gray-400;
+}
+</style>
