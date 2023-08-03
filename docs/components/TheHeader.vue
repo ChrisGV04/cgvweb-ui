@@ -20,7 +20,6 @@ const navigation: NavigationItem[] = [
       { name: "Badge", route: "/badge" },
       { name: "Icon", route: "/icon" },
       { name: "Highlights", route: "/highlights" },
-      { name: "Breakpoint Viewer", route: "/breakpoints" },
     ],
   },
   {
@@ -33,6 +32,7 @@ const navigation: NavigationItem[] = [
       { name: "Dialog", route: "/dialog" },
       { name: "Slideover", route: "/slideover" },
       { name: "Tooltip", route: "/tooltip" },
+      { name: "Breakpoint Viewer", route: "/breakpoints" },
     ],
   },
 ];

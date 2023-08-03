@@ -6,10 +6,10 @@
       Tailwind CSS breakpoint.
     </p>
 
-    <!-- <DevOnly>
+    <DevOnly>
       <ClientOnly>
         <UiBreakpointViewer />
       </ClientOnly>
-    </DevOnly> -->
+    </DevOnly>
   </UiContainer>
 </template>
