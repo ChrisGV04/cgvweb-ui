@@ -1,5 +1,6 @@
 <script setup lang="ts">
-// const demoText = 'Text with [highlighted] words as an example of a [functional component].';
+const demoText =
+  "Text with [highlighted] words as an example of a [functional component].";
 </script>
 
 <template>
@@ -9,12 +10,16 @@
       Funcional component used to highlight certain parts of a given text.
     </p>
 
-    <!-- <div class="border-primary-500 mt-4 demo-category-container border-l-2 pl-4">
+    <div
+      class="border-primary-500 mt-4 demo-category-container border-l-2 pl-4"
+    >
       <span class="demo-category-title">Raw input:</span>
       <p>{{ demoText }}</p>
     </div>
 
-    <div class="border-primary-500 mt-4 demo-category-container border-l-2 pl-4">
+    <div
+      class="border-primary-500 mt-4 demo-category-container border-l-2 pl-4"
+    >
       <span class="demo-category-title">With highlights:</span>
 
       <UiHighlightText :text="demoText">
@@ -22,6 +27,6 @@
           <span class="text-primary-500 uppercase">{{ content }}</span>
         </template>
       </UiHighlightText>
-    </div> -->
+    </div>
   </UiContainer>
 </template>

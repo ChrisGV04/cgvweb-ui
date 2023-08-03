@@ -18,13 +18,10 @@ const navigation: NavigationItem[] = [
     name: "Elements",
     children: [
       { name: "Badge", route: "/badge" },
-      { name: "Breakpoint Viewer", route: "/breakpoints" },
       { name: "Icon", route: "/icon" },
+      { name: "Highlights", route: "/highlights" },
+      { name: "Breakpoint Viewer", route: "/breakpoints" },
     ],
-  },
-  {
-    name: "Functional",
-    children: [{ name: "Highlights", route: "/highlights" }],
   },
   {
     name: "Layout",
