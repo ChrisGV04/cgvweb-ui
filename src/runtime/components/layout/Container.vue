@@ -2,11 +2,11 @@
 import { useAppConfig } from "#imports";
 import { defu } from "defu";
 import { computed, type PropType } from "vue";
-import typeAppConfig from "../../app.config";
+import type { UiContainerConfig } from "../../types";
 // @ts-expect-error
 import buildAppConfig from "#build/app.config";
 
-type UiConfig = Partial<typeof typeAppConfig.ui.container>;
+type UiConfig = Partial<UiContainerConfig>;
 
 const props = defineProps({
   as: { type: String, default: "div" },

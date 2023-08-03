@@ -10,11 +10,11 @@ import {
 } from "@floating-ui/vue";
 import { defu } from "defu";
 import { computed, ref, type PropType } from "vue";
-import typeAppConfig from "../../app.config";
+import type { UiTooltipConfig } from "../../types";
 // @ts-expect-error
 import buildAppConfig from "#build/app.config";
 
-type UiConfig = Partial<typeof typeAppConfig.ui.tooltip>;
+type UiConfig = Partial<UiTooltipConfig>;
 
 const props = defineProps({
   text: String,

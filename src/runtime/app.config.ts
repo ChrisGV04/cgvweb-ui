@@ -1,4 +1,4 @@
-import type { UseFloatingOptions } from "@floating-ui/vue";
+import type { UiContainerConfig, UiTooltipConfig } from "./types";
 
 // Data
 
@@ -8,7 +8,7 @@ import type { UseFloatingOptions } from "@floating-ui/vue";
 
 // Layout
 
-const container = {
+const container: UiContainerConfig = {
   base: "mx-auto w-full",
   constrained: "max-w-7xl",
   padding: "px-4 sm:px-6 lg:px-8",
@@ -18,7 +18,7 @@ const container = {
 
 // Overlays
 
-const tooltip = {
+const tooltip: UiTooltipConfig = {
   wrapper: "relative inline-flex",
   container: "z-30",
   width: "max-w-xs",
@@ -28,7 +28,7 @@ const tooltip = {
   rounded: "rounded",
   ring: "ring-1 ring-gray-200 dark:ring-gray-800",
   base: "px-2 py-1 text-xs font-normal truncate",
-  floating: { strategy: "fixed" } as UseFloatingOptions,
+  floating: { strategy: "fixed" },
   transition: {
     enterActiveClass: "transition ease-out duration-200",
     enterFromClass: "opacity-0 translate-y-1",
