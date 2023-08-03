@@ -1,7 +1,7 @@
 <script setup lang="ts">
-// import { ref } from 'vue';
+import { ref } from "vue";
 
-// const showSlideover = ref(false);
+const showSlideover = ref(false);
 </script>
 
 <template>
@@ -12,7 +12,7 @@
       user.
     </p>
 
-    <!-- <button
+    <button
       type="button"
       @click="showSlideover = true"
       class="bg-primary-600 hover:bg-primary-500 focus-visible:outline-primary-600 mt-8 rounded-md px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
@@ -20,13 +20,14 @@
       Open slideover
     </button>
 
-    <UiSlideover :show="showSlideover" class="max-w-md" @close="showSlideover = false">
-      <div class="flex h-full flex-col overflow-y-scroll bg-white px-4 py-6 shadow-xl sm:px-6">
+    <UiSlideover v-model="showSlideover">
+      <div class="flex flex-col px-4 py-6">
         <h2 class="text-xl font-medium text-gray-900">This is a slideover</h2>
         <p class="mt-3 text-gray-600">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus libero quo voluptatem perspiciatis
-          similique, omnis explicabo quos consequatur, ab adipisci itaque excepturi, voluptatum voluptatibus a
-          unde deserunt inventore veritatis quod delectus esse hic?
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Earum fugit
+          impedit, natus, ea libero vitae soluta expedita ratione mollitia fuga
+          similique, dicta aliquam? Distinctio nulla, vel quibusdam eligendi
+          nostrum perferendis!
         </p>
 
         <button
@@ -37,6 +38,6 @@
           Close slideover
         </button>
       </div>
-    </UiSlideover> -->
+    </UiSlideover>
   </UiContainer>
 </template>
