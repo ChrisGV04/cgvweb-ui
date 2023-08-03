@@ -1,6 +1,6 @@
 <script setup lang="ts">
-// const topWords = ['MARQUEE', 'COOL'];
-// const bottomWords = ['PAUSABLE', 'REVERSIBLE', 'SPEED', 'NUXT'];
+const topWords = ["MARQUEE", "COOL"];
+const bottomWords = ["PAUSABLE", "REVERSIBLE", "SPEED", "NUXT"];
 </script>
 
 <template>
@@ -12,15 +12,19 @@
       </p>
     </UiContainer>
 
-    <!-- <UiMarquee :speed="120">
-      <h4 class="text-primary-500 mr-8 text-[clamp(9rem,15vw,50vh)] leading-none">
-        <template v-for="w in topWords">{{ w }}{{ ' - ' }}</template>
+    <UiMarquee :speed="120">
+      <h4
+        class="text-primary-500 mr-8 text-[clamp(9rem,15vw,50vh)] leading-none"
+      >
+        <template v-for="w in topWords">{{ w }}{{ " - " }}</template>
       </h4>
     </UiMarquee>
 
     <UiMarquee :speed="50" reverse>
-      <h4 class="text-primary-900 mr-8 text-[clamp(6rem,10vw,15vh)] leading-none">
-        <template v-for="w in bottomWords">{{ w }}{{ ' - ' }}</template>
+      <h4
+        class="text-primary-900 mr-8 text-[clamp(6rem,10vw,15vh)] leading-none"
+      >
+        <template v-for="w in bottomWords">{{ w }}{{ " - " }}</template>
       </h4>
     </UiMarquee>
 
@@ -42,6 +46,6 @@
           Global IC
         </div>
       </div>
-    </UiMarquee> -->
+    </UiMarquee>
   </main>
 </template>
