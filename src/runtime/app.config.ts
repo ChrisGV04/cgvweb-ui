@@ -1,4 +1,4 @@
-import { UseFloatingOptions } from "@floating-ui/vue";
+import type { UseFloatingOptions } from "@floating-ui/vue";
 
 // Data
 
