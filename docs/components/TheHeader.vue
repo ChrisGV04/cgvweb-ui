@@ -39,18 +39,14 @@ const navigation: NavigationItem[] = [
 </script>
 
 <template>
-  <header
-    class="border-b border-gray-900/10 bg-white dark:bg-gray-950 dark:border-white/20"
-  >
+  <header class="border-b border-gray-900/10 bg-white">
     <nav
       class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
       aria-label="Global"
     >
       <div class="flex lg:flex-1">
         <NuxtLink to="/">
-          <span class="text-lg font-semibold text-gray-900 dark:text-white"
-            >CGV WEB UI</span
-          >
+          <span class="text-lg font-semibold text-gray-900">CGV WEB UI</span>
         </NuxtLink>
       </div>
 
@@ -59,13 +55,13 @@ const navigation: NavigationItem[] = [
           <NuxtLink
             v-if="item.route"
             :to="item.route"
-            class="text-sm font-semibold leading-6 text-gray-900 dark:text-white"
+            class="text-sm font-semibold leading-6 text-gray-900"
             >{{ item.name }}</NuxtLink
           >
 
           <Popover v-if="item.children" class="relative" v-slot="{ close }">
             <PopoverButton
-              class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900 dark:text-white"
+              class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900"
             >
               {{ item.name }}
               <UiIcon
@@ -90,7 +86,7 @@ const navigation: NavigationItem[] = [
                   :key="child.name"
                   :to="child.route"
                   v-for="child in item.children"
-                  class="block rounded-lg px-3 py-2 text-sm font-semibold leading-6 text-gray-900 dark:text-white dark:hover:bg-gray-800 hover:bg-gray-50"
+                  class="block rounded-lg px-3 py-2 text-sm font-semibold leading-6 text-gray-900 dark:hover:bg-gray-800 hover:bg-gray-50"
                   >{{ child.name }}</NuxtLink
                 >
               </PopoverPanel>

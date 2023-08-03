@@ -29,19 +29,15 @@
       <span class="demo-category-title">Scroll responsive</span>
 
       <div
-        class="mt-1 flex flex-nowrap dark:bg-gray-700 dark:border-white/10 items-center gap-5 overflow-x-auto rounded-md border border-gray-900/10 bg-gray-100 p-2 will-change-transform"
+        class="mt-1 flex flex-nowrap items-center gap-5 overflow-x-auto rounded-md border border-gray-900/10 bg-gray-100 p-2 will-change-transform"
       >
-        <div
-          class="h-20 w-[30vw] flex-shrink-0 rounded bg-gray-300 dark:bg-gray-500"
-        />
+        <div class="h-20 w-[30vw] flex-shrink-0 rounded bg-gray-300" />
 
         <UiTooltip text="I am a tooltip!" class="flex-shrink-0" placement="left"
           >Hover me</UiTooltip
         >
 
-        <div
-          class="h-20 w-[50vw] flex-shrink-0 rounded bg-gray-300 dark:bg-gray-500"
-        />
+        <div class="h-20 w-[50vw] flex-shrink-0 rounded bg-gray-300" />
       </div>
     </div>
 

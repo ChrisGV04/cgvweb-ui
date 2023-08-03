@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import colors from "tailwindcss/colors";
 import defaultTheme from "tailwindcss/defaultTheme";
 
 export default <Partial<Config>>{
@@ -7,6 +8,8 @@ export default <Partial<Config>>{
       fontFamily: {
         sans: ["Inter", "Inter fallback", ...defaultTheme.fontFamily.sans],
       },
+
+      colors: { primary: colors.sky },
     },
   },
 };
