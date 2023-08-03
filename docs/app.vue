@@ -23,5 +23,7 @@ useHead({
 </script>
 
 <template>
-  <div>Welcome</div>
+  <div class="p-20">
+    <UiTooltip text="I am a tooltip!">Hover me</UiTooltip>
+  </div>
 </template>
