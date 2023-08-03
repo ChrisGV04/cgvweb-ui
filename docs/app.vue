@@ -12,6 +12,8 @@ useHead({
 
 <template>
   <div>
+    <Body class="dark:bg-gray-900" />
+
     <TheHeader />
     <NuxtPage />
   </div>
