@@ -18,8 +18,6 @@ const props = defineProps({
 
 // Merge UI config
 const appConfig = useAppConfig();
-console.log(appConfig.ui.container);
-
 const ui = computed<UiConfig>(() => defu({}, props.ui, appConfig.ui.container));
 </script>
 
