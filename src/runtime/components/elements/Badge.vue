@@ -10,6 +10,7 @@ import type {
   UiBadgeVariants,
 } from "../../types";
 import { classNames } from "../../utils";
+import UiIcon from "./Icon.vue";
 // @ts-expect-error
 import buildAppConfig from "#build/app.config";
 
