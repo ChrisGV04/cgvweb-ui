@@ -66,7 +66,7 @@ const navigation: NavigationItem[] = [
               {{ item.name }}
               <UiIcon
                 name="i-heroicons-chevron-down-20-solid"
-                class="h-5 w-5 flex-none text-gray-400 dark:text-gray-600"
+                class="h-5 w-5 flex-none text-gray-400"
               />
             </PopoverButton>
 
@@ -79,14 +79,14 @@ const navigation: NavigationItem[] = [
               leave-to-class="opacity-0 translate-y-1"
             >
               <PopoverPanel
-                class="absolute -left-8 top-full z-10 mt-3 w-56 rounded-xl bg-white dark:bg-gray-900 p-2 shadow-lg ring-1 ring-gray-900/5 dark:ring-white/5"
+                class="absolute -left-8 top-full z-10 mt-3 w-56 rounded-xl bg-white p-2 shadow-lg ring-1 ring-gray-900/5"
               >
                 <NuxtLink
                   @click="close"
                   :key="child.name"
                   :to="child.route"
                   v-for="child in item.children"
-                  class="block rounded-lg px-3 py-2 text-sm font-semibold leading-6 text-gray-900 dark:hover:bg-gray-800 hover:bg-gray-50"
+                  class="block rounded-lg px-3 py-2 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50"
                   >{{ child.name }}</NuxtLink
                 >
               </PopoverPanel>
