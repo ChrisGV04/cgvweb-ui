@@ -13,6 +13,8 @@ interface NavigationItem {
   children?: Omit<NavigationItem, "children">[];
 }
 
+const env = useRuntimeConfig();
+
 const navigation: NavigationItem[] = [
   {
     name: "Elements",
@@ -95,7 +97,9 @@ const navigation: NavigationItem[] = [
         </template>
       </PopoverGroup>
 
-      <div class="hidden lg:flex lg:flex-1 lg:justify-end"></div>
+      <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+        v{{ env.public.version }}
+      </div>
     </nav>
   </header>
 </template>

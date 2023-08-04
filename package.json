@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "repository": "https://github.com/ChrisGV04/cgvweb-ui",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "exports": {
     ".": {
       "import": "./dist/module.mjs",
@@ -27,7 +30,7 @@
     "lint:fix": "eslint . --fix",
     "typecheck": "nuxi typecheck",
     "prepare": "nuxi prepare docs",
-    "release": "release-it"
+    "release": "npm version patch && npm run prepack && npm publish"
   },
   "dependencies": {
     "@egoist/tailwindcss-icons": "^1.1.0",
