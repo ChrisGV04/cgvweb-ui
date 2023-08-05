@@ -21,6 +21,7 @@ const navigation: NavigationItem[] = [
     children: [
       { name: "Badge", route: "/badge" },
       { name: "Icon", route: "/icon" },
+      { name: "Link", route: "/link" },
       { name: "Button", route: "/button" },
       { name: "Highlights", route: "/highlights" },
     ],

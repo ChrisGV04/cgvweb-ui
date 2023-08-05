@@ -1,58 +1,54 @@
-<script setup lang="ts">
+<script lang="ts">
 import { NuxtLink } from "#components";
-import { useRoute } from "#imports";
 import { isEqual } from "lodash-es";
+import { defineComponent, type PropType } from "vue";
 import type { RouteLocationNormalized } from "vue-router";
-import {
-  NuxtLinkPropsWithDefaults,
-  extractNuxtLinkProps,
-} from "../../utils/link";
+import { NuxtLinkPropsWithDefaults } from "../../utils/link";
 
-defineOptions({ inheritAttrs: false });
+export default defineComponent({
+  inheritAttrs: false,
+  props: {
+    ...NuxtLinkPropsWithDefaults,
+    type: {
+      type: String as PropType<HTMLButtonElement["type"]>,
+      default: null,
+    },
+    disabled: { type: Boolean, default: false },
+    exact: { type: Boolean, default: false },
+    exactQuery: { type: Boolean, default: false },
+    exactHash: { type: Boolean, default: false },
+    inactiveClass: { type: String, default: undefined },
+  },
+  setup(props) {
+    function resolveLinkClass(
+      route: RouteLocationNormalized,
+      $route: RouteLocationNormalized,
+      { isActive, isExactActive }: { isActive: boolean; isExactActive: boolean }
+    ): string | undefined {
+      if (props.exactQuery && !isEqual(route.query, $route.query))
+        return props.inactiveClass;
 
-const props = defineProps({
-  ...NuxtLinkPropsWithDefaults,
-  type: { type: String, default: null },
-  disabled: { type: Boolean, default: false },
-  exact: { type: Boolean, default: false },
-  exactQuery: { type: Boolean, default: false },
-  exactHash: { type: Boolean, default: false },
-  inactiveClass: { type: String, default: "" },
+      if (props.exactHash && route.hash !== $route.hash)
+        return props.inactiveClass;
+
+      if (props.exact && isExactActive) return props.activeClass;
+
+      if (!props.exact && isActive) return props.activeClass;
+
+      return props.inactiveClass;
+    }
+
+    return {
+      resolveLinkClass,
+    };
+  },
 });
-
-const linkProps = extractNuxtLinkProps(props);
-
-interface ResolverInput {
-  isActive: boolean;
-  isExactActive: boolean;
-}
-
-function resolveLinkClass(
-  route: RouteLocationNormalized,
-  { isActive, isExactActive }: ResolverInput
-) {
-  if (props.exactQuery && !isEqual(route.query, useRoute().query)) {
-    return props.inactiveClass;
-  }
-  if (props.exactHash && route.hash !== useRoute().hash) {
-    return props.inactiveClass;
-  }
-
-  if (props.exact && isExactActive) {
-    return props.activeClass;
-  }
-
-  if (!props.exact && isActive) {
-    return props.activeClass;
-  }
-
-  return props.inactiveClass;
-}
 </script>
 
 <template>
   <button
     v-if="!to"
+    :type="type"
     v-bind="$attrs"
     :disabled="disabled"
     :class="inactiveClass"
@@ -63,7 +59,7 @@ function resolveLinkClass(
   <NuxtLink
     v-else
     custom
-    v-bind="linkProps"
+    v-bind="$props"
     v-slot="{
       route,
       href,
@@ -83,7 +79,7 @@ function resolveLinkClass(
       :role="disabled ? 'link' : undefined"
       @click="(e) => !isExternal && navigate(e)"
       :aria-disabled="disabled ? 'true' : undefined"
-      :class="resolveLinkClass(route, { isActive, isExactActive })"
+      :class="resolveLinkClass(route, $route, { isActive, isExactActive })"
     >
       <slot :is-active="exact ? isExactActive : isActive" />
     </a>

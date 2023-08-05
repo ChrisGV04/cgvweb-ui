@@ -46,12 +46,7 @@ export const NuxtLinkPropsWithDefaults = {
   // Styling
   activeClass: {
     type: String as PropType<string>,
-    default: undefined,
-    required: false,
-  },
-  exactActiveClass: {
-    type: String as PropType<string>,
-    default: undefined,
+    default: "router-link-active",
     required: false,
   },
   prefetchedClass: {
