@@ -1,7 +1,48 @@
-import type { NuxtLinkProps } from "#app/components";
 import type { RouteLocationRaw } from "vue-router";
 
-export const NuxtLinkPropsWithDefaults = {
+export type UiLinkPropsType = {
+  // UiLink specific
+  type?: HTMLButtonElement["type"];
+  disabled?: boolean;
+  exact?: boolean;
+  exactQuery?: boolean;
+  exactHash?: boolean;
+  inactiveClass?: string;
+
+  // Routing
+  to?: RouteLocationRaw;
+  href?: RouteLocationRaw;
+
+  // Attributes
+  target?: string;
+  rel?: string;
+  noRel?: string;
+
+  // Prefetching
+  prefetch?: boolean;
+  noPrefetch?: boolean;
+
+  // Styling
+  activeClass?: string;
+  prefetchedClass?: string;
+
+  // Vue Router's `<RouterLink>` additional props
+  replace?: boolean;
+  ariaCurrentValue?: string;
+};
+
+export const UiLinkProps = {
+  // UiLink specific
+  type: {
+    type: String as PropType<HTMLButtonElement["type"]>,
+    default: null,
+  },
+  disabled: { type: Boolean, default: false },
+  exact: { type: Boolean, default: false },
+  exactQuery: { type: Boolean, default: false },
+  exactHash: { type: Boolean, default: false },
+  inactiveClass: { type: String, default: undefined },
+
   // Routing
   to: {
     type: [String, Object] as PropType<RouteLocationRaw>,
@@ -72,25 +113,33 @@ export const NuxtLinkPropsWithDefaults = {
  * Helper function that only picks valid keys from the NuxtLink component
  *
  * @param input Any props object
- * @returns Object containing only NuxtLinkProps
+ * @returns Object containing only UiLinkProps
  */
-export function extractNuxtLinkProps(input: object) {
-  const knownProps = [
+export function extractUiLinkProps(input: object): any {
+  const knownProps: (keyof UiLinkPropsType)[] = [
+    "type",
+    "disabled",
+    "exact",
+    "exactQuery",
+    "exactHash",
+    "inactiveClass",
+
     "to",
     "href",
-    "replace",
     "target",
     "rel",
     "noRel",
     "prefetch",
     "noPrefetch",
     "activeClass",
-    "exactActiveClass",
+    "prefetchedClass",
+    "replace",
     "ariaCurrentValue",
   ];
 
   return knownProps.reduce((result, propName) => {
+    // @ts-expect-error
     result[propName] = input[propName] ?? undefined;
     return result;
-  }, {} as NuxtLinkProps);
+  }, {} as UiLinkPropsType);
 }

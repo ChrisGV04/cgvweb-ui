@@ -81,7 +81,7 @@
         target="_blank"
         label="Go to CGV WEB"
         to="https://cgvweb.com"
-        leading-icon="i-heroicons-arrow-top-right-on-square-20-solid"
+        trailing-icon="i-heroicons-arrow-top-right-on-square-20-solid"
       />
     </div>
   </UiContainer>

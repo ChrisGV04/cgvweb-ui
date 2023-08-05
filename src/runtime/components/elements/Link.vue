@@ -1,24 +1,13 @@
 <script lang="ts">
 import { NuxtLink } from "#components";
 import { isEqual } from "lodash-es";
-import { defineComponent, type PropType } from "vue";
+import { defineComponent } from "vue";
 import type { RouteLocationNormalized } from "vue-router";
-import { NuxtLinkPropsWithDefaults } from "../../utils/link";
+import { UiLinkProps } from "../../utils/link";
 
 export default defineComponent({
   inheritAttrs: false,
-  props: {
-    ...NuxtLinkPropsWithDefaults,
-    type: {
-      type: String as PropType<HTMLButtonElement["type"]>,
-      default: null,
-    },
-    disabled: { type: Boolean, default: false },
-    exact: { type: Boolean, default: false },
-    exactQuery: { type: Boolean, default: false },
-    exactHash: { type: Boolean, default: false },
-    inactiveClass: { type: String, default: undefined },
-  },
+  props: UiLinkProps,
   setup(props) {
     function resolveLinkClass(
       route: RouteLocationNormalized,

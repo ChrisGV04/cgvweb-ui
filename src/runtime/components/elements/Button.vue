@@ -13,10 +13,12 @@ import UiIcon from "./Icon.vue";
 import UiLink from "./Link.vue";
 // @ts-expect-error
 import buildAppConfig from "#build/app.config";
+import { extractUiLinkProps, UiLinkProps } from "../../utils/link";
 
 type UiConfig = Partial<UiButtonConfig>;
 
 const props = defineProps({
+  ...UiLinkProps,
   label: String,
   leadingIcon: String,
   trailingIcon: String,
@@ -86,7 +88,12 @@ const trailingIconClass = computed(() =>
 </script>
 
 <template>
-  <UiLink :type="type" :class="buttonClass" :disabled="disabled || loading">
+  <UiLink
+    :type="type"
+    :class="buttonClass"
+    :disabled="disabled || loading"
+    v-bind="extractUiLinkProps($props)"
+  >
     <slot name="leading" :disabled="disabled" :loading="loading">
       <UiIcon
         v-if="leadingIcon"
