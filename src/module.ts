@@ -93,30 +93,30 @@ export default defineNuxtModule<ModuleOptions>({
       global: options.global,
       watch: false,
     });
-    addComponentsDir({
-      path: resolve(runtimeDir, "components", "forms"),
-      prefix: options.prefix,
-      global: options.global,
-      watch: false,
-    });
-    addComponentsDir({
-      path: resolve(runtimeDir, "components", "data"),
-      prefix: options.prefix,
-      global: options.global,
-      watch: false,
-    });
+    // addComponentsDir({
+    //   path: resolve(runtimeDir, "components", "forms"),
+    //   prefix: options.prefix,
+    //   global: options.global,
+    //   watch: false,
+    // });
+    // addComponentsDir({
+    //   path: resolve(runtimeDir, "components", "data"),
+    //   prefix: options.prefix,
+    //   global: options.global,
+    //   watch: false,
+    // });
     addComponentsDir({
       path: resolve(runtimeDir, "components", "layout"),
       prefix: options.prefix,
       global: options.global,
       watch: false,
     });
-    addComponentsDir({
-      path: resolve(runtimeDir, "components", "navigation"),
-      prefix: options.prefix,
-      global: options.global,
-      watch: false,
-    });
+    // addComponentsDir({
+    //   path: resolve(runtimeDir, "components", "navigation"),
+    //   prefix: options.prefix,
+    //   global: options.global,
+    //   watch: false,
+    // });
     addComponentsDir({
       path: resolve(runtimeDir, "components", "overlays"),
       prefix: options.prefix,
