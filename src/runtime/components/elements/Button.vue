@@ -29,6 +29,7 @@ const props = defineProps({
   loading: { type: Boolean, default: false },
   disabled: { type: Boolean, default: false },
   truncate: { type: Boolean, default: false },
+  block: { type: Boolean, default: false },
   padded: { type: Boolean, default: true },
   size: {
     type: String as PropType<UiButtonSizes>,
@@ -65,7 +66,8 @@ const buttonClass = computed(() =>
     ui.value.size[props.size],
     ui.value.gap[props.size],
     props.padded && ui.value.padding[props.size],
-    ui.value.color[props.color][props.variant]
+    ui.value.color[props.color][props.variant],
+    props.block ? "w-full flex justify-center" : "inline-flex"
   )
 );
 

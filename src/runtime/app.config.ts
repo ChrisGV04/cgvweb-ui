@@ -125,7 +125,7 @@ const badge: UiBadgeConfig = {
 };
 
 const button: UiButtonConfig = {
-  base: "inline-flex flex-shrink-0 items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75",
+  base: "flex-shrink-0 items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75",
   font: "font-semibold",
   rounded: "rounded-md",
   transition: "transition-colors duration-100",
