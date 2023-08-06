@@ -193,7 +193,8 @@ const button: UiButtonConfig = {
 const container: UiContainerConfig = {
   base: "mx-auto w-full",
   constrained: "max-w-7xl",
-  padding: "px-4 sm:px-6 lg:px-8",
+  xPadding: "px-4 sm:px-6 lg:px-8",
+  yPadding: "",
 };
 
 // Navigation

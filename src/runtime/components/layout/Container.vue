@@ -22,7 +22,10 @@ const ui = computed<UiConfig>(() => defu({}, props.ui, appConfig.ui.container));
 </script>
 
 <template>
-  <component :is="as" :class="[ui.base, ui.padding, ui.constrained]">
+  <component
+    :is="as"
+    :class="[ui.base, ui.xPadding, ui.yPadding ui.constrained]"
+  >
     <slot />
   </component>
 </template>
