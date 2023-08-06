@@ -1,6 +1,6 @@
 import { useAppConfig } from "#imports";
 import { defu } from "defu";
-import { defineComponent, h, type PropType } from "vue";
+import { computed, defineComponent, h, type PropType } from "vue";
 import type {
   UiButtonColors,
   UiButtonConfig,
@@ -35,6 +35,8 @@ type Props = ParentLinkProps & {
 };
 
 export default defineComponent<Props>({
+  components: { UiLink, UiIcon },
+
   props: {
     ...UiLink.props,
     label: String,

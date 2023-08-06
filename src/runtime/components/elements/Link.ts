@@ -1,11 +1,11 @@
-import type { NuxtLinkProps } from "#app/components/nuxt-link";
 import { NuxtLink } from "#components";
 import { useRoute } from "#imports";
 import { isEqual } from "lodash-es";
-import { defineComponent, h } from "vue";
+import { defineComponent, h, type PropType } from "vue";
 import type { RouteLocationNormalized } from "vue-router";
 import { classNames } from "../../utils";
 
+type NuxtLinkProps = InstanceType<typeof NuxtLink>["$props"];
 type Props = NuxtLinkProps & {
   type?: HTMLButtonElement["type"];
   disabled?: boolean;
@@ -17,6 +17,8 @@ type Props = NuxtLinkProps & {
 
 export default defineComponent<Props>({
   inheritAttrs: false,
+
+  components: { NuxtLink },
 
   props: {
     ...NuxtLink.props,
