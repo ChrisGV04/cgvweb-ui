@@ -1,6 +1,6 @@
 import { NuxtLink } from "#components";
 import { useRoute } from "#imports";
-import { isEqual } from "lodash-es";
+import isEqual from "lodash.isequal";
 import { defineComponent, h, type PropType } from "vue";
 import type { RouteLocationNormalized } from "vue-router";
 import { classNames } from "../../utils";
