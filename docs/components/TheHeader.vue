@@ -27,6 +27,10 @@ const navigation: NavigationItem[] = [
     ],
   },
   {
+    name: "Data",
+    children: [{ name: "Rich Text", route: "/rich-text" }],
+  },
+  {
     name: "Layout",
     children: [{ name: "Marquee", route: "/marquee" }],
   },

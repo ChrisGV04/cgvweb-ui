@@ -12,4 +12,5 @@ export default <Partial<Config>>{
       colors: { primary: colors.sky },
     },
   },
+  plugins: [require("@tailwindcss/typography")],
 };
