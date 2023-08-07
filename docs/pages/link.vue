@@ -12,6 +12,12 @@
       <div class="mt-2 flex items-center gap-4">
         <UiLink to="/link">Default link</UiLink>
         <UiLink to="/link" active-class="text-primary-500">Active link</UiLink>
+        <UiLink
+          exact-query
+          to="/link?term=query"
+          active-class="text-primary-500"
+          >Active when exact query</UiLink
+        >
       </div>
     </div>
   </UiContainer>

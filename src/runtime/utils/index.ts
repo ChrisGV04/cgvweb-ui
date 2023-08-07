@@ -38,3 +38,29 @@ export const getSlotsChildren = (slots: any) => {
   }
   return children;
 };
+
+export const isDeepEqual = (object1: unknown, object2: unknown): boolean => {
+  const objKeys1 = Object.keys(object1);
+  const objKeys2 = Object.keys(object2);
+
+  if (objKeys1.length !== objKeys2.length) return false;
+
+  for (var key of objKeys1) {
+    const value1 = object1[key];
+    const value2 = object2[key];
+
+    const areObjects = isObject(value1) && isObject(value2);
+
+    if (
+      (areObjects && !isDeepEqual(value1, value2)) ||
+      (!areObjects && value1 !== value2)
+    ) {
+      return false;
+    }
+  }
+  return true;
+};
+
+export const isObject = (input: unknown): input is object => {
+  return input != null && typeof input === "object";
+};

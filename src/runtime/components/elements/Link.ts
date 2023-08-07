@@ -1,9 +1,8 @@
 import { NuxtLink } from "#components";
 import { useRoute } from "#imports";
-import isEqual from "lodash.isequal";
 import { defineComponent, h, type PropType } from "vue";
 import type { RouteLocationNormalized } from "vue-router";
-import { classNames } from "../../utils";
+import { classNames, isDeepEqual } from "../../utils";
 
 type NuxtLinkProps = InstanceType<typeof NuxtLink>["$props"];
 type Props = NuxtLinkProps & {
@@ -40,7 +39,7 @@ export default defineComponent<Props>({
       route: RouteLocationNormalized,
       { isActive, isExactActive }: { isActive: boolean; isExactActive: boolean }
     ): string | undefined {
-      if (props.exactQuery && !isEqual(route.query, $route.query))
+      if (props.exactQuery && !isDeepEqual(route.query, $route.query))
         return classNames(props.inactiveClass, ctx.attrs.class as any);
 
       if (props.exactHash && route.hash !== $route.hash)
