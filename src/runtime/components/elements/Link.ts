@@ -1,11 +1,26 @@
 import { NuxtLink } from "#components";
 import { useRoute } from "#imports";
 import { defineComponent, h, type PropType } from "vue";
-import type { RouteLocationNormalized } from "vue-router";
+import type { RouteLocationNormalized, RouteLocationRaw } from "vue-router";
 import { classNames, isDeepEqual } from "../../utils";
 
-type NuxtLinkProps = InstanceType<typeof NuxtLink>["$props"];
-type Props = NuxtLinkProps & {
+type Props = {
+  // NuxtLink props
+  to?: RouteLocationRaw;
+  href?: RouteLocationRaw;
+  external?: boolean;
+  replace?: boolean;
+  custom?: boolean;
+  target?: "_blank" | "_parent" | "_self" | "_top" | (string & {}) | null;
+  rel?: string | null;
+  noRel?: boolean;
+  prefetch?: boolean;
+  noPrefetch?: boolean;
+  activeClass?: string;
+  exactActiveClass?: string;
+  ariaCurrentValue?: string;
+
+  // UiLink props
   type?: HTMLButtonElement["type"];
   disabled?: boolean;
   exact?: boolean;

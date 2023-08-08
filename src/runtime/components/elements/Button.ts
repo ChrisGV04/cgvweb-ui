@@ -16,25 +16,24 @@ import buildAppConfig from "#build/app.config";
 
 type ParentLinkProps = InstanceType<typeof UiLink>["$props"];
 type ButtonUiConfig = Partial<UiButtonConfig>;
+type Props = ParentLinkProps & {
+  label?: string;
+  leadingIcon?: string;
+  trailingIcon?: string;
+  type?: HTMLButtonElement["type"];
+  loading?: boolean;
+  disabled?: boolean;
+  truncate?: boolean;
+  block?: boolean;
+  padded?: boolean;
+  size?: UiButtonSizes;
+  color?: UiButtonColors;
+  variant?: UiButtonVariants;
+  loadingIcon?: string;
+  ui?: ButtonUiConfig;
+};
 
-export default defineComponent<
-  ParentLinkProps & {
-    label?: string;
-    leadingIcon?: string;
-    trailingIcon?: string;
-    type?: HTMLButtonElement["type"];
-    loading?: boolean;
-    disabled?: boolean;
-    truncate?: boolean;
-    block?: boolean;
-    padded?: boolean;
-    size?: UiButtonSizes;
-    color?: UiButtonColors;
-    variant?: UiButtonVariants;
-    loadingIcon?: string;
-    ui?: ButtonUiConfig;
-  }
->({
+export default defineComponent<Props>({
   components: { UiLink, UiIcon },
 
   props: {
