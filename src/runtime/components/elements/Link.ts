@@ -103,7 +103,10 @@ export default defineComponent<Props>({
                     target,
                     href: props.disabled ? undefined : href,
                     role: props.disabled ? undefined : "link",
-                    onClick: (e) => !isExternal && navigate(e),
+                    onClick: (e) => {
+                      !isExternal && navigate(e);
+                      ctx.emit("click", e);
+                    },
                     ariaDisabled: props.disabled ? "true" : undefined,
                     class: resolveLinkClass(route, { isActive, isExactActive }),
                   },
