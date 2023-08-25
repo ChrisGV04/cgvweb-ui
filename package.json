@@ -1,6 +1,6 @@
 {
   "name": "@cgv.web/ui",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "repository": "https://github.com/ChrisGV04/cgvweb-ui",
   "license": "MIT",
   "publishConfig": {
