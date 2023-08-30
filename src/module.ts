@@ -74,10 +74,6 @@ export default defineNuxtModule<ModuleOptions>({
     await installModule("@nuxtjs/tailwindcss", {
       viewer: false,
       config: {
-        plugins: [
-          require("@tailwindcss/forms")({ strategy: "class" }),
-          require("@tailwindcss/typography"),
-        ],
         content: [
           resolve(runtimeDir, "components/**/*.{vue,mjs,ts}"),
           resolve(runtimeDir, "*.{mjs,js,ts}"),
