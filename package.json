@@ -32,6 +32,10 @@
     "prepare": "nuxi prepare docs",
     "release": "npm version patch && npm run prepack && npm publish"
   },
+  "peerDependencies": {
+    "@headlessui/vue": "^1.7.0",
+    "@vueuse/core": "^10"
+  },
   "dependencies": {
     "@egoist/tailwindcss-icons": "^1.1.0",
     "@floating-ui/vue": "^1.0.2",
