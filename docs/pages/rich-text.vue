@@ -31,7 +31,7 @@ const data: any = [
         type: "li",
         children: [{ text: "Style it using @tailwindcss/typography;" }],
       },
-      { type: "li", children: [{ text: "Simple;" }] },
+      { type: "li", children: [{ text: "Simple;", bold: true }] },
     ],
   },
 ];
