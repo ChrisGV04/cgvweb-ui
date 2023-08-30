@@ -1,8 +1,10 @@
 import { NuxtLink } from "#components";
 import { useRoute } from "#imports";
+import omit from "lodash.omit";
+import { twJoin, twMerge } from "tailwind-merge";
 import { defineComponent, h, type PropType } from "vue";
 import type { RouteLocationNormalized, RouteLocationRaw } from "vue-router";
-import { classNames, isDeepEqual } from "../../utils";
+import { isDeepEqual } from "../../utils";
 
 type Props = {
   // NuxtLink props
@@ -55,18 +57,18 @@ export default defineComponent<Props>({
       { isActive, isExactActive }: { isActive: boolean; isExactActive: boolean }
     ): string | undefined {
       if (props.exactQuery && !isDeepEqual(route.query, $route.query))
-        return classNames(props.inactiveClass, ctx.attrs.class as any);
+        return twJoin(props.inactiveClass, ctx.attrs.class as any);
 
       if (props.exactHash && route.hash !== $route.hash)
-        return classNames(props.inactiveClass, ctx.attrs.class as any);
+        return twJoin(props.inactiveClass, ctx.attrs.class as any);
 
       if (props.exact && isExactActive)
-        return classNames(props.activeClass, ctx.attrs.class as any);
+        return twJoin(props.activeClass, ctx.attrs.class as any);
 
       if (!props.exact && isActive)
-        return classNames(props.activeClass, ctx.attrs.class as any);
+        return twJoin(props.activeClass, ctx.attrs.class as any);
 
-      return classNames(props.inactiveClass, ctx.attrs.class as any);
+      return twJoin(props.inactiveClass, ctx.attrs.class as any);
     }
 
     return () =>
@@ -74,10 +76,10 @@ export default defineComponent<Props>({
         ? h(
             "button",
             {
-              ...ctx.attrs,
+              ...omit(ctx.attrs, ["class"]),
               type: props.type,
               disabled: props.disabled,
-              class: classNames(props.inactiveClass, ctx.attrs.class as any),
+              class: twMerge(props.inactiveClass, ctx.attrs.class as any),
             },
             ctx.slots
           )
@@ -98,7 +100,7 @@ export default defineComponent<Props>({
                 h(
                   "a",
                   {
-                    ...ctx.attrs,
+                    ...omit(ctx.attrs, ["class"]),
                     rel,
                     target,
                     href: props.disabled ? undefined : href,

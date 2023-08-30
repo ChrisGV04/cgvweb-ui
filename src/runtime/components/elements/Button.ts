@@ -1,5 +1,6 @@
 import { useAppConfig } from "#imports";
-import { defu } from "defu";
+import omit from "lodash.omit";
+import { twJoin, twMerge } from "tailwind-merge";
 import { computed, defineComponent, h, type PropType } from "vue";
 import type {
   UiButtonColors,
@@ -7,7 +8,7 @@ import type {
   UiButtonSizes,
   UiButtonVariants,
 } from "../../types";
-import { classNames } from "../../utils";
+import { defuTwMerge } from "../../utils";
 import { extractUiLinkProps } from "../../utils/link";
 import UiIcon from "./Icon.vue";
 import UiLink from "./Link";
@@ -35,6 +36,7 @@ type Props = ParentLinkProps & {
 
 export default defineComponent<Props>({
   components: { UiLink, UiIcon },
+  inheritAttrs: false,
 
   props: {
     ...UiLink.props,
@@ -76,20 +78,23 @@ export default defineComponent<Props>({
     // Merge UI config
     const appConfig = useAppConfig();
     const ui = computed<ButtonUiConfig>(() =>
-      defu({}, props.ui, appConfig.ui.button)
+      defuTwMerge({}, props.ui, appConfig.ui.button)
     );
 
     const buttonClass = computed(() =>
-      classNames(
-        ui.value.base,
-        ui.value.font,
-        ui.value.rounded,
-        ui.value.transition,
-        ui.value.size[props.size],
-        ui.value.gap[props.size],
-        props.padded && ui.value.padding[props.size],
-        ui.value.color[props.color][props.variant],
-        props.block ? "w-full flex justify-center" : "inline-flex"
+      twMerge(
+        twJoin(
+          ui.value.base,
+          ui.value.font,
+          ui.value.rounded,
+          ui.value.transition,
+          ui.value.size[props.size],
+          ui.value.gap[props.size],
+          props.padded && ui.value.padding[props.size],
+          ui.value.color[props.color][props.variant],
+          props.block ? "w-full flex justify-center" : "inline-flex"
+        ),
+        ctx.attrs.class as string
       )
     );
 
@@ -99,11 +104,11 @@ export default defineComponent<Props>({
     });
 
     const leadingIconClass = computed(() =>
-      classNames(ui.value.icon.base, ui.value.icon.size[props.size])
+      twJoin(ui.value.icon.base, ui.value.icon.size[props.size])
     );
 
     const trailingIconClass = computed(() =>
-      classNames(
+      twJoin(
         ui.value.icon.base,
         ui.value.icon.size[props.size],
         props.loading && "animate-spin"
@@ -117,6 +122,7 @@ export default defineComponent<Props>({
           ...extractUiLinkProps(props),
           class: buttonClass.value,
           disabled: props.disabled || props.loading,
+          ...omit(ctx.attrs, ["class"]),
         },
         () => [
           // Leading slot with default icon

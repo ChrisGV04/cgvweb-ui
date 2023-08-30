@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import omit from "lodash.omit";
 import { useAppConfig } from "#imports";
 import {
   autoUpdate,
@@ -11,10 +12,15 @@ import {
 import { defu } from "defu";
 import { computed, ref, type PropType } from "vue";
 import type { UiTooltipConfig } from "../../types";
+import { defuTwMerge } from "../../utils";
+import { twMerge } from "tailwind-merge";
 // @ts-expect-error
 import buildAppConfig from "#build/app.config";
 
 type UiConfig = Partial<UiTooltipConfig>;
+
+defineOptions({ inheritAttrs: false });
+const attrs = useAttrs();
 
 const props = defineProps({
   text: String,
@@ -38,7 +44,9 @@ const props = defineProps({
 
 // Merge UI config
 const appConfig = useAppConfig();
-const ui = computed<UiConfig>(() => defu({}, props.ui, appConfig.ui.tooltip));
+const ui = computed<UiConfig>(() =>
+  defuTwMerge({}, props.ui, appConfig.ui.tooltip)
+);
 
 const floating = computed<UseFloatingOptions>(() =>
   defu(
@@ -51,6 +59,10 @@ const floating = computed<UseFloatingOptions>(() =>
       middleware: [offset(props.offset), shift({ padding: 8 }), flip()],
     } as UseFloatingOptions
   )
+);
+
+const wrapperClass = computed(() =>
+  twMerge(ui.value.wrapper, attrs.class as string)
 );
 
 const triggerRef = ref<HTMLElement | null>(null);
@@ -111,11 +123,12 @@ function hideTooltip() {
 <template>
   <div
     ref="triggerRef"
-    :class="ui.wrapper"
+    :class="wrapperClass"
     @blur="hideTooltip"
     @focus="showTooltip"
     @mouseover="showTooltip"
     @mouseleave="hideTooltip"
+    v-bind="omit(attrs, ['class'])"
   >
     <slot :open="open">Hover</slot>
 

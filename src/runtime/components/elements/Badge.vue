@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import omit from "lodash.omit";
 import { useAppConfig } from "#imports";
-import { defu } from "defu";
+import { twJoin, twMerge } from "tailwind-merge";
 import { computed, type PropType } from "vue";
 import type {
   UiBadgeColors,
@@ -9,12 +10,14 @@ import type {
   UiBadgeSizes,
   UiBadgeVariants,
 } from "../../types";
-import { classNames } from "../../utils";
+import { defuTwMerge } from "../../utils";
 import UiIcon from "./Icon.vue";
 // @ts-expect-error
 import buildAppConfig from "#build/app.config";
 
 type UiConfig = Partial<UiBadgeConfig>;
+
+defineOptions({ inheritAttrs: false });
 
 const props = defineProps({
   dot: Boolean,
@@ -39,25 +42,32 @@ const props = defineProps({
 });
 defineEmits(["click:action"]);
 
+const attrs = useAttrs();
+
 // Merge UI config
 const appConfig = useAppConfig();
-const ui = computed<UiConfig>(() => defu({}, props.ui, appConfig.ui.badge));
+const ui = computed<UiConfig>(() =>
+  defuTwMerge({}, props.ui, appConfig.ui.badge)
+);
 
 const variant = computed(() => ui.value.color[props.color][props.variant]);
 
 const badgeClass = computed(() =>
-  classNames(
-    ui.value.base,
-    ui.value.font,
-    ui.value.rounded,
-    ui.value.size[props.size],
-    variant.value.base
+  twMerge(
+    twJoin(
+      ui.value.base,
+      ui.value.font,
+      ui.value.rounded,
+      ui.value.size[props.size],
+      variant.value.base
+    ),
+    attrs.class as string
   )
 );
 </script>
 
 <template>
-  <span :class="badgeClass">
+  <span :class="badgeClass" v-bind="omit(attrs, ['class'])">
     <svg
       v-if="dot"
       viewBox="0 0 6 6"

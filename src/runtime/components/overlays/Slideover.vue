@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import omit from "lodash.omit";
 import { useAppConfig } from "#imports";
 import {
   Dialog,
@@ -6,13 +7,17 @@ import {
   TransitionChild,
   TransitionRoot,
 } from "@headlessui/vue";
-import { defu } from "defu";
+import { twMerge } from "tailwind-merge";
 import { computed, type PropType } from "vue";
 import type { UiSlideoverConfig } from "../../types";
+import { defuTwMerge } from "../../utils";
 // @ts-expect-error
 import buildAppConfig from "#build/app.config";
 
 type UiConfig = Partial<UiSlideoverConfig>;
+
+defineOptions({ inheritAttrs: false });
+const attrs = useAttrs();
 
 const emit = defineEmits([
   "update:modelValue",
@@ -39,7 +44,13 @@ const props = defineProps({
 
 // Merge UI config
 const appConfig = useAppConfig();
-const ui = computed<UiConfig>(() => defu({}, props.ui, appConfig.ui.slideover));
+const ui = computed<UiConfig>(() =>
+  defuTwMerge({}, props.ui, appConfig.ui.slideover)
+);
+
+const wrapperClass = computed(() =>
+  twMerge(ui.value.wrapper, attrs.class as string)
+);
 
 const isOpen = computed({
   get() {
@@ -75,7 +86,11 @@ function close() {
     @after-enter="emit('after-enter')"
     @before-enter="emit('before-enter')"
   >
-    <Dialog :class="ui.wrapper" @close="close">
+    <Dialog
+      @close="close"
+      :class="wrapperClass"
+      v-bind="omit(attrs, ['class'])"
+    >
       <TransitionChild
         as="template"
         v-if="props.overlay"
