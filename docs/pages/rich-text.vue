@@ -34,6 +34,23 @@ const data: any = [
       { type: "li", children: [{ text: "Simple;", bold: true }] },
     ],
   },
+  {
+    type: "upload",
+    value: {
+      id: "64604b3111c6720b71b37b20",
+      alt: "Christian Gil",
+      filename: "christian-gil.webp",
+      mimeType: "image/webp",
+      filesize: 19886,
+      width: 400,
+      height: 400,
+      createdAt: "2023-05-14T02:45:05.931Z",
+      updatedAt: "2023-05-14T02:48:59.075Z",
+      url: "https://cgvweb.com/uploads/christian-gil.webp",
+    },
+    relationTo: "uploads",
+    children: [{ text: " " }],
+  },
 ];
 </script>
 
@@ -48,6 +65,14 @@ const data: any = [
     <UiCmsRichText
       :content="data"
       class="mt-16 bg-gray-100 p-4 rounded-lg border border-gray-900/10 prose max-w-none text-justify md:prose-lg prose-headings:text-left prose-a:text-primary-600 hover:prose-a:text-primary-400 prose-li:marker:text-primary-600"
-    />
+    >
+      <template #upload="{ node }">
+        <img
+          v-if="node.value?.url"
+          :src="node.value.url"
+          :alt="node.value.alt"
+        />
+      </template>
+    </UiCmsRichText>
   </UiContainer>
 </template>

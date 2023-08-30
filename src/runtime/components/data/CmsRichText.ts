@@ -50,7 +50,12 @@ export default defineComponent({
     as: String,
   },
 
-  slots: Object as SlotsType<{ [key: string]: { children: RawChildren[] } }>,
+  slots: Object as SlotsType<{
+    [key: string]: {
+      children: RawChildren[];
+      node: RichTextNode;
+    };
+  }>,
 
   setup({ content, as }, { attrs, slots }) {
     function _serialize(children?: RichTextChildren): RawChildren[] | null {
@@ -78,7 +83,7 @@ export default defineComponent({
 
         // Use slots when passed for flexible components
         if (!!slots[node.type])
-          return slots[node.type]({ children: serializedChildren });
+          return slots[node.type]({ children: serializedChildren, node });
 
         if (
           [
