@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useAppConfig } from "#imports";
+import { useAppConfig, useAttrs } from "#imports";
 import {
   Dialog,
   DialogPanel,

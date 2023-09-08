@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import omit from "lodash.omit";
-import { useAppConfig } from "#imports";
+import { useAppConfig, useAttrs } from "#imports";
 import {
   autoUpdate,
   flip,
@@ -10,10 +9,11 @@ import {
   type UseFloatingOptions,
 } from "@floating-ui/vue";
 import { defu } from "defu";
+import omit from "lodash.omit";
+import { twMerge } from "tailwind-merge";
 import { computed, ref, type PropType } from "vue";
 import type { UiTooltipConfig } from "../../types";
 import { defuTwMerge } from "../../utils";
-import { twMerge } from "tailwind-merge";
 // @ts-expect-error
 import buildAppConfig from "#build/app.config";
 

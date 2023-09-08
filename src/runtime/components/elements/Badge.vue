@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { useAppConfig, useAttrs } from "#imports";
 import omit from "lodash.omit";
-import { useAppConfig } from "#imports";
 import { twJoin, twMerge } from "tailwind-merge";
 import { computed, type PropType } from "vue";
 import type {

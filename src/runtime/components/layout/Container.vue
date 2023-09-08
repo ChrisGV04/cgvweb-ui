@@ -1,12 +1,12 @@
 <script setup lang="ts">
+import { useAppConfig, useAttrs } from "#imports";
 import omit from "lodash.omit";
-import { useAppConfig } from "#imports";
 import { computed, type PropType } from "vue";
 import type { UiContainerConfig } from "../../types";
 import { defuTwMerge } from "../../utils";
 // @ts-expect-error
 import buildAppConfig from "#build/app.config";
-import { twMerge, twJoin } from "tailwind-merge";
+import { twJoin, twMerge } from "tailwind-merge";
 
 type UiConfig = Partial<UiContainerConfig>;
 

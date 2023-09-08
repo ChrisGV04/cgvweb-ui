@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import omit from "lodash.omit";
-import { useAppConfig } from "#imports";
+import { useAppConfig, useAttrs } from "#imports";
 import {
   Dialog,
   DialogPanel,
   TransitionChild,
   TransitionRoot,
 } from "@headlessui/vue";
+import omit from "lodash.omit";
 import { twMerge } from "tailwind-merge";
 import { computed, type PropType } from "vue";
 import type { UiSlideoverConfig } from "../../types";
