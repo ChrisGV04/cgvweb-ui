@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useAppConfig, useAttrs } from "#imports";
-import omit from "lodash.omit";
+import { omit } from "lodash-es";
 import { computed, type PropType } from "vue";
 import type { UiContainerConfig } from "../../types";
 import { defuTwMerge } from "../../utils";

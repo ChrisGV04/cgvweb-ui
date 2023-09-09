@@ -1,6 +1,6 @@
 import { NuxtLink } from "#components";
 import { useRoute } from "#imports";
-import omit from "lodash.omit";
+import { omit } from "lodash-es";
 import { twJoin, twMerge } from "tailwind-merge";
 import { defineComponent, h, type PropType } from "vue";
 import type { RouteLocationNormalized, RouteLocationRaw } from "vue-router";

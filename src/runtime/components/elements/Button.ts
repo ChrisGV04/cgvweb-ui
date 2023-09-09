@@ -1,5 +1,5 @@
 import { useAppConfig } from "#imports";
-import omit from "lodash.omit";
+import { omit } from "lodash-es";
 import { twJoin, twMerge } from "tailwind-merge";
 import { computed, defineComponent, h, type PropType } from "vue";
 import type {
