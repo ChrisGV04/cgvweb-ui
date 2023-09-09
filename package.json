@@ -52,6 +52,7 @@
     "@nuxt/eslint-config": "^0.2.0",
     "@nuxt/module-builder": "^0.5.0",
     "@release-it/conventional-changelog": "^7.0.0",
+    "@types/lodash.omit": "^4.5.7",
     "@vueuse/core": "^10.4.1",
     "eslint": "^8.48.0",
     "nuxt": "^3.7.0",
