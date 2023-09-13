@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { UiCmsRichText, UiContainer } from "#components";
+
 const data: any = [
   {
     children: [

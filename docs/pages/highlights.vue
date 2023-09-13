@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { UiContainer, UiHighlightText } from "#components";
+
 const demoText =
   "Text with [highlighted] words as an example of a [functional component].";
 </script>

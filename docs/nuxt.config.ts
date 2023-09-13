@@ -1,8 +1,8 @@
 import pkg from "../package.json";
-import module from "../src/module";
 
 export default defineNuxtConfig({
-  modules: ["@nuxt/devtools", module, "@vueuse/nuxt"],
+  modules: ["../src/module", "@vueuse/nuxt"],
+  devtools: { enabled: true },
 
   app: {
     head: {
@@ -32,8 +32,5 @@ export default defineNuxtConfig({
     icons: ["heroicons"],
   },
 
-  typescript: {
-    strict: false,
-    includeWorkspace: true,
-  },
+  typescript: { strict: true },
 });

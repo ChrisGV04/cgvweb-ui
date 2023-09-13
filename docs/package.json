@@ -1,20 +1,18 @@
 {
   "name": "@cgv.web/ui-docs",
   "private": true,
-  "dependencies": {
-    "@cgv.web/ui": "workspace:latest"
+  "type": "module",
+  "scripts": {
+    "dev": "nuxi dev",
+    "build": "nuxi build",
+    "generate": "nuxi generate"
   },
   "devDependencies": {
     "@headlessui/vue": "^1.7.16",
     "@iconify-json/heroicons": "latest",
-    "@nuxt/devtools": "^0.6.7",
-    "@nuxt/eslint-config": "^0.1.1",
     "@tailwindcss/typography": "^0.5.9",
     "@vueuse/core": "^10.4.1",
     "@vueuse/nuxt": "^10.2.1",
-    "eslint": "^8.45.0",
-    "nuxt": "^3.7.0",
-    "typescript": "^5.1.6",
-    "zod": "^3.21.4"
+    "nuxt": "^3.7.0"
   }
 }

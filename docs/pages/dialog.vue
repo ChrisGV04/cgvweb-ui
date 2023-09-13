@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { UiContainer, UiDialog } from "#components";
 import { ref } from "vue";
 
 const showDialog = ref(false);

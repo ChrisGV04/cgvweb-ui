@@ -1,3 +1,12 @@
+<script setup lang="ts">
+import {
+  ClientOnly,
+  DevOnly,
+  UiBreakpointViewer,
+  UiContainer,
+} from "#components";
+</script>
+
 <template>
   <UiContainer class="py-8">
     <h1 class="demo-page-title">Breakpoint viewer</h1>

@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { UiContainer } from "#components";
+</script>
 
 <template>
   <UiContainer class="py-8">

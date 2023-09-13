@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { TheHeader, NuxtPage } from "#components";
+</script>
 
 <template>
   <div>

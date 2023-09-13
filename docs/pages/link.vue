@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import { UiContainer, UiLink } from "#components";
+</script>
+
 <template>
   <UiContainer class="py-8">
     <h1 class="demo-page-title">Link</h1>

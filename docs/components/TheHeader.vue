@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { UiIcon } from "#components";
+import { useRuntimeConfig } from "#imports";
 import {
   Popover,
   PopoverButton,

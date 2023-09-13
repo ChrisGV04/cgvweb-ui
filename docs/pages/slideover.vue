@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { UiContainer, UiSlideover } from "#components";
 import { ref } from "vue";
 
 const showSlideover = ref(false);

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { UiContainer, UiMarquee } from "#components";
+
 const topWords = ["MARQUEE", "COOL"];
 const bottomWords = ["PAUSABLE", "REVERSIBLE", "SPEED", "NUXT"];
 </script>
