@@ -1,6 +1,6 @@
 # CGV WEB UI
 
-A set of reusable components for Nuxt 3 heavily inspired by [`@nuxthq/ui`](https://ui.nuxtlabs.com/getting-started). These components are developed by [Christian Gil](https://cgvweb.com/en) to be used at my own freelance projects. It provides the building blocks for the most common components I end up using.
+A set of reusable components for Nuxt 3 heavily inspired by [`@nuxt/ui`](https://ui.nuxt.com). These components are developed by [Christian Gil](https://cgvweb.com) mainly to be used at my own freelance projects. It provides the building blocks for the most common components I end up using.
 
 ## Features
 
@@ -13,13 +13,13 @@ A set of reusable components for Nuxt 3 heavily inspired by [`@nuxthq/ui`](https
 ## Installation
 
 ```bash
-pnpm install -D @cgv.web/ui
+pnpm install -D @cgvweb/ui
 ```
 
 Then, register the module in your `nuxt.config.ts`:
 
 ```ts
 export default defineNuxtConfig({
-  modules: ["@cgv.web/ui"],
+  modules: ["@cgvweb/ui"],
 });
 ```
