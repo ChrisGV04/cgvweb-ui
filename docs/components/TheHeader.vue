@@ -61,7 +61,7 @@ const navigation: NavigationItem[] = [
       </div>
 
       <PopoverGroup class="hidden lg:flex lg:gap-x-12">
-        <template v-for="item in navigation">
+        <template v-for="item in navigation" :key="item.name">
           <NuxtLink
             v-if="item.route"
             :to="item.route"

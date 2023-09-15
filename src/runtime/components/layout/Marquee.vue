@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useElementBounding, useElementVisibility } from '@vueuse/core';
-import { computed, ref } from 'vue';
+import { useElementBounding, useElementVisibility } from "@vueuse/core";
+import { computed, ref } from "vue";
 
 export interface MarqueeProps {
   speed?: number;
@@ -22,7 +22,7 @@ const duration = computed(
       marqueeWidth.value < wrapperWidth.value
         ? wrapperWidth.value / props.speed
         : marqueeWidth.value / props.speed
-    }s`,
+    }s`
 );
 
 const repeat = computed(() => {
@@ -35,17 +35,29 @@ const isVisible = useElementVisibility(wrapperRef);
 </script>
 
 <template>
-  <div ref="wrapperRef" class="marquee__wrapper flex select-none overflow-hidden">
+  <div
+    ref="wrapperRef"
+    class="marquee__wrapper flex select-none overflow-hidden"
+  >
     <div
       ref="marqueeRef"
-      :class="['marquee__content', (!isVisible || pause) && 'pause', reverse && 'reverse']"
+      :class="[
+        'marquee__content',
+        (!isVisible || pause) && 'pause',
+        reverse && 'reverse',
+      ]"
     >
       <slot />
     </div>
     <div
+      :key="i"
       aria-hidden="true"
       v-for="i in repeat"
-      :class="['marquee__content', (!isVisible || pause) && 'pause', reverse && 'reverse']"
+      :class="[
+        'marquee__content',
+        (!isVisible || pause) && 'pause',
+        reverse && 'reverse',
+      ]"
     >
       <slot />
     </div>

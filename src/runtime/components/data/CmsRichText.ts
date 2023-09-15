@@ -82,7 +82,7 @@ export default defineComponent({
         if (!node.type) return h("p", { key: i }, ...serializedChildren);
 
         // Use slots when passed for flexible components
-        if (!!slots[node.type])
+        if (slots[node.type])
           return slots[node.type]({ children: serializedChildren, node });
 
         if (

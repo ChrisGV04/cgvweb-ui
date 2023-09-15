@@ -3,7 +3,7 @@ import { useAppConfig, useAttrs } from "#imports";
 import {
   autoUpdate,
   flip,
-  offset,
+  offset as offsetMw,
   shift,
   useFloating,
   type UseFloatingOptions,
@@ -56,7 +56,7 @@ const floating = computed<UseFloatingOptions>(() =>
     {
       placement: props.placement,
       whileElementsMounted: autoUpdate,
-      middleware: [offset(props.offset), shift({ padding: 8 }), flip()],
+      middleware: [offsetMw(props.offset), shift({ padding: 8 }), flip()],
     } as UseFloatingOptions
   )
 );
