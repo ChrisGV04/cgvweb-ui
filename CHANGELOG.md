@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.1.9
+
+[compare changes](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.1.8...v0.1.9)
+
+### 🩹 Fixes
+
+- Fix button click event not emitting ([51fbc3e](https://github.com/ChrisGV04/cgvweb-ui/commit/51fbc3e))
+
+### ❤️ Contributors
+
+- Christian Gil <mrcgam.christian@gmail.com>
+
 ## v0.1.8
 
 [compare changes](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.1.7...v0.1.8)
