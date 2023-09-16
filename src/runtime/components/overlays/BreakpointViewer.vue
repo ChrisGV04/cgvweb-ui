@@ -9,7 +9,7 @@ import UiBadge from "../elements/Badge.vue";
 
 const bp = useBreakpoints(breakpointsTailwind);
 const size = computedEager(
-  () => bp.current().value.at(-1)?.toUpperCase() || "XS"
+  () => bp.current().value.at(-1)?.toUpperCase() || "XS",
 );
 const switchSide = ref(false);
 </script>
@@ -26,9 +26,9 @@ const switchSide = ref(false);
 
     <UiBadge
       color="gray"
+      :class="['pointer-events-auto select-none', switchSide && 'opacity-0']"
       @pointerenter="switchSide = true"
       @pointerleave="switchSide = false"
-      :class="['pointer-events-auto select-none', switchSide && 'opacity-0']"
       >{{ size }}</UiBadge
     >
   </div>

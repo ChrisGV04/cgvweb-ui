@@ -22,7 +22,7 @@ const duration = computed(
       marqueeWidth.value < wrapperWidth.value
         ? wrapperWidth.value / props.speed
         : marqueeWidth.value / props.speed
-    }s`
+    }s`,
 );
 
 const repeat = computed(() => {
@@ -50,9 +50,9 @@ const isVisible = useElementVisibility(wrapperRef);
       <slot />
     </div>
     <div
+      v-for="i in repeat"
       :key="i"
       aria-hidden="true"
-      v-for="i in repeat"
       :class="[
         'marquee__content',
         (!isVisible || pause) && 'pause',

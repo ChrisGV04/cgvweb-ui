@@ -32,9 +32,9 @@ type Props = {
 };
 
 export default defineComponent<Props>({
-  inheritAttrs: false,
-
   components: { NuxtLink },
+
+  inheritAttrs: false,
 
   props: {
     ...NuxtLink.props,
@@ -49,12 +49,19 @@ export default defineComponent<Props>({
     inactiveClass: { type: String, default: undefined },
   },
 
+  emits: ["click"],
+
+  // We extract the "custom" prop to avoid overrides
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup({ custom, ...props }, ctx) {
     const $route = useRoute();
 
     function resolveLinkClass(
       route: RouteLocationNormalized,
-      { isActive, isExactActive }: { isActive: boolean; isExactActive: boolean }
+      {
+        isActive,
+        isExactActive,
+      }: { isActive: boolean; isExactActive: boolean },
     ): string | undefined {
       if (props.exactQuery && !isDeepEqual(route.query, $route.query))
         return twJoin(props.inactiveClass, ctx.attrs.class as any);
@@ -81,7 +88,7 @@ export default defineComponent<Props>({
               disabled: props.disabled,
               class: twMerge(props.inactiveClass, ctx.attrs.class as any),
             },
-            ctx.slots
+            ctx.slots,
           )
         : h(
             NuxtLink,
@@ -114,9 +121,9 @@ export default defineComponent<Props>({
                   },
                   ctx.slots.default({
                     isActive: props.exact ? isExactActive : isActive,
-                  })
+                  }),
                 ),
-            }
+            },
           );
   },
 });

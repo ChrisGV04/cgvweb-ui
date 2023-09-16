@@ -51,8 +51,8 @@ const navigation: NavigationItem[] = [
 <template>
   <header class="border-b border-gray-900/10 bg-white">
     <nav
-      class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
       aria-label="Global"
+      class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
     >
       <div class="flex lg:flex-1">
         <NuxtLink to="/">
@@ -66,10 +66,11 @@ const navigation: NavigationItem[] = [
             v-if="item.route"
             :to="item.route"
             class="text-sm font-semibold leading-6 text-gray-900"
-            >{{ item.name }}</NuxtLink
           >
+            {{ item.name }}
+          </NuxtLink>
 
-          <Popover v-if="item.children" class="relative" v-slot="{ close }">
+          <Popover v-if="item.children" v-slot="{ close }" class="relative">
             <PopoverButton
               class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900"
             >
@@ -92,13 +93,14 @@ const navigation: NavigationItem[] = [
                 class="absolute -left-8 top-full z-10 mt-3 w-56 rounded-xl bg-white p-2 shadow-lg ring-1 ring-gray-900/5"
               >
                 <NuxtLink
-                  @click="close"
+                  v-for="child in item.children"
                   :key="child.name"
                   :to="child.route"
-                  v-for="child in item.children"
                   class="block rounded-lg px-3 py-2 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50"
-                  >{{ child.name }}</NuxtLink
+                  @click="close"
                 >
+                  {{ child.name }}
+                </NuxtLink>
               </PopoverPanel>
             </Transition>
           </Popover>

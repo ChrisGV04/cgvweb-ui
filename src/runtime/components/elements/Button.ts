@@ -40,9 +40,9 @@ export default defineComponent<Props>({
 
   props: {
     ...UiLink.props,
-    label: String,
-    leadingIcon: String,
-    trailingIcon: String,
+    label: { type: String, default: undefined },
+    leadingIcon: { type: String, default: undefined },
+    trailingIcon: { type: String, default: undefined },
     type: {
       type: String as PropType<HTMLButtonElement["type"]>,
       default: "button",
@@ -78,7 +78,7 @@ export default defineComponent<Props>({
     // Merge UI config
     const appConfig = useAppConfig();
     const ui = computed<ButtonUiConfig>(() =>
-      defuTwMerge({}, props.ui, appConfig.ui.button)
+      defuTwMerge({}, props.ui, appConfig.ui.button),
     );
 
     const buttonClass = computed(() =>
@@ -92,10 +92,10 @@ export default defineComponent<Props>({
           ui.value.gap[props.size],
           props.padded && ui.value.padding[props.size],
           ui.value.color[props.color][props.variant],
-          props.block ? "w-full flex justify-center" : "inline-flex"
+          props.block ? "w-full flex justify-center" : "inline-flex",
         ),
-        ctx.attrs.class as string
-      )
+        ctx.attrs.class as string,
+      ),
     );
 
     const trailingIconName = computed(() => {
@@ -104,15 +104,15 @@ export default defineComponent<Props>({
     });
 
     const leadingIconClass = computed(() =>
-      twJoin(ui.value.icon.base, ui.value.icon.size[props.size])
+      twJoin(ui.value.icon.base, ui.value.icon.size[props.size]),
     );
 
     const trailingIconClass = computed(() =>
       twJoin(
         ui.value.icon.base,
         ui.value.icon.size[props.size],
-        props.loading && "animate-spin"
-      )
+        props.loading && "animate-spin",
+      ),
     );
 
     return () =>
@@ -138,7 +138,7 @@ export default defineComponent<Props>({
                   name: props.leadingIcon,
                   class: leadingIconClass.value,
                 },
-                null
+                null,
               )
             : null,
 
@@ -151,7 +151,7 @@ export default defineComponent<Props>({
                 {
                   class: props.truncate && "text-left break-all line-clamp-1",
                 },
-                props.label
+                props.label,
               )
             : null,
 
@@ -168,10 +168,10 @@ export default defineComponent<Props>({
                   name: trailingIconName.value,
                   class: trailingIconClass.value,
                 },
-                null
+                null,
               )
             : null,
-        ]
+        ],
       );
   },
 });

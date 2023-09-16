@@ -21,8 +21,8 @@ defineOptions({ inheritAttrs: false });
 
 const props = defineProps({
   dot: Boolean,
-  label: String,
-  actionIcon: String,
+  label: { type: String, default: undefined },
+  actionIcon: { type: String, default: undefined },
   size: {
     type: String as PropType<UiBadgeSizes>,
     default: (): UiBadgeSizes => buildAppConfig.ui.badge.default.size,
@@ -47,7 +47,7 @@ const attrs = useAttrs();
 // Merge UI config
 const appConfig = useAppConfig();
 const ui = computed<UiConfig>(() =>
-  defuTwMerge({}, props.ui, appConfig.ui.badge)
+  defuTwMerge({}, props.ui, appConfig.ui.badge),
 );
 
 const variant = computed(() => ui.value.color[props.color][props.variant]);
@@ -59,10 +59,10 @@ const badgeClass = computed(() =>
       ui.value.font,
       ui.value.rounded,
       ui.value.size[props.size],
-      variant.value.base
+      variant.value.base,
     ),
-    attrs.class as string
-  )
+    attrs.class as string,
+  ),
 );
 </script>
 
@@ -82,14 +82,14 @@ const badgeClass = computed(() =>
 
     <slot name="action">
       <button
-        type="button"
         v-if="props.actionIcon"
-        @click="$emit('click:action')"
+        type="button"
         :class="[
           variant.action,
           variant.addons,
           'flex h-3.5 w-3.5 -mr-0.5 shrink-0 items-center justify-center rounded-sm',
         ]"
+        @click="$emit('click:action')"
       >
         <UiIcon :name="props.actionIcon" />
       </button>

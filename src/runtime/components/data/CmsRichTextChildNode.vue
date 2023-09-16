@@ -12,5 +12,5 @@ defineProps<{
     child
   }}</template>
 
-  <component v-else :is="child as any" />
+  <component :is="child as any" v-else />
 </template>

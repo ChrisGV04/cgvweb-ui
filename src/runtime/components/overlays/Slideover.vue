@@ -45,11 +45,11 @@ const props = defineProps({
 // Merge UI config
 const appConfig = useAppConfig();
 const ui = computed<UiConfig>(() =>
-  defuTwMerge({}, props.ui, appConfig.ui.slideover)
+  defuTwMerge({}, props.ui, appConfig.ui.slideover),
 );
 
 const wrapperClass = computed(() =>
-  twMerge(ui.value.wrapper, attrs.class as string)
+  twMerge(ui.value.wrapper, attrs.class as string),
 );
 
 const isOpen = computed({
@@ -87,13 +87,13 @@ function close() {
     @before-enter="emit('before-enter')"
   >
     <Dialog
-      @close="close"
       :class="wrapperClass"
       v-bind="omit(attrs, ['class'])"
+      @close="close"
     >
       <TransitionChild
-        as="template"
         v-if="props.overlay"
+        as="template"
         v-bind="ui.overlay.transition"
       >
         <div :class="[ui.overlay.base, ui.overlay.background]" />

@@ -23,7 +23,7 @@ defineOptions({ inheritAttrs: false });
 const attrs = useAttrs();
 
 const props = defineProps({
-  text: String,
+  text: { type: String, default: undefined },
   offset: { type: Number, default: 8 },
   openDelay: { type: Number, default: 0 },
   closeDelay: { type: Number, default: 0 },
@@ -45,7 +45,7 @@ const props = defineProps({
 // Merge UI config
 const appConfig = useAppConfig();
 const ui = computed<UiConfig>(() =>
-  defuTwMerge({}, props.ui, appConfig.ui.tooltip)
+  defuTwMerge({}, props.ui, appConfig.ui.tooltip),
 );
 
 const floating = computed<UseFloatingOptions>(() =>
@@ -57,12 +57,12 @@ const floating = computed<UseFloatingOptions>(() =>
       placement: props.placement,
       whileElementsMounted: autoUpdate,
       middleware: [offsetMw(props.offset), shift({ padding: 8 }), flip()],
-    } as UseFloatingOptions
-  )
+    } as UseFloatingOptions,
+  ),
 );
 
 const wrapperClass = computed(() =>
-  twMerge(ui.value.wrapper, attrs.class as string)
+  twMerge(ui.value.wrapper, attrs.class as string),
 );
 
 const triggerRef = ref<HTMLElement | null>(null);
@@ -71,7 +71,7 @@ const containerRef = ref<HTMLElement | null>(null);
 const { floatingStyles, update } = useFloating(
   triggerRef,
   containerRef,
-  floating.value
+  floating.value,
 );
 defineExpose({ update }); // Expose the update method in case it's required
 
@@ -124,17 +124,17 @@ function hideTooltip() {
   <div
     ref="triggerRef"
     :class="wrapperClass"
+    v-bind="omit(attrs, ['class'])"
     @blur="hideTooltip"
     @focus="showTooltip"
     @mouseover="showTooltip"
     @mouseleave="hideTooltip"
-    v-bind="omit(attrs, ['class'])"
   >
     <slot :open="open">Hover</slot>
 
     <div
-      ref="containerRef"
       v-if="open && !prevent"
+      ref="containerRef"
       :style="floatingStyles"
       :class="[ui.container, ui.width]"
     >

@@ -46,8 +46,8 @@ type RawChildren =
 
 export default defineComponent({
   props: {
+    as: { type: String, default: "div" },
     content: { type: Array as PropType<RichTextChildren>, required: true },
-    as: String,
   },
 
   slots: Object as SlotsType<{
@@ -113,6 +113,6 @@ export default defineComponent({
 
     const children = _serialize(content);
     if (!children) return h("div", { ...attrs }, "No rich text provided");
-    return () => h(as || "div", { ...attrs }, ...children);
+    return () => h(as, { ...attrs }, ...children);
   },
 });
