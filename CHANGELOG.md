@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.1.7
+
+[compare changes](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.1.6...v0.1.7)
+
+### 🏡 Chore
+
+- **release:** V0.1.6 ([a053eda](https://github.com/ChrisGV04/cgvweb-ui/commit/a053eda))
+- Improve type safety ([7a68ea3](https://github.com/ChrisGV04/cgvweb-ui/commit/7a68ea3))
+
+### ❤️ Contributors
+
+- Christian Gil <mrcgam.christian@gmail.com>
+
 ## v0.1.6
 
 
