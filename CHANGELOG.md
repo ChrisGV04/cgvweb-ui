@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.1.8
+
+[compare changes](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.1.7...v0.1.8)
+
+### 🏡 Chore
+
+- Update deps ([fc3c240](https://github.com/ChrisGV04/cgvweb-ui/commit/fc3c240))
+
+### ❤️ Contributors
+
+- Christian Gil <mrcgam.christian@gmail.com>
+
 ## v0.1.7
 
 [compare changes](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.1.6...v0.1.7)
