@@ -40,7 +40,7 @@ const props = defineProps({
 
 // Merge UI config
 const appConfig = useAppConfig();
-const ui = computed<UiConfig>(() =>
+const ui = computed<UiDialogConfig>(() =>
   defuTwMerge({}, props.ui, appConfig.ui.dialog),
 );
 

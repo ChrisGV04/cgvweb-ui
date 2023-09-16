@@ -23,8 +23,8 @@ const props = defineProps({
 
 // Merge UI config
 const appConfig = useAppConfig();
-const ui = computed<UiConfig>(() =>
-  defuTwMerge({}, props.ui, appConfig.ui.container)
+const ui = computed<UiContainerConfig>(() =>
+  defuTwMerge({}, props.ui, appConfig.ui.container),
 );
 
 const containerClass = computed(() => {
@@ -33,9 +33,9 @@ const containerClass = computed(() => {
       ui.value.base,
       ui.value.xPadding,
       ui.value.yPadding,
-      ui.value.constrained
+      ui.value.constrained,
     ),
-    attrs.class as string
+    attrs.class as string,
   );
 });
 </script>

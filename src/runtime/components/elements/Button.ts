@@ -77,7 +77,7 @@ export default defineComponent<Props>({
   setup(props, ctx) {
     // Merge UI config
     const appConfig = useAppConfig();
-    const ui = computed<ButtonUiConfig>(() =>
+    const ui = computed<UiButtonConfig>(() =>
       defuTwMerge({}, props.ui, appConfig.ui.button),
     );
 
@@ -88,10 +88,10 @@ export default defineComponent<Props>({
           ui.value.font,
           ui.value.rounded,
           ui.value.transition,
-          ui.value.size[props.size],
-          ui.value.gap[props.size],
-          props.padded && ui.value.padding[props.size],
-          ui.value.color[props.color][props.variant],
+          ui.value.size[props.size!],
+          ui.value.gap[props.size!],
+          props.padded && ui.value.padding[props.size!],
+          ui.value.color[props.color!][props.variant!],
           props.block ? "w-full flex justify-center" : "inline-flex",
         ),
         ctx.attrs.class as string,
@@ -104,13 +104,13 @@ export default defineComponent<Props>({
     });
 
     const leadingIconClass = computed(() =>
-      twJoin(ui.value.icon.base, ui.value.icon.size[props.size]),
+      twJoin(ui.value.icon.base, ui.value.icon.size[props.size!]),
     );
 
     const trailingIconClass = computed(() =>
       twJoin(
         ui.value.icon.base,
-        ui.value.icon.size[props.size],
+        ui.value.icon.size[props.size!],
         props.loading && "animate-spin",
       ),
     );
@@ -132,14 +132,10 @@ export default defineComponent<Props>({
                 loading: props.loading,
               })
             : props.leadingIcon
-            ? h(
-                UiIcon,
-                {
-                  name: props.leadingIcon,
-                  class: leadingIconClass.value,
-                },
-                null,
-              )
+            ? h(UiIcon, {
+                name: props.leadingIcon,
+                class: leadingIconClass.value,
+              })
             : null,
 
           // Default slot that renders a span if the slot is not defined
@@ -162,14 +158,10 @@ export default defineComponent<Props>({
                 loading: props.loading,
               })
             : trailingIconName.value
-            ? h(
-                UiIcon,
-                {
-                  name: trailingIconName.value,
-                  class: trailingIconClass.value,
-                },
-                null,
-              )
+            ? h(UiIcon, {
+                name: trailingIconName.value,
+                class: trailingIconClass.value,
+              })
             : null,
         ],
       );

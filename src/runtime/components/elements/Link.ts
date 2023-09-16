@@ -103,7 +103,7 @@ export default defineComponent<Props>({
                 isActive,
                 isExactActive,
                 isExternal,
-              }) =>
+              }: Record<string, any>) =>
                 h(
                   "a",
                   {
@@ -112,16 +112,17 @@ export default defineComponent<Props>({
                     target,
                     href: props.disabled ? undefined : href,
                     role: props.disabled ? undefined : "link",
-                    onClick: (e) => {
+                    onClick: (e: Event) => {
                       !isExternal && navigate(e);
                       ctx.emit("click", e);
                     },
                     ariaDisabled: props.disabled ? "true" : undefined,
                     class: resolveLinkClass(route, { isActive, isExactActive }),
                   },
-                  ctx.slots.default({
-                    isActive: props.exact ? isExactActive : isActive,
-                  }),
+                  ctx.slots.default &&
+                    ctx.slots.default({
+                      isActive: props.exact ? isExactActive : isActive,
+                    }),
                 ),
             },
           );

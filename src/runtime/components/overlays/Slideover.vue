@@ -44,7 +44,7 @@ const props = defineProps({
 
 // Merge UI config
 const appConfig = useAppConfig();
-const ui = computed<UiConfig>(() =>
+const ui = computed<UiSlideoverConfig>(() =>
   defuTwMerge({}, props.ui, appConfig.ui.slideover),
 );
 

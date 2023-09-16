@@ -46,7 +46,7 @@ const attrs = useAttrs();
 
 // Merge UI config
 const appConfig = useAppConfig();
-const ui = computed<UiConfig>(() =>
+const ui = computed<UiBadgeConfig>(() =>
   defuTwMerge({}, props.ui, appConfig.ui.badge),
 );
 
