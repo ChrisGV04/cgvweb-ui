@@ -49,8 +49,6 @@ export default defineComponent<Props>({
     inactiveClass: { type: String, default: undefined },
   },
 
-  emits: ["click"],
-
   // We extract the "custom" prop to avoid overrides
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup({ custom, ...props }, ctx) {
@@ -114,6 +112,7 @@ export default defineComponent<Props>({
                     role: props.disabled ? undefined : "link",
                     onClick: (e: Event) => {
                       !isExternal && navigate(e);
+                      // eslint-disable-next-line vue/require-explicit-emits
                       ctx.emit("click", e);
                     },
                     ariaDisabled: props.disabled ? "true" : undefined,
