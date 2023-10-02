@@ -9,7 +9,7 @@ import {
   type UseFloatingOptions,
 } from "@floating-ui/vue";
 import { defu } from "defu";
-import { omit } from "lodash-es";
+import omit from "just-omit";
 import { twMerge } from "tailwind-merge";
 import { computed, ref, type PropType } from "vue";
 import type { UiTooltipConfig } from "../../types";

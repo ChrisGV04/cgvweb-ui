@@ -6,7 +6,7 @@ import {
   TransitionChild,
   TransitionRoot,
 } from "@headlessui/vue";
-import { omit } from "lodash-es";
+import omit from "just-omit";
 import { twMerge } from "tailwind-merge";
 import { computed, type PropType } from "vue";
 import type { UiDialogConfig } from "../../types";

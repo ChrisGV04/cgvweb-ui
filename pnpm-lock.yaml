@@ -26,9 +26,9 @@ importers:
       defu:
         specifier: ^6.1.2
         version: 6.1.2
-      lodash-es:
-        specifier: ^4.17.21
-        version: 4.17.21
+      just-omit:
+        specifier: ^2.2.0
+        version: 2.2.0
       tailwind-merge:
         specifier: ^1.14.0
         version: 1.14.0
@@ -51,9 +51,6 @@ importers:
       '@nuxt/schema':
         specifier: ^3.7.3
         version: 3.7.3(rollup@3.29.2)
-      '@types/lodash-es':
-        specifier: ^4.17.9
-        version: 4.17.9
       '@types/node':
         specifier: ^20.6.1
         version: 20.6.1
@@ -1630,6 +1627,7 @@ packages:
     dependencies:
       is-glob: 4.0.3
       micromatch: 4.0.5
+      napi-wasm: 1.1.0
     dev: true
     bundledDependencies:
       - napi-wasm
@@ -1958,16 +1956,6 @@ packages:
 
   /@types/json-schema@7.0.13:
     resolution: {integrity: sha512-RbSSoHliUbnXj3ny0CNFOoxrIDV6SUGyStHsvDqosw6CkdPV8TtWGlfecuK4ToyMEAql6pzNxgCFKanovUzlgQ==}
-
-  /@types/lodash-es@4.17.9:
-    resolution: {integrity: sha512-ZTcmhiI3NNU7dEvWLZJkzG6ao49zOIjEgIE0RgV7wbPxU0f2xT3VSAHw2gmst8swH6V0YkLRGp4qPlX/6I90MQ==}
-    dependencies:
-      '@types/lodash': 4.14.198
-    dev: true
-
-  /@types/lodash@4.14.198:
-    resolution: {integrity: sha512-trNJ/vtMZYMLhfN45uLq4ShQSw0/S7xCTLLVM+WM1rmFpba/VS42jVUgaO3w/NOLiWR/09lnYk0yMaA/atdIsg==}
-    dev: true
 
   /@types/node@20.6.1:
     resolution: {integrity: sha512-4LcJvuXQlv4lTHnxwyHQZ3uR9Zw2j7m1C9DfuwoTFQQP4Pmu04O6IfLYgMmHoOCt0nosItLLZAH+sOrRE0Bo8g==}
@@ -4936,6 +4924,10 @@ packages:
     engines: {'0': node >= 0.2.0}
     dev: true
 
+  /just-omit@2.2.0:
+    resolution: {integrity: sha512-Js7+HxDOGcB3RhI38Mird/RgyMf3t0DAJFda1QWqqlAKTa36NeSYIufJXxrZUbysFTRcTOFcoMCiFK5FwCoI7Q==}
+    dev: false
+
   /keygrip@1.1.0:
     resolution: {integrity: sha512-iYSchDJ+liQ8iwbSI2QqsQOvqv58eJCEanyJPJi+Khyu8smkcKSFUCbPwzFcL7YVtZ6eONjqRX/38caJ7QjRAQ==}
     engines: {node: '>= 0.6'}
@@ -5103,10 +5095,6 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       p-locate: 5.0.0
-
-  /lodash-es@4.17.21:
-    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
-    dev: false
 
   /lodash.castarray@4.4.0:
     resolution: {integrity: sha512-aVx8ztPv7/2ULbArGJ2Y42bG1mEQ5mGjpdvrbJcJFU3TbYybe+QlLS4pst9zV52ymy2in1KpFPiZnAOATxD4+Q==}
@@ -5492,6 +5480,10 @@ packages:
     resolution: {integrity: sha512-7ZtY5KTCNheRGfEFxnedV5zFiORN1+Y1N6zvPTnHQd8ENUvfaDBeuJDZb2bN/oXwXxu3qkTXDzy57W5vAmDTBw==}
     engines: {node: ^14 || ^16 || >=18}
     hasBin: true
+    dev: true
+
+  /napi-wasm@1.1.0:
+    resolution: {integrity: sha512-lHwIAJbmLSjF9VDRm9GoVOy9AGp3aIvkjv+Kvz9h16QR3uSVYH78PNQUnT2U4X53mhlnV2M7wrhibQ3GHicDmg==}
     dev: true
 
   /natural-compare@1.4.0:
