@@ -51,7 +51,7 @@ export default defineComponent<Props>({
 
   // We extract the "custom" prop to avoid overrides
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  setup({ custom, ...props }, ctx) {
+  setup(props, ctx) {
     const $route = useRoute();
 
     function resolveLinkClass(
@@ -90,7 +90,7 @@ export default defineComponent<Props>({
           )
         : h(
             NuxtLink,
-            { custom: true, ...props },
+            { custom: true, ...omit(props, ["custom"]) },
             {
               default: ({
                 route,

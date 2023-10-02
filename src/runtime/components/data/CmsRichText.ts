@@ -57,7 +57,7 @@ export default defineComponent({
     };
   }>,
 
-  setup({ content, as }, { attrs, slots }) {
+  setup(props, { attrs, slots }) {
     function _serialize(children?: RichTextChildren): RawChildren[] | null {
       if (!children) return null;
 
@@ -111,8 +111,8 @@ export default defineComponent({
       });
     }
 
-    const children = _serialize(content);
+    const children = _serialize(props.content);
     if (!children) return h("div", { ...attrs }, "No rich text provided");
-    return () => h(as, { ...attrs }, ...children);
+    return () => h(props.as, { ...attrs }, ...children);
   },
 });
