@@ -1,5 +1,21 @@
 # Changelog
 
+## v0.1.10
+
+[compare changes](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.1.9...v0.1.10)
+
+### 🩹 Fixes
+
+- Fix destructuring props removing reactivity ([7fd1f81](https://github.com/ChrisGV04/cgvweb-ui/commit/7fd1f81))
+
+### 🏡 Chore
+
+- **release:** V0.1.9 ([6982d09](https://github.com/ChrisGV04/cgvweb-ui/commit/6982d09))
+
+### ❤️ Contributors
+
+- Christian Gil <mrcgam.christian@gmail.com>
+
 ## v0.1.9
 
 [compare changes](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.1.8...v0.1.9)
