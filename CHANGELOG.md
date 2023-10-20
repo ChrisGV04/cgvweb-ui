@@ -1,5 +1,21 @@
 # Changelog
 
+## v0.1.14
+
+[compare changes](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.1.13...v0.1.14)
+
+### 🩹 Fixes
+
+- Wrong Strategy type for module ([6d50510](https://github.com/ChrisGV04/cgvweb-ui/commit/6d50510))
+
+### 🏡 Chore
+
+- **release:** V0.1.13 ([ad197f7](https://github.com/ChrisGV04/cgvweb-ui/commit/ad197f7))
+
+### ❤️ Contributors
+
+- Christian Gil <mrcgam.christian@gmail.com>
+
 ## v0.1.13
 
 [compare changes](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.1.12...v0.1.13)
