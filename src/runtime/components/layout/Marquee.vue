@@ -1,37 +1,47 @@
-<script setup lang="ts">
-import { useElementBounding, useElementVisibility } from "@vueuse/core";
-import { computed, ref } from "vue";
+<script lang="ts">
+import {
+  useElementBounding,
+  useElementVisibility,
+  useToNumber,
+} from "@vueuse/core";
+import { computed, defineComponent, ref } from "vue";
 
-export interface MarqueeProps {
-  speed?: number;
-  reverse?: boolean;
-  pause?: boolean;
-}
+export default defineComponent({
+  props: {
+    speed: { type: [String, Number], default: 20 },
+    reverse: { type: Boolean, default: false },
+    pause: { type: Boolean, default: false },
+  },
 
-const props = withDefaults(defineProps<MarqueeProps>(), { speed: 20 });
+  setup(props) {
+    const wrapperRef = ref<HTMLElement | null>(null);
+    const marqueeRef = ref<HTMLElement | null>(null);
 
-const wrapperRef = ref<HTMLElement | null>(null);
-const marqueeRef = ref<HTMLElement | null>(null);
+    const numSpeed = useToNumber(props.speed);
 
-const { width: wrapperWidth } = useElementBounding(wrapperRef);
-const { width: marqueeWidth } = useElementBounding(marqueeRef);
+    const { width: wrapperWidth } = useElementBounding(wrapperRef);
+    const { width: marqueeWidth } = useElementBounding(marqueeRef);
 
-const duration = computed(
-  () =>
-    `${
-      marqueeWidth.value < wrapperWidth.value
-        ? wrapperWidth.value / props.speed
-        : marqueeWidth.value / props.speed
-    }s`,
-);
+    const duration = computed(
+      () =>
+        `${
+          marqueeWidth.value < wrapperWidth.value
+            ? wrapperWidth.value / numSpeed.value
+            : marqueeWidth.value / numSpeed.value
+        }s`,
+    );
 
-const repeat = computed(() => {
-  const times = Math.ceil(wrapperWidth.value / marqueeWidth.value);
-  if (times === Infinity || isNaN(times)) return 1;
-  return times;
+    const repeat = computed(() => {
+      const times = Math.ceil(wrapperWidth.value / marqueeWidth.value);
+      if (times === Infinity || isNaN(times)) return 1;
+      return times;
+    });
+
+    const isVisible = useElementVisibility(wrapperRef);
+
+    return { duration, repeat, isVisible, wrapperRef, marqueeRef };
+  },
 });
-
-const isVisible = useElementVisibility(wrapperRef);
 </script>
 
 <template>

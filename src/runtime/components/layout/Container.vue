@@ -1,47 +1,65 @@
-<script setup lang="ts">
-import { useAppConfig, useAttrs } from "#imports";
-import omit from "just-omit";
-import { computed, type PropType } from "vue";
-import type { UiContainerConfig } from "../../types";
-import { defuTwMerge } from "../../utils";
-// @ts-expect-error
-import buildAppConfig from "#build/app.config";
+<script lang="ts">
 import { twJoin, twMerge } from "tailwind-merge";
+import type { PropType } from "vue";
+import { computed, defineComponent, toRef } from "vue";
+import { useUI } from "../../composables/useUI";
+import type { Strategy } from "../../types";
+import { container } from "../../ui.config";
+import { mergeConfig } from "../../utils";
+// @ts-expect-error
+import appConfig from "#build/app.config";
 
-type UiConfig = Partial<UiContainerConfig>;
-
-defineOptions({ inheritAttrs: false });
-const attrs = useAttrs();
-
-const props = defineProps({
-  as: { type: String, default: "div" },
-  ui: {
-    type: Object as PropType<UiConfig>,
-    default: (): UiConfig => buildAppConfig.ui.container,
-  },
-});
-
-// Merge UI config
-const appConfig = useAppConfig();
-const ui = computed<UiContainerConfig>(() =>
-  defuTwMerge({}, props.ui, appConfig.ui.container),
+const config = mergeConfig<typeof container>(
+  appConfig.ui.strategy,
+  appConfig.ui.container,
+  container,
 );
 
-const containerClass = computed(() => {
-  return twMerge(
-    twJoin(
-      ui.value.base,
-      ui.value.xPadding,
-      ui.value.yPadding,
-      ui.value.constrained,
-    ),
-    attrs.class as string,
-  );
+export default defineComponent({
+  inheritAttrs: false,
+  props: {
+    as: {
+      type: String,
+      default: "div",
+    },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined,
+    },
+    ui: {
+      type: Object as PropType<
+        Partial<typeof config & { strategy?: Strategy }>
+      >,
+      default: undefined,
+    },
+  },
+  setup(props) {
+    const { ui, attrs } = useUI("container", toRef(props, "ui"), config);
+
+    const containerClass = computed(() => {
+      return twMerge(
+        twJoin(
+          ui.value.base,
+          ui.value.xPadding,
+          ui.value.yPadding,
+          ui.value.constrained,
+        ),
+        props.class,
+      );
+    });
+
+    return {
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
+      attrs,
+      containerClass,
+    };
+  },
 });
 </script>
 
 <template>
-  <component :is="as" :class="containerClass" v-bind="omit(attrs, ['class'])">
+  <component :is="as" :class="containerClass" v-bind="attrs">
     <slot />
   </component>
 </template>

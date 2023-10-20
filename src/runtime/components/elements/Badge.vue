@@ -1,79 +1,86 @@
-<script setup lang="ts">
-import { useAppConfig, useAttrs } from "#imports";
-import omit from "just-omit";
+<script lang="ts">
 import { twJoin, twMerge } from "tailwind-merge";
-import { computed, type PropType } from "vue";
-import type {
-  UiBadgeColors,
-  UiBadgeConfig,
-  UiBadgeDefaultConfig,
-  UiBadgeSizes,
-  UiBadgeVariants,
-} from "../../types";
-import { defuTwMerge } from "../../utils";
+import type { PropType } from "vue";
+import { computed, defineComponent, toRef } from "vue";
+import { useUI } from "../../composables/useUI";
+import type { BadgeColor, BadgeSize, BadgeVariant, Strategy } from "../../types";
+import { badge } from "../../ui.config";
+import { mergeConfig } from "../../utils";
 import UiIcon from "./Icon.vue";
 // @ts-expect-error
-import buildAppConfig from "#build/app.config";
+import appConfig from "#build/app.config";
 
-type UiConfig = Partial<UiBadgeConfig>;
+const config = mergeConfig<typeof badge>(
+  appConfig.ui.strategy,
+  appConfig.ui.badge,
+  badge,
+);
 
-defineOptions({ inheritAttrs: false });
+export default defineComponent({
+  components: { UiIcon },
+  inheritAttrs: false,
+  props: {
+    dot: Boolean,
+    actionIcon: { type: String, default: null },
+    label: { type: [String, Number], default: null },
+    size: {
+      type: String as PropType<BadgeSize>,
+      default: () => config.default.size,
+    },
+    color: {
+      type: String as PropType<BadgeColor>,
+      default: () => config.default.color,
+    },
+    variant: {
+      type: String as PropType<BadgeVariant>,
+      default: () => config.default.variant,
+    },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined,
+    },
+    ui: {
+      type: Object as PropType<
+        Partial<typeof config & { strategy?: Strategy }>
+      >,
+      default: undefined,
+    },
+  },
+  emits: ["click:action"],
 
-const props = defineProps({
-  dot: Boolean,
-  label: { type: String, default: undefined },
-  actionIcon: { type: String, default: undefined },
-  size: {
-    type: String as PropType<UiBadgeSizes>,
-    default: (): UiBadgeSizes => buildAppConfig.ui.badge.default.size,
-  },
-  color: {
-    type: String as PropType<UiBadgeColors>,
-    default: (): UiBadgeColors => buildAppConfig.ui.badge.default.color,
-  },
-  variant: {
-    type: String as PropType<UiBadgeVariants>,
-    default: (): UiBadgeVariants => buildAppConfig.ui.badge.default.variant,
-  },
-  ui: {
-    type: Object as PropType<UiConfig>,
-    default: (): Partial<UiBadgeDefaultConfig> => buildAppConfig.ui.badge,
+  setup(props) {
+    const { ui, attrs } = useUI("badge", toRef(props, "ui"), config);
+
+    const activeVariant = computed(
+      () => ui.value.color[props.color][props.variant],
+    );
+
+    const badgeClass = computed(() => {
+      return twMerge(
+        twJoin(
+          ui.value.base,
+          ui.value.font,
+          ui.value.rounded,
+          ui.value.size[props.size],
+          activeVariant.value.base,
+        ),
+        props.class,
+      );
+    });
+
+    return { attrs, activeVariant, badgeClass };
   },
 });
-defineEmits(["click:action"]);
-
-const attrs = useAttrs();
-
-// Merge UI config
-const appConfig = useAppConfig();
-const ui = computed<UiBadgeConfig>(() =>
-  defuTwMerge({}, props.ui, appConfig.ui.badge),
-);
-
-const variant = computed(() => ui.value.color[props.color][props.variant]);
-
-const badgeClass = computed(() =>
-  twMerge(
-    twJoin(
-      ui.value.base,
-      ui.value.font,
-      ui.value.rounded,
-      ui.value.size[props.size],
-      variant.value.base,
-    ),
-    attrs.class as string,
-  ),
-);
 </script>
 
 <template>
-  <span :class="badgeClass" v-bind="omit(attrs, ['class'])">
+  <span :class="badgeClass" v-bind="attrs">
     <svg
       v-if="dot"
       viewBox="0 0 6 6"
       aria-hidden="true"
       fill="currentColor"
-      :class="['h-1.5 w-1.5', variant.addons]"
+      :class="['h-1.5 w-1.5', activeVariant.addons]"
     >
       <circle cx="3" cy="3" r="3" />
     </svg>
@@ -82,16 +89,16 @@ const badgeClass = computed(() =>
 
     <slot name="action">
       <button
-        v-if="props.actionIcon"
+        v-if="actionIcon"
         type="button"
         :class="[
-          variant.action,
-          variant.addons,
+          activeVariant.action,
+          activeVariant.addons,
           'flex h-3.5 w-3.5 -mr-0.5 shrink-0 items-center justify-center rounded-sm',
         ]"
         @click="$emit('click:action')"
       >
-        <UiIcon :name="props.actionIcon" />
+        <UiIcon :name="actionIcon" />
       </button>
     </slot>
   </span>

@@ -1,92 +1,126 @@
-<script setup lang="ts">
-import { useAppConfig, useAttrs } from "#imports";
+<script lang="ts">
 import {
-  Dialog,
-  DialogPanel,
+  Dialog as HDialog,
+  DialogPanel as HDialogPanel,
   TransitionChild,
   TransitionRoot,
 } from "@headlessui/vue";
-import omit from "just-omit";
-import { twMerge } from "tailwind-merge";
-import { computed, type PropType } from "vue";
-import type { UiDialogConfig } from "../../types";
-import { defuTwMerge } from "../../utils";
+import type { PropType } from "vue";
+import { computed, defineComponent, toRef } from "vue";
+import { useUI } from "../../composables/useUI";
+import type { Strategy } from "../../types";
+import { dialog } from "../../ui.config";
+import { mergeConfig } from "../../utils";
 // @ts-expect-error
-import buildAppConfig from "#build/app.config";
+import appConfig from "#build/app.config";
 
-type UiConfig = Partial<UiDialogConfig>;
-
-defineOptions({ inheritAttrs: false });
-const attrs = useAttrs();
-
-const emit = defineEmits([
-  "update:modelValue",
-  "close",
-  "before-leave",
-  "after-leave",
-  "before-enter",
-  "after-enter",
-]);
-
-const props = defineProps({
-  modelValue: { type: Boolean, default: false },
-  overlay: { type: Boolean, default: true },
-  preventClose: { type: Boolean, default: false },
-  ui: {
-    type: Object as PropType<UiConfig>,
-    default: (): UiConfig => buildAppConfig.ui.dialog,
-  },
-});
-
-// Merge UI config
-const appConfig = useAppConfig();
-const ui = computed<UiDialogConfig>(() =>
-  defuTwMerge({}, props.ui, appConfig.ui.dialog),
+const config = mergeConfig<typeof dialog>(
+  appConfig.ui.strategy,
+  appConfig.ui.dialog,
+  dialog,
 );
 
-const wrapperClass = computed(() =>
-  twMerge(ui.value.wrapper, attrs.class as string),
-);
-
-const isOpen = computed({
-  get() {
-    return props.modelValue;
+export default defineComponent({
+  components: { HDialog, HDialogPanel, TransitionChild, TransitionRoot },
+  inheritAttrs: false,
+  props: {
+    modelValue: { type: Boolean, default: false },
+    appear: { type: Boolean, default: false },
+    overlay: { type: Boolean, default: true },
+    transition: { type: Boolean, default: true },
+    preventClose: { type: Boolean, default: false },
+    class: {
+      type: [String, Object, Array] as PropType<any>,
+      default: undefined,
+    },
+    ui: {
+      type: Object as PropType<
+        Partial<typeof config & { strategy?: Strategy }>
+      >,
+      default: undefined,
+    },
   },
-  set(value) {
-    emit("update:modelValue", value);
+  emits: [
+    "update:modelValue",
+    "close",
+    "before-leave",
+    "after-leave",
+    "before-enter",
+    "after-enter",
+  ],
+
+  setup(props, { emit }) {
+    const { ui, attrs } = useUI(
+      "dialog",
+      toRef(props, "ui"),
+      config,
+      toRef(props, "class"),
+    );
+
+    const isOpen = computed({
+      get() {
+        return props.modelValue;
+      },
+      set(value) {
+        emit("update:modelValue", value);
+      },
+    });
+
+    const transitionClass = computed(() => {
+      if (!props.transition) return {};
+
+      return {
+        ...ui.value.transition,
+      };
+    });
+
+    function close() {
+      if (props.preventClose) return;
+
+      isOpen.value = false;
+      emit("close");
+    }
+
+    return {
+      // eslint-disable-next-line vue/no-dupe-keys
+      ui,
+      attrs,
+      isOpen,
+      close,
+      transitionClass,
+    };
   },
 });
-
-function close() {
-  if (props.preventClose) return;
-
-  isOpen.value = false;
-  emit("close");
-}
 </script>
 
 <template>
   <TransitionRoot
     :show="isOpen"
+    :appear="appear"
     as="template"
-    @after-leave="emit('after-leave')"
-    @before-leave="emit('before-leave')"
-    @after-enter="emit('after-enter')"
-    @before-enter="emit('before-enter')"
+    @after-leave="$emit('after-leave')"
+    @before-leave="$emit('before-leave')"
+    @after-enter="$emit('after-enter')"
+    @before-enter="$emit('before-enter')"
   >
-    <Dialog
-      :class="wrapperClass"
-      v-bind="omit(attrs, ['class'])"
-      @close="close"
-    >
-      <TransitionChild as="template" v-bind="ui.overlay.transition">
+    <HDialog :class="ui.wrapper" v-bind="attrs" @close="close">
+      <TransitionChild
+        v-if="overlay"
+        as="template"
+        :appear="appear"
+        v-bind="ui.overlay.transition"
+      >
         <div :class="[ui.overlay.base, ui.overlay.background]" />
       </TransitionChild>
 
       <div :class="ui.inner">
         <div :class="[ui.container, ui.padding]">
-          <TransitionChild as="template" v-bind="ui.transition">
-            <DialogPanel
+          <TransitionChild
+            as="template"
+            :appear="appear"
+            v-bind="transitionClass"
+          >
+            <HDialogPanel
               :class="[
                 ui.base,
                 ui.width,
@@ -98,10 +132,10 @@ function close() {
               ]"
             >
               <slot />
-            </DialogPanel>
+            </HDialogPanel>
           </TransitionChild>
         </div>
       </div>
-    </Dialog>
+    </HDialog>
   </TransitionRoot>
 </template>

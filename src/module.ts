@@ -1,22 +1,29 @@
 import { getIconCollections, iconsPlugin } from "@egoist/tailwindcss-icons";
+import type { Strategy } from "@floating-ui/vue";
 import {
   addComponentsDir,
   addImportsDir,
   createResolver,
   defineNuxtModule,
   installModule,
-  resolvePath,
 } from "@nuxt/kit";
 import { name, version } from "../package.json";
-import appConfig from "./runtime/app.config";
+import type { DeepPartial } from "./runtime/types";
+import * as config from "./runtime/ui.config";
 
-type DeepPartial<T> = Partial<{
-  [P in keyof T]: DeepPartial<T[P]> | { [key: string]: string };
-}>;
+type UI = {
+  strategy?: Strategy;
+  [key: string]: any;
+} & DeepPartial<typeof config>;
 
+declare module "nuxt/schema" {
+  interface AppConfigInput {
+    ui?: UI;
+  }
+}
 declare module "@nuxt/schema" {
   interface AppConfigInput {
-    ui?: DeepPartial<typeof appConfig.ui>;
+    ui?: UI;
   }
 }
 
@@ -40,7 +47,7 @@ export default defineNuxtModule<ModuleOptions>({
     version,
     configKey: "ui",
     compatibility: {
-      nuxt: "^3.0.0-rc.8",
+      nuxt: "^3.0.0",
     },
   },
   defaults: {
@@ -55,17 +62,19 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.build.transpile.push(runtimeDir);
     nuxt.options.build.transpile.push("@floating-ui/vue", "@headlessui/vue");
 
+    nuxt.options.alias["#ui"] = runtimeDir;
+
     nuxt.options.css.push(resolve(runtimeDir, "ui.css"));
 
-    const appConfigFile = await resolvePath(resolve(runtimeDir, "app.config"));
-    nuxt.hook("app:resolve", (app) => {
-      app.configs.push(appConfigFile);
-    });
-
     nuxt.hook("tailwindcss:config", function (tailwindConfig) {
+      // @ts-ignore
+      nuxt.options.appConfig.ui = { strategy: "merge" };
+
       tailwindConfig.plugins = tailwindConfig.plugins || [];
       tailwindConfig.plugins.push(
-        iconsPlugin({ collections: getIconCollections(options.icons as any[]) })
+        iconsPlugin({
+          collections: getIconCollections(options.icons as any[]),
+        }),
       );
     });
 

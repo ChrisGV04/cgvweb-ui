@@ -1,10 +1,17 @@
-<script setup lang="ts">
-import type { VNode, VNodeArrayChildren } from "vue";
+<script lang="ts">
+import type { PropType, VNode, VNodeArrayChildren } from "vue";
+import { defineComponent } from "vue";
 
-defineProps<{
-  // Same as RawChildren inside the CmsRichText
-  child: string | number | boolean | VNode | VNodeArrayChildren | (() => any);
-}>();
+export default defineComponent({
+  props: {
+    child: {
+      type: [String, Number, Boolean, Object, Function] as PropType<
+        string | number | boolean | VNode | VNodeArrayChildren | (() => any)
+      >,
+      required: true,
+    },
+  },
+});
 </script>
 
 <template>

@@ -1,17 +1,8 @@
-import type {
-  UiBadgeConfig,
-  UiButtonConfig,
-  UiContainerConfig,
-  UiDialogConfig,
-  UiSlideoverConfig,
-  UiTooltipConfig,
-} from "./types";
-
 // Data
 
 // Elements
 
-const badge: UiBadgeConfig = {
+export const badge = {
   base: "inline-flex items-center",
   rounded: "rounded-md",
   font: "font-medium",
@@ -124,7 +115,7 @@ const badge: UiBadgeConfig = {
   },
 };
 
-const button: UiButtonConfig = {
+export const button = {
   base: "flex-shrink-0 items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75",
   font: "font-semibold",
   rounded: "rounded-md",
@@ -190,7 +181,7 @@ const button: UiButtonConfig = {
 
 // Layout
 
-const container: UiContainerConfig = {
+export const container = {
   base: "mx-auto w-full",
   constrained: "max-w-7xl",
   xPadding: "px-4 sm:px-6 lg:px-8",
@@ -201,7 +192,7 @@ const container: UiContainerConfig = {
 
 // Overlays
 
-const tooltip: UiTooltipConfig = {
+export const tooltip = {
   wrapper: "relative inline-flex",
   container: "z-30",
   width: "max-w-xs",
@@ -222,7 +213,7 @@ const tooltip: UiTooltipConfig = {
   },
 };
 
-const dialog: UiDialogConfig = {
+export const dialog = {
   wrapper: "relative z-40",
   inner: "fixed inset-0 z-10 overflow-y-auto",
   container: "flex min-h-full items-end justify-center sm:items-center",
@@ -256,7 +247,7 @@ const dialog: UiDialogConfig = {
   },
 };
 
-const slideover: UiSlideoverConfig = {
+export const slideover = {
   wrapper: "relative z-40",
   inner: "fixed inset-0 z-10",
   container: "flex min-h-full justify-end",
@@ -282,16 +273,5 @@ const slideover: UiSlideoverConfig = {
   transition: {
     enter: "transform transition ease-in-out duration-500 sm:duration-700",
     leave: "transform transition ease-in-out duration-500 sm:duration-700",
-  },
-};
-
-export default {
-  ui: {
-    badge,
-    button,
-    container,
-    dialog,
-    slideover,
-    tooltip,
   },
 };

@@ -1,38 +1,22 @@
-export type UiButtonColors = "primary" | "white" | "black";
-export type UiButtonSizes = "xs" | "sm" | "md";
-export type UiButtonVariants = "solid" | "soft" | "ghost" | "link";
+import { button } from "../ui.config";
+import { Link } from "./link";
 
-export interface UiButtonConfig<
-  TSizes extends string = any,
-  TColors extends string = any,
-  TVariants extends string = any
-> {
-  base: string;
-  font: string;
-  rounded: string;
-  transition: string;
-  size: { [S in TSizes]: string };
-  gap: { [S in TSizes]: string };
-  padding: { [S in TSizes]: string };
-  color: {
-    [C in TColors]: {
-      [V in Variants]: string;
-    };
-  };
-  icon: {
-    base: string;
-    size: { [S in TSizes]: string };
-  };
-  default: {
-    size: TSizes;
-    color: TColors;
-    variant: TVariants;
-    loadingIcon: string;
-  };
+export type ButtonSize = keyof typeof button.size;
+export type ButtonColor = "primary" | "white" | "black";
+export type ButtonVariant = "solid" | "soft" | "ghost" | "link";
+
+export interface Button extends Link {
+  label?: string;
+  loadingIcon?: string;
+  leadingIcon?: string;
+  trailingIcon?: string;
+  type?: HTMLButtonElement["type"];
+  loading?: boolean;
+  disabled?: boolean;
+  truncate?: boolean;
+  block?: boolean;
+  padded?: boolean;
+  size?: ButtonSize;
+  color?: ButtonColor;
+  variant?: ButtonVariant;
 }
-
-export type UiButtonDefaultConfig = UiButtonConfig<
-  UiButtonSizes,
-  UiButtonColors,
-  UiButtonVariants
->;
