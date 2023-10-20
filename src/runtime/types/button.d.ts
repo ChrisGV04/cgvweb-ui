@@ -1,5 +1,6 @@
 import { button } from "../ui.config";
-import { Link } from "./link";
+import type { Link } from "./link";
+import type { DeepPartial, Strategy } from "./utils";
 
 export type ButtonSize = keyof typeof button.size;
 export type ButtonColor = "primary" | "white" | "black";
@@ -19,4 +20,6 @@ export interface Button extends Link {
   size?: ButtonSize;
   color?: ButtonColor;
   variant?: ButtonVariant;
+  ui?: DeepPartial<typeof button & { strategy?: Strategy }>;
+  class?: any;
 }

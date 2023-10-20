@@ -23,13 +23,8 @@ const config = mergeConfig<typeof button>(
   button,
 );
 
-type Props = Button & {
-  ui?: Partial<typeof config & { strategy?: Strategy }>;
-  class?: any;
-};
-
 // @ts-ignore
-export default defineComponent<Props>({
+export default defineComponent<Button>({
   components: { UiIcon, UiLink },
   inheritAttrs: false,
   props: {
