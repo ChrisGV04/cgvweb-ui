@@ -1,5 +1,4 @@
 import { getIconCollections, iconsPlugin } from "@egoist/tailwindcss-icons";
-import type { Strategy } from "@floating-ui/vue";
 import {
   addComponentsDir,
   addImportsDir,
@@ -8,7 +7,7 @@ import {
   installModule,
 } from "@nuxt/kit";
 import { name, version } from "../package.json";
-import type { DeepPartial } from "./runtime/types";
+import type { DeepPartial, Strategy } from "./runtime/types";
 import * as config from "./runtime/ui.config";
 
 type UI = {
