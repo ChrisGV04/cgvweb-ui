@@ -126,9 +126,9 @@ export const button = {
     md: "text-sm",
   },
   gap: {
-    xs: "space-x-1.5",
-    sm: "space-x-1.5",
-    md: "space-x-2",
+    xs: "gap-x-1.5",
+    sm: "gap-x-1.5",
+    md: "gap-x-2",
   },
   padding: {
     xs: "px-2 py-1",
