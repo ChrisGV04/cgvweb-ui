@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.1.13
+
+[compare changes](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.1.12...v0.1.13)
+
+### 🏡 Chore
+
+- **release:** V0.1.12 ([2b55e0f](https://github.com/ChrisGV04/cgvweb-ui/commit/2b55e0f))
+
+### ❤️ Contributors
+
+- Christian Gil <mrcgam.christian@gmail.com>
+
 ## v0.1.12
 
 [compare changes](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.1.11...v0.1.12)
