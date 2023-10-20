@@ -1,5 +1,21 @@
 # Changelog
 
+## v0.1.12
+
+[compare changes](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.1.11...v0.1.12)
+
+### 🩹 Fixes
+
+- Fix ui types for the Button ([e8b5625](https://github.com/ChrisGV04/cgvweb-ui/commit/e8b5625))
+
+### 🏡 Chore
+
+- **release:** V0.1.11 ([49f9d9b](https://github.com/ChrisGV04/cgvweb-ui/commit/49f9d9b))
+
+### ❤️ Contributors
+
+- Christian Gil <mrcgam.christian@gmail.com>
+
 ## v0.1.11
 
 [compare changes](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.1.10...v0.1.11)
