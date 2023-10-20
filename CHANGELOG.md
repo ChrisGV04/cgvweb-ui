@@ -1,5 +1,23 @@
 # Changelog
 
+## v0.1.11
+
+[compare changes](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.1.10...v0.1.11)
+
+### 🩹 Fixes
+
+- Fix #app not resolved on build ([113e14b](https://github.com/ChrisGV04/cgvweb-ui/commit/113e14b))
+
+### 🏡 Chore
+
+- Update dependencies ([be98763](https://github.com/ChrisGV04/cgvweb-ui/commit/be98763))
+- Move typescript strict to nuxtrc ([926d667](https://github.com/ChrisGV04/cgvweb-ui/commit/926d667))
+- Update dependencies ([be0d7c1](https://github.com/ChrisGV04/cgvweb-ui/commit/be0d7c1))
+
+### ❤️ Contributors
+
+- Christian Gil <mrcgam.christian@gmail.com>
+
 ## v0.1.10
 
 [compare changes](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.1.9...v0.1.10)
