@@ -1,11 +1,11 @@
 <script lang="ts">
+import type { UseFloatingOptions } from "@floating-ui/vue";
 import {
   autoUpdate,
   flip,
   offset as offsetMw,
   shift,
   useFloating,
-  type UseFloatingOptions,
 } from "@floating-ui/vue";
 import { useToNumber } from "@vueuse/core";
 import { defu } from "defu";

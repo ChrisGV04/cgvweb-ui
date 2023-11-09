@@ -1,11 +1,5 @@
-import {
-  defineComponent,
-  h,
-  type PropType,
-  type VNode,
-  type VNodeArrayChildren,
-  type SlotsType,
-} from "vue";
+import type { PropType, SlotsType, VNode, VNodeArrayChildren } from "vue";
+import { defineComponent, h } from "vue";
 
 type RichTextElement =
   | "h1"

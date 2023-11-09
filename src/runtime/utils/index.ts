@@ -2,9 +2,11 @@ import { createDefu, defu } from "defu";
 import { extendTailwindMerge } from "tailwind-merge";
 import type { Strategy } from "../types";
 
-const customTwMerge = extendTailwindMerge({
-  classGroups: {
-    icons: [(classPart: string) => /^i-/.test(classPart)],
+const customTwMerge = extendTailwindMerge<string, string>({
+  extend: {
+    classGroups: {
+      icons: [(classPart: string) => /^i-/.test(classPart)],
+    },
   },
 });
 
