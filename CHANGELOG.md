@@ -1,5 +1,19 @@
 # Changelog
 
+## v0.1.15
+
+[compare changes](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.1.14...v0.1.15)
+
+### 🏡 Chore
+
+- **release:** V0.1.14 ([e43da08](https://github.com/ChrisGV04/cgvweb-ui/commit/e43da08))
+- Update deps ([4afea3c](https://github.com/ChrisGV04/cgvweb-ui/commit/4afea3c))
+- Update deps and migrate tailwind-merge v2 ([bbebebc](https://github.com/ChrisGV04/cgvweb-ui/commit/bbebebc))
+
+### ❤️ Contributors
+
+- Christian Gil <mrcgam.christian@gmail.com>
+
 ## v0.1.14
 
 [compare changes](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.1.13...v0.1.14)
