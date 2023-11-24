@@ -3,7 +3,7 @@ import { twJoin, twMerge } from "tailwind-merge";
 import type { PropType } from "vue";
 import { computed, defineComponent, toRef } from "vue";
 import { useUI } from "../../composables/useUI";
-import type { BadgeColor, BadgeSize, BadgeVariant, Strategy } from "../../types";
+import type { BadgeSize, BadgeVariant, Strategy } from "../../types";
 import { badge } from "../../ui.config";
 import { mergeConfig } from "../../utils";
 import UiIcon from "./Icon.vue";
@@ -27,10 +27,6 @@ export default defineComponent({
       type: String as PropType<BadgeSize>,
       default: () => config.default.size,
     },
-    color: {
-      type: String as PropType<BadgeColor>,
-      default: () => config.default.color,
-    },
     variant: {
       type: String as PropType<BadgeVariant>,
       default: () => config.default.variant,
@@ -51,9 +47,7 @@ export default defineComponent({
   setup(props) {
     const { ui, attrs } = useUI("badge", toRef(props, "ui"), config);
 
-    const activeVariant = computed(
-      () => ui.value.color[props.color][props.variant],
-    );
+    const activeVariant = computed(() => ui.value.variant[props.variant]);
 
     const badgeClass = computed(() => {
       return twMerge(
