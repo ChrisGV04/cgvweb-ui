@@ -1,4 +1,8 @@
 import { getIconCollections, iconsPlugin } from "@egoist/tailwindcss-icons";
+import type {
+  CollectionNames,
+  IconsPluginOptions,
+} from "@egoist/tailwindcss-icons";
 import {
   addComponentsDir,
   addImportsDir,
@@ -12,7 +16,7 @@ import * as config from "./runtime/ui.config";
 
 type UI = {
   strategy?: Strategy;
-  [key: string]: any;
+  icons?: { dynamic: boolean };
 } & DeepPartial<typeof config>;
 
 declare module "nuxt/schema" {
@@ -37,7 +41,7 @@ export interface ModuleOptions {
    */
   global?: boolean;
 
-  icons: string[] | string;
+  icons: CollectionNames[] | "all" | IconsPluginOptions;
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -70,15 +74,21 @@ export default defineNuxtModule<ModuleOptions>({
       nuxt.options.appConfig.ui = { strategy: "merge" };
 
       tailwindConfig.plugins = tailwindConfig.plugins || [];
+
       tailwindConfig.plugins.push(
-        iconsPlugin({
-          collections: getIconCollections(options.icons as any[]),
-        }),
+        iconsPlugin(
+          Array.isArray(options.icons) || options.icons === "all"
+            ? { collections: getIconCollections(options.icons) }
+            : typeof options.icons === "object"
+              ? options.icons
+              : {},
+        ),
       );
     });
 
     // Modules
 
+    await installModule("nuxt-icon");
     await installModule("@nuxtjs/tailwindcss", {
       viewer: false,
       config: {

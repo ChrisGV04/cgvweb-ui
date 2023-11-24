@@ -9,3 +9,32 @@ export type NestedKeyOf<ObjectType extends object> = {
 export type DeepPartial<T> = Partial<{
   [P in keyof T]: DeepPartial<T[P]> | { [key: string]: string };
 }>;
+
+type DeepKey<T, Keys extends string[]> = Keys extends [
+  infer First,
+  ...infer Rest,
+]
+  ? First extends keyof T
+    ? Rest extends string[]
+      ? DeepKey<T[First], Rest>
+      : never
+    : never
+  : T;
+
+export type ExtractDeepKey<T, Path extends string[]> = DeepKey<
+  T,
+  Path
+> extends infer Result
+  ? Result extends object
+    ? keyof Result
+    : never
+  : never;
+
+export type ExtractDeepObject<T, Path extends string[]> = DeepKey<
+  T,
+  Path
+> extends infer Result
+  ? Result extends object
+    ? Result
+    : never
+  : never;

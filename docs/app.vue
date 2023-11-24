@@ -25,4 +25,8 @@ import { TheHeader, NuxtPage } from "#components";
 .demo-category-title {
   @apply text-sm font-medium text-gray-600;
 }
+
+.demo-code-line {
+  @apply whitespace-nowrap rounded bg-gray-200 p-1 text-gray-900
+}
 </style>
