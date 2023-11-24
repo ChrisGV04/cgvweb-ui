@@ -3,13 +3,7 @@ import { twJoin, twMerge } from "tailwind-merge";
 import type { PropType } from "vue";
 import { computed, defineComponent, toRef } from "vue";
 import { useUI } from "../../composables/useUI";
-import type {
-  Button,
-  ButtonColor,
-  ButtonSize,
-  ButtonVariant,
-  Strategy,
-} from "../../types";
+import type { Button, ButtonSize, ButtonVariant, Strategy } from "../../types";
 import { button } from "../../ui.config";
 import { mergeConfig } from "../../utils";
 import UiIcon from "../elements/Icon.vue";
@@ -46,10 +40,6 @@ export default defineComponent<Button>({
       type: String as PropType<ButtonSize>,
       default: () => config.default.size,
     },
-    color: {
-      type: String as PropType<ButtonColor>,
-      default: () => config.default.color,
-    },
     variant: {
       type: String as PropType<ButtonVariant>,
       default: () => config.default.variant,
@@ -83,7 +73,7 @@ export default defineComponent<Button>({
           ui.value.size[props.size!],
           ui.value.gap[props.size!],
           props.padded && ui.value.padding[props.size!],
-          ui.value.color[props.color!][props.variant!],
+          ui.value.variant[props.variant!],
           props.block
             ? "w-full flex justify-center items-center"
             : "inline-flex items-center",

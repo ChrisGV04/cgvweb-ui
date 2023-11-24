@@ -135,31 +135,24 @@ export const button = {
     sm: "px-4 py-2",
     md: "px-5 py-2.5",
   },
-  color: {
-    primary: {
-      solid:
-        "bg-primary-500 text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 disabled:bg-primary-500",
-      soft: "bg-primary-50 text-primary-600 hover:bg-primary-100 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 disabled:bg-primary-50",
-      ghost:
-        "text-primary-500 hover:bg-primary-50 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 disabled:bg-transparent",
-      link: "text-primary-500 underline-offset-4 hover:text-primary-600 hover:underline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 disabled:text-primary-500",
-    },
-    white: {
-      solid:
-        "bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-400 disabled:bg-white",
-      soft: "bg-white/20 text-white hover:bg-white/30 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 disabled:bg-white/10",
-      ghost:
-        "text-white hover:bg-white/30 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 disabled:bg-transparent",
-      link: "text-white underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-400 disabled:text-white",
-    },
-    black: {
-      solid:
-        "bg-gray-900 text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-400 disabled:bg-gray-900",
-      soft: "bg-gray-100 text-gray-700 hover:bg-gray-200 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 disabled:bg-gray-50",
-      ghost:
-        "text-gray-700 hover:bg-gray-200 hover:text-gray-900 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 disabled:bg-transparent",
-      link: "text-gray-900 underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 disabled:text-gray-900",
-    },
+  variant: {
+    "white-solid":
+      "bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-400 disabled:bg-white",
+    "white-soft":
+      "bg-white/20 text-white hover:bg-white/30 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 disabled:bg-white/10",
+    "white-ghost":
+      "text-white hover:bg-white/30 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 disabled:bg-transparent",
+    "white-link":
+      "text-white underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-400 disabled:text-white",
+
+    "black-solid":
+      "bg-gray-900 text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-400 disabled:bg-gray-900",
+    "black-soft":
+      "bg-gray-100 text-gray-700 hover:bg-gray-200 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 disabled:bg-gray-50",
+    "black-ghost":
+      "text-gray-700 hover:bg-gray-200 hover:text-gray-900 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 disabled:bg-transparent",
+    "black-link":
+      "text-gray-900 underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 disabled:text-gray-900",
   },
   icon: {
     base: "flex-shrink-0",
@@ -171,8 +164,7 @@ export const button = {
   },
   default: {
     size: "sm",
-    color: "primary",
-    variant: "solid",
+    variant: "black-solid",
     loadingIcon: "i-heroicons-arrow-path-20-solid",
   },
 };

@@ -12,9 +12,9 @@ import { UiButton, UiContainer } from "#components";
 
       <div class="mt-2 flex items-center gap-4">
         <UiButton label="Solid" />
-        <UiButton label="Soft" variant="soft" />
-        <UiButton label="Ghost" variant="ghost" />
-        <UiButton label="Link" variant="link" />
+        <UiButton label="Soft" variant="primary-soft" />
+        <UiButton label="Ghost" variant="primary-ghost" />
+        <UiButton label="Link" variant="primary-link" />
       </div>
     </div>
 
@@ -22,10 +22,10 @@ import { UiButton, UiContainer } from "#components";
       <span class="demo-category-title">White</span>
 
       <div class="mt-2 flex items-center p-4 bg-gray-900 rounded-md gap-4">
-        <UiButton label="Solid" color="white" />
-        <UiButton label="Soft" color="white" variant="soft" />
-        <UiButton label="Ghost" color="white" variant="ghost" />
-        <UiButton label="Link" color="white" variant="link" />
+        <UiButton label="Solid" variant="white-solid" />
+        <UiButton label="Soft" variant="white-soft" />
+        <UiButton label="Ghost" variant="white-ghost" />
+        <UiButton label="Link" variant="white-link" />
       </div>
     </div>
 
@@ -33,10 +33,10 @@ import { UiButton, UiContainer } from "#components";
       <span class="demo-category-title">Black</span>
 
       <div class="mt-2 flex items-center gap-4">
-        <UiButton label="Solid" color="black" />
-        <UiButton label="Soft" color="black" variant="soft" />
-        <UiButton label="Ghost" color="black" variant="ghost" />
-        <UiButton label="Link" color="black" variant="link" />
+        <UiButton label="Solid" variant="black-solid" />
+        <UiButton label="Soft" variant="black-soft" />
+        <UiButton label="Ghost" variant="black-ghost" />
+        <UiButton label="Link" variant="black-link" />
       </div>
     </div>
 
@@ -49,11 +49,11 @@ import { UiButton, UiContainer } from "#components";
           leading-icon="i-heroicons-lock-closed-20-solid"
         />
         <UiButton
-          color="white"
           label="Trailing"
+          variant="white-solid"
           leading-icon="i-heroicons-lock-closed-20-solid"
         />
-        <UiButton loading color="black" label="Loading" />
+        <UiButton loading variant="black-solid" label="Loading" />
       </div>
     </div>
 
@@ -62,8 +62,8 @@ import { UiButton, UiContainer } from "#components";
 
       <div class="mt-2 flex items-center gap-4">
         <UiButton disabled label="Primary" />
-        <UiButton disabled label="White" color="white" />
-        <UiButton disabled label="Black" color="black" />
+        <UiButton disabled label="White" variant="white-solid" />
+        <UiButton disabled label="Black" variant="black-solid" />
       </div>
     </div>
 

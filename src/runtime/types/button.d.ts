@@ -1,10 +1,15 @@
+import type { AppConfig } from "nuxt/schema";
 import { button } from "../ui.config";
 import type { Link } from "./link";
-import type { DeepPartial, Strategy } from "./utils";
+import type { DeepPartial, ExtractDeepKey, Strategy } from "./utils";
 
-export type ButtonSize = keyof typeof button.size;
-export type ButtonColor = "primary" | "white" | "black";
-export type ButtonVariant = "solid" | "soft" | "ghost" | "link";
+export type ButtonSize =
+  | keyof typeof button.size
+  | ExtractDeepKey<AppConfig, ["ui", "button", "size"]>;
+
+export type ButtonVariant =
+  | keyof typeof button.variant
+  | ExtractDeepKey<AppConfig, ["ui", "button", "variant"]>;
 
 export interface Button extends Link {
   label?: string;
@@ -18,7 +23,6 @@ export interface Button extends Link {
   block?: boolean;
   padded?: boolean;
   size?: ButtonSize;
-  color?: ButtonColor;
   variant?: ButtonVariant;
   ui?: DeepPartial<typeof button & { strategy?: Strategy }>;
   class?: any;
