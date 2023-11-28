@@ -1,5 +1,28 @@
 # Changelog
 
+## v0.1.16
+
+[compare changes](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.1.15...v0.1.16)
+
+### 🚀 Enhancements
+
+- **Icon:** Allow dynamic icons ([1f789f0](https://github.com/ChrisGV04/cgvweb-ui/commit/1f789f0))
+- **Button:** Allow custom variants with type safety ([502efdb](https://github.com/ChrisGV04/cgvweb-ui/commit/502efdb))
+- **Badge:** Allow custom variants with type safety ([ede1f60](https://github.com/ChrisGV04/cgvweb-ui/commit/ede1f60))
+
+### 🩹 Fixes
+
+- **Types:** Fix DeepPartial not allowing objects ([efca199](https://github.com/ChrisGV04/cgvweb-ui/commit/efca199))
+
+### 🏡 Chore
+
+- **release:** V0.1.15 ([169ace2](https://github.com/ChrisGV04/cgvweb-ui/commit/169ace2))
+- Update deps ([8fde0fc](https://github.com/ChrisGV04/cgvweb-ui/commit/8fde0fc))
+
+### ❤️ Contributors
+
+- Christian Gil <mrcgam.christian@gmail.com>
+
 ## v0.1.15
 
 [compare changes](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.1.14...v0.1.15)
