@@ -1,5 +1,7 @@
 # Changelog
 
+## [0.2.0](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.1.16...v0.2.0) (2023-11-28)
+
 ## v0.1.16
 
 [compare changes](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.1.15...v0.1.16)
@@ -193,4 +195,3 @@
 ### ❤️ Contributors
 
 - Christian Gil ([@ChrisGV04](http://github.com/ChrisGV04))
-
