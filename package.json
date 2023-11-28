@@ -30,7 +30,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "nuxi typecheck",
-    "release": "npm run lint && npm run prepack && changelogen --release --push && npm publish && git push --follow-tags"
+    "release": "release-it && npm run prepack && npm publish"
   },
   "peerDependencies": {
     "@headlessui/vue": "^1.7.0",
