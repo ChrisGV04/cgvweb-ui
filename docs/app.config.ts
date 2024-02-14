@@ -1,7 +1,7 @@
 import { defineAppConfig } from "#imports";
 
 export default defineAppConfig({
-  ui: {
+  ui: /*ui*/ {
     container: {
       constrained: "max-w-2xl",
     },
