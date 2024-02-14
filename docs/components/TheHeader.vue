@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { UiIcon } from "#components";
-import { useRuntimeConfig } from "#imports";
+import { useId, useRuntimeConfig } from "#imports";
 import {
   Popover,
   PopoverButton,
   PopoverGroup,
   PopoverPanel,
+  provideUseId,
 } from "@headlessui/vue";
 import type { RouteLocationRaw } from "vue-router";
 
@@ -16,6 +17,7 @@ interface NavigationItem {
 }
 
 const env = useRuntimeConfig();
+provideUseId(() => useId());
 
 const navigation: NavigationItem[] = [
   {

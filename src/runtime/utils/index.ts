@@ -11,8 +11,10 @@ const customTwMerge = extendTailwindMerge<string, string>({
 });
 
 const defuTwMerge = createDefu((obj, key, value, namespace) => {
+  if (namespace === "default" || namespace.startsWith("default.")) {
+    return false;
+  }
   if (
-    namespace !== "default" &&
     typeof obj[key] === "string" &&
     typeof value === "string" &&
     obj[key] &&

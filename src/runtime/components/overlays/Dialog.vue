@@ -1,9 +1,11 @@
 <script lang="ts">
+import { useId } from "#imports";
 import {
   Dialog as HDialog,
   DialogPanel as HDialogPanel,
   TransitionChild,
   TransitionRoot,
+  provideUseId,
 } from "@headlessui/vue";
 import type { PropType } from "vue";
 import { computed, defineComponent, toRef } from "vue";
@@ -80,6 +82,8 @@ export default defineComponent({
       isOpen.value = false;
       emit("close");
     }
+
+    provideUseId(() => useId());
 
     return {
       // eslint-disable-next-line vue/no-dupe-keys
