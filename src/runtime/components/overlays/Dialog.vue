@@ -34,7 +34,7 @@ const $open = useVModel(props, 'open', emits, {
   passive: (props.open === undefined) as any,
 });
 
-const { ui } = useUI('dropdown', toRef(props, 'ui'), config);
+const { ui } = useUI('dialog', toRef(props, 'ui'), config);
 </script>
 
 <template>
