@@ -2,15 +2,15 @@
 // @ts-expect-error
 import appConfig from '#build/app.config';
 
-import { useUI } from '#ui/composables/useUI';
-import dropdown from '../../ui.config/dropdown';
 import { mergeConfig } from '#ui/utils';
+import dropdown from '../../ui.config/dropdown';
 
 const config = mergeConfig<typeof dropdown>(appConfig.ui.strategy, appConfig.ui.dropdown, dropdown);
 </script>
 
 <script setup lang="ts">
 import { navigateTo } from '#imports';
+import { useUI } from '#ui/composables/useUI';
 import type { DropdownItem, Strategy } from '#ui/types';
 import { useToNumber, useVModel } from '@vueuse/core';
 import type { DropdownMenuContentProps } from 'radix-vue';
