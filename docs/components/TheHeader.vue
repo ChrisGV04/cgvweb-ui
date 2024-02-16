@@ -11,10 +11,13 @@ const elementsLinks: DropdownItem[] = [
   { label: 'Link', to: '/link' },
   { label: 'Button', to: '/button' },
   { label: 'Dropdown Menu', to: '/dropdown' },
+];
+
+const dataLinks: DropdownItem[] = [
+  { label: 'Rich Text', to: '/rich-text' },
   { label: 'Highlights', to: '/highlights' },
 ];
 
-const dataLinks: DropdownItem[] = [{ label: 'Rich Text', to: '/rich-text' }];
 const layoutLinks: DropdownItem[] = [{ label: 'Marquee', to: '/marquee' }];
 
 const overlayLinks: DropdownItem[] = [
