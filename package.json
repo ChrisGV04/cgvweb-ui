@@ -46,9 +46,9 @@
     "just-omit": "^2.2.0",
     "just-safe-get": "^4.2.0",
     "nuxt-icon": "^0.6.8",
-    "tailwindcss-animate": "^1.0.7",
     "tailwind-merge": "^2.2.1",
-    "tailwindcss": "^3.4.1"
+    "tailwindcss": "^3.4.1",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@headlessui/vue": "^1.7.19",
