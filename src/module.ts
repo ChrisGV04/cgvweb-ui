@@ -1,30 +1,22 @@
-import { getIconCollections, iconsPlugin } from "@egoist/tailwindcss-icons";
-import type {
-  CollectionNames,
-  IconsPluginOptions,
-} from "@egoist/tailwindcss-icons";
-import {
-  addComponentsDir,
-  addImportsDir,
-  createResolver,
-  defineNuxtModule,
-  installModule,
-} from "@nuxt/kit";
-import { name, version } from "../package.json";
-import type { DeepPartial, Strategy } from "./runtime/types";
-import * as config from "./runtime/ui.config";
+import type { CollectionNames, IconsPluginOptions } from '@egoist/tailwindcss-icons';
+import { getIconCollections, iconsPlugin } from '@egoist/tailwindcss-icons';
+import { addComponentsDir, addImportsDir, createResolver, defineNuxtModule, installModule } from '@nuxt/kit';
+import twAnimate from 'tailwindcss-animate';
+import { name, version } from '../package.json';
+import type { DeepPartial, Strategy } from './runtime/types';
+import * as config from './runtime/ui.config';
 
 type UI = {
   strategy?: Strategy;
   icons?: { dynamic: boolean };
 } & DeepPartial<typeof config>;
 
-declare module "nuxt/schema" {
+declare module 'nuxt/schema' {
   interface AppConfigInput {
     ui?: UI;
   }
 }
-declare module "@nuxt/schema" {
+declare module '@nuxt/schema' {
   interface AppConfigInput {
     ui?: UI;
   }
@@ -41,45 +33,45 @@ export interface ModuleOptions {
    */
   global?: boolean;
 
-  icons: CollectionNames[] | "all" | IconsPluginOptions;
+  icons: CollectionNames[] | 'all' | IconsPluginOptions;
 }
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
     name,
     version,
-    configKey: "ui",
+    configKey: 'ui',
     compatibility: {
-      nuxt: "^3.0.0",
+      nuxt: '^3.0.0',
     },
   },
   defaults: {
-    prefix: "Ui",
-    icons: ["heroicons"],
+    prefix: 'Ui',
+    icons: ['heroicons'],
   },
   async setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url);
 
     // Transpile runtime
-    const runtimeDir = resolve("./runtime");
+    const runtimeDir = resolve('./runtime');
     nuxt.options.build.transpile.push(runtimeDir);
-    nuxt.options.build.transpile.push("@floating-ui/vue", "@headlessui/vue");
+    nuxt.options.build.transpile.push('@floating-ui/vue', '@headlessui/vue');
 
-    nuxt.options.alias["#ui"] = runtimeDir;
+    nuxt.options.alias['#ui'] = runtimeDir;
 
-    nuxt.options.css.push(resolve(runtimeDir, "ui.css"));
+    nuxt.options.css.push(resolve(runtimeDir, 'ui.css'));
 
-    nuxt.hook("tailwindcss:config", function (tailwindConfig) {
+    nuxt.hook('tailwindcss:config', function (tailwindConfig) {
       // @ts-ignore
-      nuxt.options.appConfig.ui = { strategy: "merge" };
+      nuxt.options.appConfig.ui = { strategy: 'merge' };
 
       tailwindConfig.plugins = tailwindConfig.plugins || [];
 
       tailwindConfig.plugins.push(
         iconsPlugin(
-          Array.isArray(options.icons) || options.icons === "all"
+          Array.isArray(options.icons) || options.icons === 'all'
             ? { collections: getIconCollections(options.icons) }
-            : typeof options.icons === "object"
+            : typeof options.icons === 'object'
               ? options.icons
               : {},
         ),
@@ -88,39 +80,37 @@ export default defineNuxtModule<ModuleOptions>({
 
     // Modules
 
-    await installModule("nuxt-icon");
-    await installModule("@nuxtjs/tailwindcss", {
+    await installModule('nuxt-icon');
+    await installModule('@nuxtjs/tailwindcss', {
       viewer: false,
       config: {
-        content: [
-          resolve(runtimeDir, "components/**/*.{vue,mjs,ts}"),
-          resolve(runtimeDir, "*.{mjs,js,ts}"),
-        ],
+        content: [resolve(runtimeDir, 'components/**/*.{vue,mjs,ts}'), resolve(runtimeDir, '*.{mjs,js,ts}')],
+        plugins: [twAnimate],
       },
     });
 
     // Components
 
     addComponentsDir({
-      path: resolve(runtimeDir, "components", "elements"),
+      path: resolve(runtimeDir, 'components', 'elements'),
       prefix: options.prefix,
       global: options.global,
       watch: false,
     });
     addComponentsDir({
-      path: resolve(runtimeDir, "components", "data"),
+      path: resolve(runtimeDir, 'components', 'data'),
       prefix: options.prefix,
       global: options.global,
       watch: false,
     });
     addComponentsDir({
-      path: resolve(runtimeDir, "components", "layout"),
+      path: resolve(runtimeDir, 'components', 'layout'),
       prefix: options.prefix,
       global: options.global,
       watch: false,
     });
     addComponentsDir({
-      path: resolve(runtimeDir, "components", "overlays"),
+      path: resolve(runtimeDir, 'components', 'overlays'),
       prefix: options.prefix,
       global: options.global,
       watch: false,
@@ -128,6 +118,6 @@ export default defineNuxtModule<ModuleOptions>({
 
     // Composables
 
-    addImportsDir(resolve(runtimeDir, "composables"));
+    addImportsDir(resolve(runtimeDir, 'composables'));
   },
 });
