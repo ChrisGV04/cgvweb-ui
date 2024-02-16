@@ -29,7 +29,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "nuxi typecheck",
-    "release": "release-it --ci && npm run build && npm publish"
+    "release": "release-it && npm run build && npm publish"
   },
   "peerDependencies": {
     "@headlessui/vue": "^1.7.0",
