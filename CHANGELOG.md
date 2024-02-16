@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.2.0...v0.2.1) (2024-02-16)
+
+
+### Features
+
+* New Dropdown component ([2e4f8e6](https://github.com/ChrisGV04/cgvweb-ui/commit/2e4f8e6ebe2943120101a4e7dadab1f5c941762c))
+
 ## [0.2.0](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.1.16...v0.2.0) (2023-11-28)
 
 ## v0.1.16
