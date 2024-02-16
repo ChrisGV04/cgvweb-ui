@@ -2,128 +2,87 @@
 // @ts-expect-error
 import appConfig from '#build/app.config';
 
-import { useId } from '#imports';
-import { useUI } from '#ui/composables/useUI';
-import type { Strategy } from '#ui/types';
-import { slideover } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
-import {
-  Dialog as HDialog,
-  DialogPanel as HDialogPanel,
-  TransitionChild,
-  TransitionRoot,
-  provideUseId,
-} from '@headlessui/vue';
-import type { PropType } from 'vue';
-import { computed, defineComponent, toRef } from 'vue';
+import slideover from '../../ui.config/slideover';
 
 const config = mergeConfig<typeof slideover>(appConfig.ui.strategy, appConfig.ui.slideover, slideover);
+</script>
 
-export default defineComponent({
-  components: {
-    HDialog,
-    HDialogPanel,
-    TransitionRoot,
-    TransitionChild,
+<script setup lang="ts">
+import { useUI } from '#ui/composables/useUI';
+import type { Strategy } from '#ui/types';
+import { useVModel } from '@vueuse/core';
+import type { PopoverContentProps } from 'radix-vue';
+import { Dialog } from 'radix-vue/namespaced';
+import { twJoin, twMerge } from 'tailwind-merge';
+import type { PropType } from 'vue';
+import { computed, defineOptions, toRef } from 'vue';
+
+defineOptions({ inheritAttrs: false });
+
+const props = defineProps({
+  defaultOpen: Boolean,
+  open: { type: Boolean, default: undefined }, // v-model:open To use as controlled component
+  side: {
+    type: String as PropType<PopoverContentProps['side']>,
+    default: 'right',
+    validator: (value: string) => ['top', 'bottom', 'left', 'right'].includes(value),
   },
-  inheritAttrs: false,
-  props: {
-    modelValue: { type: Boolean, default: false },
-    overlay: { type: Boolean, default: true },
-    preventClose: { type: Boolean, default: false },
-    transition: { type: Boolean, default: true },
-    appear: { type: Boolean, default: false },
-    side: {
-      type: String as PropType<'left' | 'right'>,
-      default: 'right',
-      validator: (value: string) => ['left', 'right'].includes(value),
-    },
-    class: {
-      type: [String, Object, Array] as PropType<any>,
-      default: undefined,
-    },
-    ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
-      default: undefined,
-    },
+  ui: {
+    type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+    default: () => ({}),
   },
-  emits: ['update:modelValue', 'close', 'before-leave', 'after-leave', 'before-enter', 'after-enter'],
+});
+const emits = defineEmits({ 'update:open': (value: boolean) => true });
 
-  setup(props, { emit }) {
-    const { ui, attrs } = useUI('slideover', toRef(props, 'ui'), config, toRef(props, 'class'));
+const $open = useVModel(props, 'open', emits, {
+  defaultValue: props.defaultOpen,
+  passive: (props.open === undefined) as any,
+});
 
-    const isOpen = computed({
-      get() {
-        return props.modelValue;
-      },
-      set(value) {
-        emit('update:modelValue', value);
-      },
-    });
+const { ui } = useUI('slideover', toRef(props, 'ui'), config);
 
-    const transitionClass = computed(() => {
-      if (!props.transition) return {};
+const containerClasses = computed(() => {
+  let position = '';
 
-      return {
-        ...ui.value.transition,
-        enterFrom: props.side === 'left' ? '-translate-x-full' : 'translate-x-full',
-        enterTo: 'translate-x-0',
-        leaveFrom: 'translate-x-0',
-        leaveTo: props.side === 'left' ? '-translate-x-full' : 'translate-x-full',
-      };
-    });
+  switch (props.side) {
+    case 'top':
+      position = 'inset-x-0 top-0 data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top';
+      break;
+    case 'bottom':
+      position =
+        'inset-x-0 bottom-0 data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom';
+      break;
+    case 'left':
+      position =
+        'inset-y-0 left-0 h-full w-3/4 data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:max-w-sm';
+      break;
+    case 'right':
+      position =
+        'inset-y-0 right-0 h-full w-3/4 data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-md';
+      break;
+    default:
+      break;
+  }
 
-    function close() {
-      if (props.preventClose) return;
-
-      isOpen.value = false;
-      emit('close');
-    }
-
-    provideUseId(() => useId());
-
-    return {
-      // eslint-disable-next-line vue/no-dupe-keys
-      ui,
-      attrs,
-      isOpen,
-      transitionClass,
-      close,
-    };
-  },
+  return twMerge(twJoin(ui.value.container, ui.value.transition), position, ui.value.size);
 });
 </script>
 
 <template>
-  <TransitionRoot
-    :show="isOpen"
-    :appear="appear"
-    as="template"
-    @after-leave="$emit('after-leave')"
-    @before-leave="$emit('before-leave')"
-    @after-enter="$emit('after-enter')"
-    @before-enter="$emit('before-enter')"
-  >
-    <HDialog :class="ui.wrapper" v-bind="attrs" @close="close">
-      <TransitionChild v-if="overlay" as="template" :appear="appear" v-bind="ui.overlay.transition">
-        <div :class="[ui.overlay.base, ui.overlay.background]" />
-      </TransitionChild>
+  <Dialog.Root v-model:open="$open">
+    <Dialog.Trigger as-child>
+      <slot name="trigger" :open="$open">
+        <UiButton label="Open" />
+      </slot>
+    </Dialog.Trigger>
 
-      <div :class="ui.inner">
-        <div :class="[ui.container, side === 'left' && 'flex-row-reverse']">
-          <TransitionChild as="template" v-bind="ui.overlay.transition">
-            <div :class="ui.padding">
-              <slot name="padding" />
-            </div>
-          </TransitionChild>
+    <Dialog.Portal>
+      <Dialog.Overlay :class="ui.overlay" />
 
-          <TransitionChild as="template" :appear="appear" v-bind="transitionClass">
-            <HDialogPanel :class="[ui.base, ui.background, ui.width, ui.ring, ui.rounded, ui.shadow]">
-              <slot />
-            </HDialogPanel>
-          </TransitionChild>
-        </div>
-      </div>
-    </HDialog>
-  </TransitionRoot>
+      <Dialog.Content :data-side="props.side" :class="containerClasses">
+        <slot name="content" />
+      </Dialog.Content>
+    </Dialog.Portal>
+  </Dialog.Root>
 </template>
