@@ -1,33 +1,8 @@
 export default /*ui*/ {
-  wrapper: 'relative z-40',
-  inner: 'fixed inset-0 z-10 overflow-y-auto',
-  container: 'flex min-h-full items-end justify-center sm:items-center',
-  padding: 'p-4 sm:p-0',
-  base: 'relative text-left overflow-hidden sm:my-8 w-full flex flex-col',
-  overlay: {
-    base: 'fixed inset-0 transition-opacity',
-    background: 'bg-gray-900/70 backdrop-blur-sm backdrop-filter',
-    transition: {
-      enter: 'ease-out duration-300',
-      enterFrom: 'opacity-0',
-      enterTo: 'opacity-100',
-      leave: 'ease-in duration-200',
-      leaveFrom: 'opacity-100',
-      leaveTo: 'opacity-0',
-    },
-  },
-  background: 'bg-white',
-  ring: '',
-  rounded: 'rounded-lg',
-  shadow: 'shadow-xl',
-  width: 'sm:max-w-lg',
-  height: '',
-  transition: {
-    enter: 'transition-[opacity,transform] ease-out duration-300',
-    enterFrom: 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95',
-    enterTo: 'opacity-100 translate-y-0 sm:scale-100',
-    leave: 'transition-[opacity,transform] ease-in duration-200',
-    leaveFrom: 'opacity-100 translate-y-0 sm:scale-100',
-    leaveTo: 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95',
-  },
+  container: 'fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white shadow-xl',
+  size: 'w-full max-w-lg',
+  overlay:
+    'fixed inset-0 z-40 bg-black/70 backdrop-blur-sm backdrop-filter duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
+  transition:
+    'duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]',
 };
