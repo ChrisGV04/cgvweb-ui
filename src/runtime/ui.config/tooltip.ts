@@ -1,20 +1,17 @@
+import type { PopoverContentProps } from 'radix-vue';
+
 export default /*ui*/ {
-  wrapper: 'relative inline-flex',
-  container: 'z-30',
-  width: 'max-w-xs',
-  background: 'bg-white',
-  color: 'text-gray-900',
-  shadow: 'shadow',
-  rounded: 'rounded',
-  ring: 'ring-1 ring-gray-200',
-  base: 'px-2 py-1 text-xs font-normal truncate',
-  floating: { strategy: 'fixed' },
-  transition: {
-    enterActiveClass: 'transition ease-out duration-200',
-    enterFromClass: 'opacity-0 translate-y-1',
-    enterToClass: 'opacity-100 translate-y-0',
-    leaveActiveClass: 'transition ease-in duration-150',
-    leaveFromClass: 'opacity-100 translate-y-0',
-    leaveToClass: 'opacity-0 translate-y-1',
+  container: 'z-30 bg-white shadow rounded',
+  border: 'border border-gray-900/10',
+  size: 'max-w-xs',
+  padding: 'px-2 py-1',
+  font: 'text-gray-900 text-xs font-normal',
+  transition:
+    'animate-in fade-in-0 zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
+  default: {
+    offset: 8,
+    delay: 0,
+    align: 'center' as PopoverContentProps['align'],
+    side: 'top' as PopoverContentProps['side'],
   },
 };

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TheHeader, NuxtPage } from "#components";
+import { NuxtPage, TheHeader } from '#components';
 </script>
 
 <template>
@@ -27,6 +27,6 @@ import { TheHeader, NuxtPage } from "#components";
 }
 
 .demo-code-line {
-  @apply whitespace-nowrap rounded bg-gray-200 p-1 text-gray-900
+  @apply whitespace-nowrap rounded bg-gray-200 p-1 text-gray-900;
 }
 </style>

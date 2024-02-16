@@ -2,167 +2,93 @@
 // @ts-expect-error
 import appConfig from '#build/app.config';
 
-import { useUI } from '#ui/composables/useUI';
-import type { Strategy } from '#ui/types';
-import { tooltip } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
-import type { UseFloatingOptions } from '@floating-ui/vue';
-import { autoUpdate, flip, offset as offsetMw, shift, useFloating } from '@floating-ui/vue';
-import { useToNumber } from '@vueuse/core';
-import { defu } from 'defu';
-import type { PropType } from 'vue';
-import { computed, defineComponent, ref, toRef } from 'vue';
+import tooltip from '../../ui.config/tooltip';
 
 const config = mergeConfig<typeof tooltip>(appConfig.ui.strategy, appConfig.ui.tooltip, tooltip);
+</script>
 
-export default defineComponent({
-  inheritAttrs: false,
-  props: {
-    text: { type: String, default: null },
-    prevent: { type: Boolean, default: false },
-    offset: { type: [String, Number], default: 8 },
-    openDelay: { type: [String, Number], default: 0 },
-    closeDelay: { type: [String, Number], default: 0 },
-    placement: {
-      type: String as PropType<UseFloatingOptions['placement']>,
-      default: 'bottom',
-      validator: (value: string) =>
-        [
-          'top',
-          'right',
-          'bottom',
-          'left',
-          'top-start',
-          'top-end',
-          'right-start',
-          'right-end',
-          'bottom-start',
-          'bottom-end',
-          'left-start',
-          'left-end',
-        ].includes(value),
-    },
-    floating: {
-      type: Object as PropType<UseFloatingOptions>,
-      default: (): UseFloatingOptions => ({}),
-    },
-    class: {
-      type: [String, Object, Array] as PropType<any>,
-      default: undefined,
-    },
-    ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
-      default: undefined,
-    },
+<script setup lang="ts">
+import { useUI } from '#ui/composables/useUI';
+import type { Strategy } from '#ui/types';
+import { useToNumber } from '@vueuse/core';
+import type { TooltipContentProps } from 'radix-vue';
+import { Tooltip } from 'radix-vue/namespaced';
+import { twMerge } from 'tailwind-merge';
+import type { PropType } from 'vue';
+import { computed, defineOptions, toRef } from 'vue';
+
+defineOptions({ inheritAttrs: false });
+
+const props = defineProps({
+  content: { type: String, default: null },
+  disabled: { type: Boolean, default: false },
+  collisionBoundary: {
+    type: [Object, Array] as PropType<Element | (Element | null)[] | null>,
+    default: undefined,
   },
-
-  setup(props, { expose }) {
-    const { ui, attrs } = useUI('tooltip', toRef(props, 'ui'), config, toRef(props, 'class'));
-
-    const numOffset = useToNumber(props.offset);
-    const numOpenDelay = useToNumber(props.openDelay);
-    const numCloseDelay = useToNumber(props.closeDelay);
-
-    const floating = computed<UseFloatingOptions>(() =>
-      defu(
-        {},
-        props.floating,
-        ui.value.floating as UseFloatingOptions,
-        {
-          placement: props.placement,
-          whileElementsMounted: autoUpdate,
-          middleware: [offsetMw(numOffset.value), shift({ padding: 8 }), flip()],
-        } as UseFloatingOptions,
-      ),
-    );
-
-    const triggerRef = ref<HTMLElement | null>(null);
-    const containerRef = ref<HTMLElement | null>(null);
-
-    const { floatingStyles, update } = useFloating(triggerRef, containerRef, floating.value);
-    expose({ update }); // Expose the update method in case it's required
-
-    const open = ref(false);
-    let openTimeout: NodeJS.Timeout | null = null;
-    let closeTimeout: NodeJS.Timeout | null = null;
-
-    function showTooltip() {
-      // Cancel programmed closing
-      if (closeTimeout) {
-        clearTimeout(closeTimeout);
-        closeTimeout = null;
-      }
-
-      // Dropdown already open
-      if (open.value) {
-        return;
-      }
-
-      openTimeout =
-        openTimeout ||
-        setTimeout(() => {
-          open.value = true;
-          openTimeout = null;
-        }, numOpenDelay.value);
-    }
-
-    function hideTooltip() {
-      // Cancel programmed opening
-      if (openTimeout) {
-        clearTimeout(openTimeout);
-        openTimeout = null;
-      }
-
-      // ropdown already closed
-      if (!open.value) {
-        return;
-      }
-
-      closeTimeout =
-        closeTimeout ||
-        setTimeout(() => {
-          open.value = false;
-          closeTimeout = null;
-        }, numCloseDelay.value);
-    }
-
-    return {
-      // eslint-disable-next-line vue/no-dupe-keys
-      ui,
-      attrs,
-      open,
-      triggerRef,
-      containerRef,
-      floatingStyles,
-      hideTooltip,
-      showTooltip,
-    };
+  delay: {
+    type: [Number, String],
+    default: () => config.default.delay,
+  },
+  offset: {
+    type: [Number, String],
+    default: () => config.default.offset,
+  },
+  align: {
+    type: String as PropType<TooltipContentProps['align']>,
+    default: () => config.default.align,
+    validate: (value) => ['start', 'center', 'end'].includes(value),
+  },
+  side: {
+    type: String as PropType<TooltipContentProps['side']>,
+    default: () => config.default.side,
+    validate: (value) => ['top', 'right', 'bottom', 'left'].includes(value),
+  },
+  ui: {
+    type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
+    default: () => ({}),
   },
 });
+
+const { ui } = useUI('tooltip', toRef(props, 'ui'), config);
+const numOffset = useToNumber(props.offset);
+const numDelay = useToNumber(props.delay);
+
+const tooltipClasses = computed(() =>
+  twMerge(
+    ui.value.container,
+    ui.value.border,
+    ui.value.size,
+    ui.value.padding,
+    ui.value.font,
+    ui.value.transition,
+  ),
+);
 </script>
 
 <template>
-  <div
-    ref="triggerRef"
-    :class="ui.wrapper"
-    v-bind="attrs"
-    @blur="hideTooltip"
-    @focus="showTooltip"
-    @mouseover="showTooltip"
-    @mouseleave="hideTooltip"
-  >
-    <slot :open="open">Hover</slot>
+  <Tooltip.Provider :delay-duration="numDelay">
+    <Tooltip.Root>
+      <Tooltip.Trigger as-child>
+        <slot />
+      </Tooltip.Trigger>
 
-    <div v-if="open && !prevent" ref="containerRef" :style="floatingStyles" :class="[ui.container, ui.width]">
-      <Transition appear v-bind="ui.transition">
-        <slot name="tooltip">
-          <div :class="[ui.base, ui.background, ui.color, ui.rounded, ui.shadow, ui.ring]">
-            <slot name="text">
-              {{ text }}
-            </slot>
-          </div>
-        </slot>
-      </Transition>
-    </div>
-  </div>
+      <Tooltip.Portal v-if="!disabled">
+        <Tooltip.Content
+          as-child
+          :side="side"
+          :align="align"
+          :side-offset="numOffset"
+          :collision-boundary="collisionBoundary"
+        >
+          <slot name="content" :classes="tooltipClasses">
+            <div :class="tooltipClasses">
+              {{ content }}
+            </div>
+          </slot>
+        </Tooltip.Content>
+      </Tooltip.Portal>
+    </Tooltip.Root>
+  </Tooltip.Provider>
 </template>

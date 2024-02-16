@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { UiContainer, UiTooltip } from "#components";
+import { UiContainer, UiTooltip } from '#components';
+import { ref } from 'vue';
+
+const scrollableRef = ref<HTMLElement | null>(null);
 </script>
 
 <template>
@@ -9,37 +12,49 @@ import { UiContainer, UiTooltip } from "#components";
 
     <div class="demo-category-container mt-4 items-start">
       <span class="demo-category-title">Default</span>
-      <UiTooltip text="I am a tooltip!">Hover me</UiTooltip>
+
+      <UiTooltip content="I am a tooltip!">
+        <UiButton label="Hover me" />
+      </UiTooltip>
     </div>
 
     <div class="demo-category-container mt-4">
       <span class="demo-category-title">Placement</span>
 
-      <div class="grid grid-cols-4 place-items-start gap-5">
-        <UiTooltip text="I am a tooltip!" placement="top">On the top</UiTooltip>
-        <UiTooltip text="I am a tooltip!" placement="bottom"
-          >On the bottom</UiTooltip
+      <div class="mt-1 flex gap-5">
+        <UiTooltip
+          align="end"
+          content="Hello! I'm a tooltip with alignment set to 'end' which makes me align to the right"
         >
-        <UiTooltip text="I am a tooltip!" placement="left"
-          >On the left</UiTooltip
-        >
-        <UiTooltip text="I am a tooltip!" placement="right"
-          >On the right</UiTooltip
-        >
+          <UiButton label="Top right" />
+        </UiTooltip>
+
+        <UiTooltip side="right" content="Hello! I'm a tooltip">
+          <UiButton label="Right center" />
+        </UiTooltip>
+
+        <UiTooltip side="bottom" align="start" content="Hello! I'm a tooltip">
+          <UiButton label="Bottom left" />
+        </UiTooltip>
+
+        <UiTooltip side="left" content="Hello! I'm a tooltip">
+          <UiButton label="Left center" />
+        </UiTooltip>
       </div>
     </div>
 
     <div class="demo-category-container mt-4">
-      <span class="demo-category-title">Scroll responsive</span>
+      <span class="demo-category-title">Custom collision boundary</span>
 
       <div
+        ref="scrollableRef"
         class="mt-1 flex flex-nowrap items-center gap-5 overflow-x-auto rounded-md border border-gray-900/10 bg-gray-100 p-2 will-change-transform"
       >
         <div class="h-20 w-[30vw] flex-shrink-0 rounded bg-gray-300" />
 
-        <UiTooltip text="I am a tooltip!" class="flex-shrink-0" placement="left"
-          >Hover me</UiTooltip
-        >
+        <UiTooltip content="I am a tooltip!" side="right" :collision-boundary="scrollableRef">
+          <UiButton label="Hover me" />
+        </UiTooltip>
 
         <div class="h-20 w-[50vw] flex-shrink-0 rounded bg-gray-300" />
       </div>
@@ -48,28 +63,10 @@ import { UiContainer, UiTooltip } from "#components";
     <div class="demo-category-container mt-4 items-start">
       <span class="demo-category-title">Custom text</span>
       <UiTooltip>
-        Hover me
+        <UiButton label="Hover me" />
 
-        <template #text>This is a tooltip with <i>custom text</i>.</template>
-      </UiTooltip>
-    </div>
-
-    <div class="demo-category-container mt-4 items-start">
-      <span class="demo-category-title">Custom tooltip</span>
-
-      <UiTooltip placement="right">
-        Hover me
-
-        <template #tooltip>
-          <div
-            class="flex items-center gap-1 rounded-md bg-white px-2 py-1 text-xs text-gray-700 shadow-sm ring-1 ring-black/5"
-          >
-            <UiIcon
-              name="i-heroicons-question-mark-circle-20-solid"
-              class="text-gray-500"
-            />
-            This is a completely <strong>custom tooltip.</strong>
-          </div>
+        <template #content="{ classes }">
+          <div :class="classes">This is a tooltip with <i>custom text</i>.</div>
         </template>
       </UiTooltip>
     </div>
