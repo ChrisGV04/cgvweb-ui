@@ -6,6 +6,7 @@ import { mergeConfig } from '#ui/utils';
 import slideover from '../../ui.config/slideover';
 
 const config = mergeConfig<typeof slideover>(appConfig.ui.strategy, appConfig.ui.slideover, slideover);
+type UiConfig = Partial<typeof config> & { strategy?: Strategy };
 </script>
 
 <script setup lang="ts">
@@ -29,8 +30,8 @@ const props = defineProps({
     validator: (value: string) => ['top', 'bottom', 'left', 'right'].includes(value),
   },
   ui: {
-    type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
-    default: () => ({}),
+    type: Object as PropType<UiConfig>,
+    default: () => ({}) as UiConfig,
   },
 });
 const emits = defineEmits({ 'update:open': (value: boolean) => true });

@@ -6,6 +6,7 @@ import { mergeConfig } from '#ui/utils';
 import dialog from '../../ui.config/dialog';
 
 const config = mergeConfig<typeof dialog>(appConfig.ui.strategy, appConfig.ui.dialog, dialog);
+type UiConfig = Partial<typeof config> & { strategy?: Strategy };
 </script>
 
 <script setup lang="ts">
@@ -23,8 +24,8 @@ const props = defineProps({
   defaultOpen: Boolean,
   open: { type: Boolean, default: undefined }, // v-model:open To use as controlled component
   ui: {
-    type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
-    default: () => ({}),
+    type: Object as PropType<UiConfig>,
+    default: () => ({}) as UiConfig,
   },
 });
 const emits = defineEmits({ 'update:open': (value: boolean) => true });

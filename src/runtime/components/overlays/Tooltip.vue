@@ -6,6 +6,7 @@ import { mergeConfig } from '#ui/utils';
 import tooltip from '../../ui.config/tooltip';
 
 const config = mergeConfig<typeof tooltip>(appConfig.ui.strategy, appConfig.ui.tooltip, tooltip);
+type UiConfig = Partial<typeof config> & { strategy?: Strategy };
 </script>
 
 <script setup lang="ts">
@@ -46,8 +47,8 @@ const props = defineProps({
     validate: (value) => ['top', 'right', 'bottom', 'left'].includes(value),
   },
   ui: {
-    type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
-    default: () => ({}),
+    type: Object as PropType<UiConfig>,
+    default: () => ({}) as UiConfig,
   },
 });
 

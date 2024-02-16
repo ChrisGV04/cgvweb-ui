@@ -11,6 +11,7 @@ import type { PropType } from 'vue';
 import { computed, defineComponent, toRef } from 'vue';
 
 const config = mergeConfig<typeof container>(appConfig.ui.strategy, appConfig.ui.container, container);
+type UiConfig = Partial<typeof config> & { strategy?: Strategy };
 
 export default defineComponent({
   inheritAttrs: false,
@@ -24,8 +25,8 @@ export default defineComponent({
       default: undefined,
     },
     ui: {
-      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
-      default: undefined,
+      type: Object as PropType<UiConfig>,
+      default: () => ({}) as UiConfig,
     },
   },
   setup(props) {

@@ -6,6 +6,7 @@ import { mergeConfig } from '#ui/utils';
 import dropdown from '../../ui.config/dropdown';
 
 const config = mergeConfig<typeof dropdown>(appConfig.ui.strategy, appConfig.ui.dropdown, dropdown);
+type UiConfig = Partial<typeof config> & { strategy?: Strategy };
 </script>
 
 <script setup lang="ts">
@@ -47,8 +48,8 @@ const props = defineProps({
     default: () => [],
   },
   ui: {
-    type: Object as PropType<Partial<typeof config> & { strategy?: Strategy }>,
-    default: () => ({}),
+    type: Object as PropType<UiConfig>,
+    default: () => ({}) as UiConfig,
   },
 });
 const emits = defineEmits({ 'update:open': (value: boolean) => true });

@@ -1,32 +1,26 @@
 <script setup lang="ts">
-import { UiContainer, UiMarquee } from "#components";
+import { UiContainer, UiMarquee } from '#components';
 
-const topWords = ["MARQUEE", "COOL"];
-const bottomWords = ["PAUSABLE", "REVERSIBLE", "SPEED", "NUXT"];
+const topWords = ['MARQUEE', 'COOL'];
+const bottomWords = ['PAUSABLE', 'REVERSIBLE', 'SPEED', 'NUXT'];
 </script>
 
 <template>
   <main class="space-y-20">
     <UiContainer class="py-8">
       <h1 class="demo-page-title">Marquee</h1>
-      <p class="demo-page-description">
-        Make content automatically scroll for a neat effect.
-      </p>
+      <p class="demo-page-description">Make content automatically scroll for a neat effect.</p>
     </UiContainer>
 
     <UiMarquee :speed="120">
-      <h4
-        class="text-primary-500 mr-8 text-[clamp(9rem,15vw,50vh)] leading-none"
-      >
-        <template v-for="w in topWords">{{ w }}{{ " - " }}</template>
+      <h4 class="text-primary-500 mr-8 text-[clamp(9rem,15vw,50vh)] leading-none">
+        <template v-for="w in topWords">{{ w }}{{ ' - ' }}</template>
       </h4>
     </UiMarquee>
 
     <UiMarquee :speed="50" reverse>
-      <h4
-        class="text-primary-900 mr-8 text-[clamp(6rem,10vw,15vh)] leading-none"
-      >
-        <template v-for="w in bottomWords">{{ w }}{{ " - " }}</template>
+      <h4 class="text-primary-900 mr-8 text-[clamp(6rem,10vw,15vh)] leading-none">
+        <template v-for="w in bottomWords">{{ w }}{{ ' - ' }}</template>
       </h4>
     </UiMarquee>
 

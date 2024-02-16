@@ -6,6 +6,7 @@ import { mergeConfig } from '#ui/utils';
 import { badge } from '../../ui.config';
 
 const config = mergeConfig<typeof badge>(appConfig.ui.strategy, appConfig.ui.badge, badge);
+type UiConfig = Partial<typeof config> & { strategy?: Strategy };
 </script>
 
 <script setup lang="ts">
@@ -34,8 +35,8 @@ const props = defineProps({
     default: undefined,
   },
   ui: {
-    type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
-    default: undefined,
+    type: Object as PropType<UiConfig>,
+    default: () => ({}) as UiConfig,
   },
 });
 
