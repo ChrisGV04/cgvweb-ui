@@ -84,7 +84,10 @@ export default defineNuxtModule<ModuleOptions>({
     await installModule('@nuxtjs/tailwindcss', {
       viewer: false,
       config: {
-        content: [resolve(runtimeDir, 'components/**/*.{vue,mjs,ts}'), resolve(runtimeDir, '*.{mjs,js,ts}')],
+        content: [
+          resolve(runtimeDir, 'components/**/*.{vue,mjs,ts}'),
+          resolve(runtimeDir, 'ui.config/**/*.{mjs,js,ts}'),
+        ],
         plugins: [twAnimate],
       },
     });

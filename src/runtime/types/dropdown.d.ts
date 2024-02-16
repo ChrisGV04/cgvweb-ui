@@ -1,4 +1,4 @@
-import type { NuxtLinkProps } from '#app';
+import type { NuxtLinkProps } from 'nuxt/app';
 
 export interface DropdownItem extends NuxtLinkProps {
   label: string;

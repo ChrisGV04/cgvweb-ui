@@ -1,20 +1,17 @@
 <script lang="ts">
-import { twJoin, twMerge } from "tailwind-merge";
-import type { PropType } from "vue";
-import { computed, defineComponent, toRef } from "vue";
-import { useUI } from "../../composables/useUI";
-import type { BadgeSize, BadgeVariant, Strategy } from "../../types";
-import { badge } from "../../ui.config";
-import { mergeConfig } from "../../utils";
-import UiIcon from "./Icon.vue";
 // @ts-expect-error
-import appConfig from "#build/app.config";
+import appConfig from '#build/app.config';
 
-const config = mergeConfig<typeof badge>(
-  appConfig.ui.strategy,
-  appConfig.ui.badge,
-  badge,
-);
+import { useUI } from '#ui/composables/useUI';
+import type { BadgeSize, BadgeVariant, Strategy } from '#ui/types';
+import { badge } from '#ui/ui.config';
+import { mergeConfig } from '#ui/utils';
+import { twJoin, twMerge } from 'tailwind-merge';
+import type { PropType } from 'vue';
+import { computed, defineComponent, toRef } from 'vue';
+import UiIcon from './Icon.vue';
+
+const config = mergeConfig<typeof badge>(appConfig.ui.strategy, appConfig.ui.badge, badge);
 
 export default defineComponent({
   components: { UiIcon },
@@ -36,16 +33,14 @@ export default defineComponent({
       default: undefined,
     },
     ui: {
-      type: Object as PropType<
-        Partial<typeof config & { strategy?: Strategy }>
-      >,
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined,
     },
   },
-  emits: ["click:action"],
+  emits: ['click:action'],
 
   setup(props) {
-    const { ui, attrs } = useUI("badge", toRef(props, "ui"), config);
+    const { ui, attrs } = useUI('badge', toRef(props, 'ui'), config);
 
     const activeVariant = computed(() => ui.value.variant[props.variant]);
 
@@ -88,7 +83,7 @@ export default defineComponent({
         :class="[
           activeVariant.action,
           activeVariant.addons,
-          'flex h-3.5 w-3.5 -mr-0.5 shrink-0 items-center justify-center rounded-sm',
+          '-mr-0.5 flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-sm',
         ]"
         @click="$emit('click:action')"
       >

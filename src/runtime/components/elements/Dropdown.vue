@@ -2,22 +2,22 @@
 // @ts-expect-error
 import appConfig from '#build/app.config';
 
-import { dropdown } from '#ui/ui.config';
-import { useUI } from '../../composables/useUI';
-import { mergeConfig } from '../../utils';
+import { useUI } from '#ui/composables/useUI';
+import dropdown from '../../ui.config/dropdown';
+import { mergeConfig } from '#ui/utils';
 
 const config = mergeConfig<typeof dropdown>(appConfig.ui.strategy, appConfig.ui.dropdown, dropdown);
 </script>
 
 <script setup lang="ts">
 import { navigateTo } from '#imports';
+import type { DropdownItem, Strategy } from '#ui/types';
 import { useToNumber, useVModel } from '@vueuse/core';
 import type { DropdownMenuContentProps } from 'radix-vue';
 import { DropdownMenu } from 'radix-vue/namespaced';
 import { twJoin, twMerge } from 'tailwind-merge';
 import type { PropType } from 'vue';
 import { defineOptions, toRef } from 'vue';
-import type { DropdownItem, Strategy } from '../../types';
 import UiButton from './Button.vue';
 import UiIcon from './Icon.vue';
 

@@ -1,10 +1,6 @@
 <script lang="ts">
-import {
-  useElementBounding,
-  useElementVisibility,
-  useToNumber,
-} from "@vueuse/core";
-import { computed, defineComponent, ref } from "vue";
+import { useElementBounding, useElementVisibility, useToNumber } from '@vueuse/core';
+import { computed, defineComponent, ref } from 'vue';
 
 export default defineComponent({
   props: {
@@ -45,17 +41,10 @@ export default defineComponent({
 </script>
 
 <template>
-  <div
-    ref="wrapperRef"
-    class="marquee__wrapper flex select-none overflow-hidden"
-  >
+  <div ref="wrapperRef" class="marquee__wrapper flex select-none overflow-hidden">
     <div
       ref="marqueeRef"
-      :class="[
-        'marquee__content',
-        (!isVisible || pause) && 'pause',
-        reverse && 'reverse',
-      ]"
+      :class="['marquee__content', (!isVisible || pause) && 'pause', reverse && 'reverse']"
     >
       <slot />
     </div>
@@ -63,11 +52,7 @@ export default defineComponent({
       v-for="i in repeat"
       :key="i"
       aria-hidden="true"
-      :class="[
-        'marquee__content',
-        (!isVisible || pause) && 'pause',
-        reverse && 'reverse',
-      ]"
+      :class="['marquee__content', (!isVisible || pause) && 'pause', reverse && 'reverse']"
     >
       <slot />
     </div>

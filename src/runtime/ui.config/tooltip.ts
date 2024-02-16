@@ -1,0 +1,20 @@
+export default /*ui*/ {
+  wrapper: 'relative inline-flex',
+  container: 'z-30',
+  width: 'max-w-xs',
+  background: 'bg-white',
+  color: 'text-gray-900',
+  shadow: 'shadow',
+  rounded: 'rounded',
+  ring: 'ring-1 ring-gray-200',
+  base: 'px-2 py-1 text-xs font-normal truncate',
+  floating: { strategy: 'fixed' },
+  transition: {
+    enterActiveClass: 'transition ease-out duration-200',
+    enterFromClass: 'opacity-0 translate-y-1',
+    enterToClass: 'opacity-100 translate-y-0',
+    leaveActiveClass: 'transition ease-in duration-150',
+    leaveFromClass: 'opacity-100 translate-y-0',
+    leaveToClass: 'opacity-0 translate-y-1',
+  },
+};

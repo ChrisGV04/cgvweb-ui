@@ -1,26 +1,23 @@
 <script lang="ts">
-import { useId } from "#imports";
+// @ts-expect-error
+import appConfig from '#build/app.config';
+
+import { useId } from '#imports';
+import { useUI } from '#ui/composables/useUI';
+import type { Strategy } from '#ui/types';
+import { dialog } from '#ui/ui.config';
+import { mergeConfig } from '#ui/utils';
 import {
   Dialog as HDialog,
   DialogPanel as HDialogPanel,
   TransitionChild,
   TransitionRoot,
   provideUseId,
-} from "@headlessui/vue";
-import type { PropType } from "vue";
-import { computed, defineComponent, toRef } from "vue";
-import { useUI } from "../../composables/useUI";
-import type { Strategy } from "../../types";
-import { dialog } from "../../ui.config";
-import { mergeConfig } from "../../utils";
-// @ts-expect-error
-import appConfig from "#build/app.config";
+} from '@headlessui/vue';
+import type { PropType } from 'vue';
+import { computed, defineComponent, toRef } from 'vue';
 
-const config = mergeConfig<typeof dialog>(
-  appConfig.ui.strategy,
-  appConfig.ui.dialog,
-  dialog,
-);
+const config = mergeConfig<typeof dialog>(appConfig.ui.strategy, appConfig.ui.dialog, dialog);
 
 export default defineComponent({
   components: { HDialog, HDialogPanel, TransitionChild, TransitionRoot },
@@ -36,35 +33,21 @@ export default defineComponent({
       default: undefined,
     },
     ui: {
-      type: Object as PropType<
-        Partial<typeof config & { strategy?: Strategy }>
-      >,
+      type: Object as PropType<Partial<typeof config & { strategy?: Strategy }>>,
       default: undefined,
     },
   },
-  emits: [
-    "update:modelValue",
-    "close",
-    "before-leave",
-    "after-leave",
-    "before-enter",
-    "after-enter",
-  ],
+  emits: ['update:modelValue', 'close', 'before-leave', 'after-leave', 'before-enter', 'after-enter'],
 
   setup(props, { emit }) {
-    const { ui, attrs } = useUI(
-      "dialog",
-      toRef(props, "ui"),
-      config,
-      toRef(props, "class"),
-    );
+    const { ui, attrs } = useUI('dialog', toRef(props, 'ui'), config, toRef(props, 'class'));
 
     const isOpen = computed({
       get() {
         return props.modelValue;
       },
       set(value) {
-        emit("update:modelValue", value);
+        emit('update:modelValue', value);
       },
     });
 
@@ -80,7 +63,7 @@ export default defineComponent({
       if (props.preventClose) return;
 
       isOpen.value = false;
-      emit("close");
+      emit('close');
     }
 
     provideUseId(() => useId());
@@ -108,32 +91,15 @@ export default defineComponent({
     @before-enter="$emit('before-enter')"
   >
     <HDialog :class="ui.wrapper" v-bind="attrs" @close="close">
-      <TransitionChild
-        v-if="overlay"
-        as="template"
-        :appear="appear"
-        v-bind="ui.overlay.transition"
-      >
+      <TransitionChild v-if="overlay" as="template" :appear="appear" v-bind="ui.overlay.transition">
         <div :class="[ui.overlay.base, ui.overlay.background]" />
       </TransitionChild>
 
       <div :class="ui.inner">
         <div :class="[ui.container, ui.padding]">
-          <TransitionChild
-            as="template"
-            :appear="appear"
-            v-bind="transitionClass"
-          >
+          <TransitionChild as="template" :appear="appear" v-bind="transitionClass">
             <HDialogPanel
-              :class="[
-                ui.base,
-                ui.width,
-                ui.height,
-                ui.background,
-                ui.ring,
-                ui.rounded,
-                ui.shadow,
-              ]"
+              :class="[ui.base, ui.width, ui.height, ui.background, ui.ring, ui.rounded, ui.shadow]"
             >
               <slot />
             </HDialogPanel>

@@ -9,7 +9,6 @@
   },
   "exports": {
     ".": {
-      "types": "./dist/types.d.ts",
       "import": "./dist/module.mjs",
       "require": "./dist/module.cjs"
     }
@@ -23,14 +22,14 @@
     "node": ">=v16.20.1"
   },
   "scripts": {
-    "prepack": "nuxt-module-build build",
+    "build": "nuxt-module-build build",
     "dev": "nuxi dev docs",
     "dev:build": "nuxi build docs",
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare docs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "nuxi typecheck",
-    "release": "release-it && npm run prepack && npm publish"
+    "release": "release-it --ci && npm run build && npm publish"
   },
   "peerDependencies": {
     "@headlessui/vue": "^1.7.0",

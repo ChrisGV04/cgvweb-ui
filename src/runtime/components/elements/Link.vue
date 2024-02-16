@@ -1,9 +1,9 @@
 <script lang="ts">
-import { isEqual } from "ohash";
-import { defineComponent } from "vue";
-import type { PropType } from "vue";
-import { NuxtLink } from "#components";
-import type { Link } from "../../types";
+import { NuxtLink } from '#components';
+import type { Link } from '#ui/types';
+import { isEqual } from 'ohash';
+import type { PropType } from 'vue';
+import { defineComponent } from 'vue';
 
 export default defineComponent<Link>({
   inheritAttrs: false,
@@ -11,7 +11,7 @@ export default defineComponent<Link>({
     ...NuxtLink.props,
     as: {
       type: [String, Object] as PropType<any>,
-      default: "button",
+      default: 'button',
     },
     disabled: { type: Boolean, default: null },
     active: { type: Boolean, default: false },
@@ -24,10 +24,7 @@ export default defineComponent<Link>({
     function resolveLinkClass(
       route,
       $route,
-      {
-        isActive,
-        isExactActive,
-      }: { isActive: boolean; isExactActive: boolean },
+      { isActive, isExactActive }: { isActive: boolean; isExactActive: boolean },
     ) {
       if (props.active) {
         return props.activeClass;
@@ -59,27 +56,12 @@ export default defineComponent<Link>({
 </script>
 
 <template>
-  <component
-    :is="as"
-    v-if="!to"
-    v-bind="$attrs"
-    :disabled="disabled"
-    :class="inactiveClass"
-  >
+  <component :is="as" v-if="!to" v-bind="$attrs" :disabled="disabled" :class="inactiveClass">
     <slot />
   </component>
   <NuxtLink
     v-else
-    v-slot="{
-      route,
-      href,
-      target,
-      rel,
-      navigate,
-      isActive,
-      isExactActive,
-      isExternal,
-    }"
+    v-slot="{ route, href, target, rel, navigate, isActive, isExactActive, isExternal }"
     v-bind="$props"
     custom
   >
