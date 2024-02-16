@@ -1,47 +1,27 @@
 <script setup lang="ts">
-import { UiIcon } from '#components';
-import { useId, useRuntimeConfig } from '#imports';
-import { Popover, PopoverButton, PopoverGroup, PopoverPanel, provideUseId } from '@headlessui/vue';
-import type { RouteLocationRaw } from 'vue-router';
-
-interface NavigationItem {
-  name: string;
-  route?: RouteLocationRaw;
-  children?: Omit<NavigationItem, 'children'>[];
-}
+import { UiButton, UiDropdown } from '#components';
+import { useRuntimeConfig } from '#imports';
+import type { DropdownItem } from '#ui/types';
 
 const env = useRuntimeConfig();
-provideUseId(() => useId());
 
-const navigation: NavigationItem[] = [
-  {
-    name: 'Elements',
-    children: [
-      { name: 'Badge', route: '/badge' },
-      { name: 'Icon', route: '/icon' },
-      { name: 'Link', route: '/link' },
-      { name: 'Button', route: '/button' },
-      { name: 'Highlights', route: '/highlights' },
-      { name: 'Dropdown Menu', route: '/dropdown' },
-    ],
-  },
-  {
-    name: 'Data',
-    children: [{ name: 'Rich Text', route: '/rich-text' }],
-  },
-  {
-    name: 'Layout',
-    children: [{ name: 'Marquee', route: '/marquee' }],
-  },
-  {
-    name: 'Overlays',
-    children: [
-      { name: 'Dialog', route: '/dialog' },
-      { name: 'Slideover', route: '/slideover' },
-      { name: 'Tooltip', route: '/tooltip' },
-      { name: 'Breakpoint Viewer', route: '/breakpoints' },
-    ],
-  },
+const elementsLinks: DropdownItem[] = [
+  { label: 'Badge', to: '/badge' },
+  { label: 'Icon', to: '/icon' },
+  { label: 'Link', to: '/link' },
+  { label: 'Button', to: '/button' },
+  { label: 'Dropdown Menu', to: '/dropdown' },
+  { label: 'Highlights', to: '/highlights' },
+];
+
+const dataLinks: DropdownItem[] = [{ label: 'Rich Text', to: '/rich-text' }];
+const layoutLinks: DropdownItem[] = [{ label: 'Marquee', to: '/marquee' }];
+
+const overlayLinks: DropdownItem[] = [
+  { label: 'Dialog', to: '/dialog' },
+  { label: 'Slideover', to: '/slideover' },
+  { label: 'Tooltip', to: '/tooltip' },
+  { label: 'Breakpoint Viewer', to: '/breakpoints' },
 ];
 </script>
 
@@ -54,28 +34,28 @@ const navigation: NavigationItem[] = [
         </NuxtLink>
       </div>
 
-      <PopoverGroup class="hidden lg:flex lg:gap-x-12">
-        <template v-for="item in navigation" :key="item.name">
-          <NuxtLink v-if="item.route" :to="item.route" class="text-sm font-semibold leading-6 text-gray-900">
-            {{ item.name }}
-          </NuxtLink>
-
-          <Popover v-if="item.children" v-slot="{ close }" class="relative">
-            <PopoverButton class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
-              {{ item.name }}
-              <UiIcon name="i-heroicons-chevron-down-20-solid" class="h-5 w-5 flex-none text-gray-400" />
-            </PopoverButton>
-
-            <Transition enter-active-class="transition ease-out duration-200" enter-from-class="opacity-0 translate-y-1" enter-to-class="opacity-100 translate-y-0" leave-active-class="transition ease-in duration-150" leave-from-class="opacity-100 translate-y-0" leave-to-class="opacity-0 translate-y-1">
-              <PopoverPanel class="absolute -left-8 top-full z-10 mt-3 w-56 rounded-xl bg-white p-2 shadow-lg ring-1 ring-gray-900/5">
-                <NuxtLink v-for="child in item.children" :key="child.name" :to="child.route" class="block rounded-lg px-3 py-2 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50" @click="close">
-                  {{ child.name }}
-                </NuxtLink>
-              </PopoverPanel>
-            </Transition>
-          </Popover>
-        </template>
-      </PopoverGroup>
+      <nav class="hidden lg:flex lg:gap-x-6">
+        <UiDropdown :items="[elementsLinks]">
+          <UiButton
+            label="Elements"
+            variant="black-ghost"
+            trailing-icon="i-heroicons-chevron-down-20-solid"
+          />
+        </UiDropdown>
+        <UiDropdown :items="[dataLinks]">
+          <UiButton label="Data" variant="black-ghost" trailing-icon="i-heroicons-chevron-down-20-solid" />
+        </UiDropdown>
+        <UiDropdown :items="[layoutLinks]">
+          <UiButton label="Layout" variant="black-ghost" trailing-icon="i-heroicons-chevron-down-20-solid" />
+        </UiDropdown>
+        <UiDropdown :items="[overlayLinks]">
+          <UiButton
+            label="Overlays"
+            variant="black-ghost"
+            trailing-icon="i-heroicons-chevron-down-20-solid"
+          />
+        </UiDropdown>
+      </nav>
 
       <div class="hidden lg:flex lg:flex-1 lg:justify-end">v{{ env.public.version }}</div>
     </nav>
