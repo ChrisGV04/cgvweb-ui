@@ -1,27 +1,20 @@
 <script setup lang="ts">
-import { UiContainer, UiHighlightText } from "#components";
+import { UiContainer, UiHighlightText } from '#components';
 
-const demoText =
-  "Text with [highlighted] words as an example of a [functional component].";
+const demoText = 'Text with [highlighted] words as an example of a [functional component].';
 </script>
 
 <template>
   <UiContainer class="py-8">
     <h1 class="demo-page-title">Highlights</h1>
-    <p class="demo-page-description">
-      Funcional component used to highlight certain parts of a given text.
-    </p>
+    <p class="demo-page-description">Funcional component used to highlight certain parts of a given text.</p>
 
-    <div
-      class="border-primary-500 mt-4 demo-category-container border-l-2 pl-4"
-    >
+    <div class="border-primary-500 demo-category-container mt-4 border-l-2 pl-4">
       <span class="demo-category-title">Raw input:</span>
       <p>{{ demoText }}</p>
     </div>
 
-    <div
-      class="border-primary-500 mt-4 demo-category-container border-l-2 pl-4"
-    >
+    <div class="border-primary-500 demo-category-container mt-4 border-l-2 pl-4">
       <span class="demo-category-title">With highlights:</span>
 
       <UiHighlightText :text="demoText">

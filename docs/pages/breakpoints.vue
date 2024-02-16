@@ -1,18 +1,12 @@
 <script setup lang="ts">
-import {
-  ClientOnly,
-  DevOnly,
-  UiBreakpointViewer,
-  UiContainer,
-} from "#components";
+import { ClientOnly, DevOnly, UiBreakpointViewer, UiContainer } from '#components';
 </script>
 
 <template>
   <UiContainer class="py-8">
     <h1 class="demo-page-title">Breakpoint viewer</h1>
     <p class="demo-page-description">
-      Small indicator at the bottom of the viewport that shows the current
-      Tailwind CSS breakpoint.
+      Small indicator at the bottom of the viewport that shows the current Tailwind CSS breakpoint.
     </p>
 
     <DevOnly>

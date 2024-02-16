@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { UiButton, UiContainer } from "#components";
+import { UiButton, UiContainer } from '#components';
 </script>
 
 <template>
@@ -21,7 +21,7 @@ import { UiButton, UiContainer } from "#components";
     <div class="demo-category-container mt-4">
       <span class="demo-category-title">White</span>
 
-      <div class="mt-2 flex items-center p-4 bg-gray-900 rounded-md gap-4">
+      <div class="mt-2 flex items-center gap-4 rounded-md bg-gray-900 p-4">
         <UiButton label="Solid" variant="white-solid" />
         <UiButton label="Soft" variant="white-soft" />
         <UiButton label="Ghost" variant="white-ghost" />
@@ -44,15 +44,8 @@ import { UiButton, UiContainer } from "#components";
       <span class="demo-category-title">With icons</span>
 
       <div class="mt-2 flex items-center gap-4">
-        <UiButton
-          label="Leading"
-          leading-icon="i-heroicons-lock-closed-20-solid"
-        />
-        <UiButton
-          label="Trailing"
-          variant="white-solid"
-          leading-icon="i-heroicons-lock-closed-20-solid"
-        />
+        <UiButton label="Leading" leading-icon="i-heroicons-lock-closed-20-solid" />
+        <UiButton label="Trailing" variant="white-solid" leading-icon="i-heroicons-lock-closed-20-solid" />
         <UiButton loading variant="black-solid" label="Loading" />
       </div>
     </div>
@@ -77,7 +70,7 @@ import { UiButton, UiContainer } from "#components";
       </div>
     </div>
 
-    <div class="demo-category-container items-start mt-4">
+    <div class="demo-category-container mt-4 items-start">
       <span class="demo-category-title">As link</span>
 
       <UiButton

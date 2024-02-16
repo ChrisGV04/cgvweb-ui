@@ -1,23 +1,11 @@
-<script lang="ts">
-import type { PropType, VNode, VNodeArrayChildren } from "vue";
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import type { VNode, VNodeArrayChildren } from 'vue';
 
-export default defineComponent({
-  props: {
-    child: {
-      type: [String, Number, Boolean, Object, Function] as PropType<
-        string | number | boolean | VNode | VNodeArrayChildren | (() => any)
-      >,
-      required: true,
-    },
-  },
-});
+defineProps<{ child: string | number | boolean | VNode | VNodeArrayChildren | (() => any) }>();
 </script>
 
 <template>
-  <template v-if="['string', 'number', 'boolean'].includes(typeof child)">{{
-    child
-  }}</template>
+  <template v-if="['string', 'number', 'boolean'].includes(typeof child)">{{ child }}</template>
 
   <component :is="child as any" v-else />
 </template>

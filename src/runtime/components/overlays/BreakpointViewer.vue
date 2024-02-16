@@ -1,18 +1,11 @@
-<script lang="ts">
-import { breakpointsTailwind, computedEager, useBreakpoints } from '@vueuse/core';
-import { defineComponent, ref } from 'vue';
+<script setup lang="ts">
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core';
+import { computed, ref } from 'vue';
 import UiBadge from '../elements/Badge.vue';
 
-export default defineComponent({
-  components: { UiBadge },
-  setup() {
-    const bp = useBreakpoints(breakpointsTailwind);
-    const size = computedEager(() => bp.current().value.at(-1)?.toUpperCase() || 'XS');
-    const switchSide = ref(false);
-
-    return { size, switchSide };
-  },
-});
+const bp = useBreakpoints(breakpointsTailwind);
+const size = computed(() => bp.current().value.at(-1)?.toUpperCase() || 'XS');
+const switchSide = ref(false);
 </script>
 
 <template>

@@ -1,28 +1,28 @@
-import type { PropType, SlotsType, VNode, VNodeArrayChildren } from "vue";
-import { defineComponent, h } from "vue";
+import type { PropType, SlotsType, VNode, VNodeArrayChildren } from 'vue';
+import { defineComponent, h } from 'vue';
 
 type RichTextElement =
-  | "h1"
-  | "h2"
-  | "h3"
-  | "h4"
-  | "h5"
-  | "h6"
-  | "blockquote"
-  | "ul"
-  | "ol"
-  | "link"
-  | "relationship"
-  | "upload"
-  | "indent";
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'h5'
+  | 'h6'
+  | 'blockquote'
+  | 'ul'
+  | 'ol'
+  | 'link'
+  | 'relationship'
+  | 'upload'
+  | 'indent';
 
-type RichTextLeaf = "bold" | "italic" | "underline" | "strikethrough" | "code";
+type RichTextLeaf = 'bold' | 'italic' | 'underline' | 'strikethrough' | 'code';
 
 interface RichTextNode extends Partial<Record<RichTextLeaf, boolean>> {
   type?: RichTextElement;
   children?: RichTextChildren;
   text?: string;
-  linkType?: "custom" | "relationship";
+  linkType?: 'custom' | 'relationship';
   url?: string;
   newTab?: boolean;
   [x: string]: any;
@@ -30,17 +30,11 @@ interface RichTextNode extends Partial<Record<RichTextLeaf, boolean>> {
 
 export type RichTextChildren = RichTextNode[];
 
-type RawChildren =
-  | string
-  | number
-  | boolean
-  | VNode
-  | VNodeArrayChildren
-  | (() => any);
+type RawChildren = string | number | boolean | VNode | VNodeArrayChildren | (() => any);
 
 export default defineComponent({
   props: {
-    as: { type: String, default: "div" },
+    as: { type: String, default: 'div' },
     content: { type: Array as PropType<RichTextChildren>, required: true },
   },
 
@@ -59,54 +53,38 @@ export default defineComponent({
         if (node.text != undefined) {
           let textNode: RawChildren = node.text;
 
-          if (node.bold) textNode = h("strong", null, textNode);
-          if (node.italic) textNode = h("em", null, textNode);
-          if (node.underline)
-            textNode = h("span", { class: "underline" }, textNode);
-          if (node.strikethrough)
-            textNode = h("span", { class: "line-through" }, textNode);
-          if (node.code) textNode = h("code", null, textNode);
+          if (node.bold) textNode = h('strong', null, textNode);
+          if (node.italic) textNode = h('em', null, textNode);
+          if (node.underline) textNode = h('span', { class: 'underline' }, textNode);
+          if (node.strikethrough) textNode = h('span', { class: 'line-through' }, textNode);
+          if (node.code) textNode = h('code', null, textNode);
 
           return textNode;
         }
 
         const serializedChildren = _serialize(node.children);
-        if (!serializedChildren) return h("p", null, "No children detected");
+        if (!serializedChildren) return h('p', null, 'No children detected');
 
-        if (!node.type) return h("p", { key: i }, ...serializedChildren);
+        if (!node.type) return h('p', { key: i }, ...serializedChildren);
 
         // Use slots when passed for flexible components
-        if (slots[node.type])
-          return slots[node.type]({ children: serializedChildren, node });
+        if (slots[node.type]) return slots[node.type]({ children: serializedChildren, node });
 
-        if (
-          [
-            "h1",
-            "h2",
-            "h3",
-            "h4",
-            "h5",
-            "h6",
-            "ul",
-            "ol",
-            "li",
-            "blockquote",
-          ].includes(node.type)
-        )
+        if (['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li', 'blockquote'].includes(node.type))
           return h(node.type, { key: i }, ...serializedChildren);
 
-        if (node.type === "link") {
+        if (node.type === 'link') {
           const attrs: any = { key: i, href: node.url };
-          node.newTab && (attrs.target = "_blank");
-          return h("a", attrs, ...serializedChildren);
+          node.newTab && (attrs.target = '_blank');
+          return h('a', attrs, ...serializedChildren);
         }
 
-        return h("p", { key: i }, ...serializedChildren);
+        return h('p', { key: i }, ...serializedChildren);
       });
     }
 
     const children = _serialize(props.content);
-    if (!children) return h("div", { ...attrs }, "No rich text provided");
+    if (!children) return h('div', { ...attrs }, 'No rich text provided');
     return () => h(props.as, { ...attrs }, ...children);
   },
 });

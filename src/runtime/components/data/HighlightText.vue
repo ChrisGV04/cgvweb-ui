@@ -1,19 +1,10 @@
-<script lang="ts">
-import type { PropType } from "vue";
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import type { PropType } from 'vue';
 
-export default defineComponent({
-  props: {
-    text: { type: String, required: true },
-    as: {
-      type: [String, Object] as PropType<any>,
-      default: "span",
-    },
-    finderRegex: {
-      type: RegExp,
-      default: () => /\[(.*?)\]/g,
-    },
-  },
+defineProps({
+  text: { type: String, required: true },
+  finderRegex: { type: RegExp, default: () => /\[(.*?)\]/g },
+  as: { type: [String, Object] as PropType<any>, default: 'span' },
 });
 </script>
 

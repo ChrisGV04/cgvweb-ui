@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { UiContainer } from "#components";
+import { UiContainer } from '#components';
 </script>
 
 <template>
   <UiContainer class="py-8">
     <h1 class="demo-page-title">Welcome</h1>
-    <p class="demo-page-description">
-      Choose any component to view some examples.
-    </p>
+    <p class="demo-page-description">Choose any component to view some examples.</p>
   </UiContainer>
 </template>

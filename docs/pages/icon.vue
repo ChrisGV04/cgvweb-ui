@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { UiContainer, UiIcon } from "#components";
+import { UiContainer, UiIcon } from '#components';
 </script>
 
 <template>
@@ -8,11 +8,10 @@ import { UiContainer, UiIcon } from "#components";
     <p class="demo-page-description">
       Basic component to render Iconify icons. You must install the
       <code class="demo-code-line">@iconify-json/{collection-name}</code>
-      packages for the icons you want and add them to the config, since they
-      will get bundled.
+      packages for the icons you want and add them to the config, since they will get bundled.
     </p>
 
-    <div class="mt-4 demo-category-container">
+    <div class="demo-category-container mt-4">
       <span class="demo-category-title">Examples</span>
 
       <div class="mt-2 flex items-center gap-5 text-gray-700">
@@ -26,12 +25,11 @@ import { UiContainer, UiIcon } from "#components";
     <h2 class="demo-page-title mt-10">Dynamic icons</h2>
     <p class="demo-page-description">
       If you require dynamic icons, pass the
-      <code class="demo-code-line">dynamic</code> prop and it will switch to
-      icons from <code class="demo-code-line">nuxt-icon</code> and fetch them at
-      runtime.
+      <code class="demo-code-line">dynamic</code> prop and it will switch to icons from
+      <code class="demo-code-line">nuxt-icon</code> and fetch them at runtime.
     </p>
 
-    <div class="mt-4 demo-category-container">
+    <div class="demo-category-container mt-4">
       <span class="demo-category-title">Dynamic icons</span>
 
       <div class="mt-2 flex items-center gap-5 text-gray-700">
