@@ -1,22 +1,25 @@
-import pkg from "../package.json";
+import pkg from '../package.json';
 
 export default defineNuxtConfig({
-  modules: ["../src/module", "@vueuse/nuxt"],
+  modules: ['../src/module', '@vueuse/nuxt'],
   devtools: { enabled: true },
 
   app: {
     head: {
-      titleTemplate: (title) =>
-        title && title.includes("CGV WEB UI") ? title : `${title} - CGV WEB UI`,
+      titleTemplate: (title) => (title && title.includes('CGV WEB UI') ? title : `${title} - CGV WEB UI`),
       meta: [
         {
-          name: "viewport",
-          content: "width=device-width, initial-scale=1, maximum-scale=1",
+          name: 'viewport',
+          content: 'width=device-width, initial-scale=1, maximum-scale=1',
         },
       ],
-      link: [{ rel: "icon", type: "image/svg+xml", href: "/icon.svg" }],
+      link: [
+        { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' },
+        { rel: 'preconnect', href: 'https://rsms.me/' },
+        { rel: 'stylesheet', href: 'https://rsms.me/inter/inter.css' },
+      ],
       htmlAttrs: {
-        lang: "en",
+        lang: 'en',
       },
     },
   },
@@ -29,6 +32,6 @@ export default defineNuxtConfig({
 
   ui: {
     global: true,
-    icons: ["heroicons"],
+    icons: ['heroicons'],
   },
 });

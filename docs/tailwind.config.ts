@@ -1,16 +1,16 @@
-import type { Config } from "tailwindcss";
-import colors from "tailwindcss/colors";
-import defaultTheme from "tailwindcss/defaultTheme";
+import type { Config } from 'tailwindcss';
+import { sky } from 'tailwindcss/colors';
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 export default <Partial<Config>>{
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Inter", "Inter fallback", ...defaultTheme.fontFamily.sans],
+        sans: ['Inter', ...defaultTheme.fontFamily.sans],
       },
 
-      colors: { primary: colors.sky },
+      colors: { primary: sky },
     },
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [require('@tailwindcss/typography')],
 };

@@ -1,102 +1,35 @@
 export default /*ui*/ {
-  base: 'inline-flex items-center',
-  rounded: 'rounded-md',
+  base: 'inline-flex items-center rounded-md data-[interactive]:hover:cursor-pointer data-[interactive]:select-none',
   font: 'font-medium',
   size: {
-    xs: 'text-xs gap-x-1 px-1.5 py-0.5',
-    sm: 'text-xs gap-x-1.5 px-2 py-1',
+    xs: 'text-xs gap-x-1.5 px-1.5 py-0.5',
   },
-  variant: {
-    gray: {
-      base: 'bg-gray-50 text-gray-600 ring-gray-500/10 ring-1 ring-inset',
-      addons: 'text-gray-400',
-      action: 'hover:bg-gray-500/20',
-    },
-    'gray-solid': {
-      base: 'bg-gray-100 text-gray-600',
-      addons: 'text-gray-400',
-      action: 'hover:bg-gray-500/20',
-    },
-
-    blue: {
-      base: 'bg-blue-50 text-blue-700 ring-blue-700/10 ring-1 ring-inset',
-      addons: 'text-blue-500',
-      action: 'hover:bg-blue-600/20',
-    },
-    'blue-solid': {
-      base: 'bg-blue-100 text-blue-700',
-      addons: 'text-blue-500',
-      action: 'hover:bg-blue-600/20',
-    },
-
-    indigo: {
-      base: 'bg-indigo-50 text-indigo-700 ring-indigo-700/10 ring-1 ring-inset',
-      addons: 'text-indigo-500',
-      action: 'hover:bg-indigo-600/20',
-    },
-    'indigo-solid': {
-      base: 'bg-indigo-100 text-indigo-700',
-      addons: 'text-indigo-500',
-      action: 'hover:bg-indigo-600/20',
-    },
-
-    pink: {
-      base: 'bg-pink-50 text-pink-700 ring-pink-700/10 ring-1 ring-inset',
-      addons: 'text-pink-500',
-      action: 'hover:bg-pink-600/20',
-    },
-    'pink-solid': {
-      base: 'bg-pink-100 text-pink-700',
-      addons: 'text-pink-500',
-      action: 'hover:bg-pink-600/20',
-    },
-
-    purple: {
-      base: 'bg-purple-50 text-purple-700 ring-purple-700/10 ring-1 ring-inset',
-      addons: 'text-purple-500',
-      action: 'hover:bg-purple-600/20',
-    },
-    'purple-solid': {
-      base: 'bg-purple-100 text-purple-700',
-      addons: 'text-purple-500',
-      action: 'hover:bg-purple-600/20',
-    },
-
-    red: {
-      base: 'bg-red-50 text-red-700 ring-red-600/10 ring-1 ring-inset',
-      addons: 'text-red-500',
-      action: 'hover:bg-red-600/20',
-    },
-    'red-solid': {
-      base: 'bg-red-100 text-red-700',
-      addons: 'text-red-500',
-      action: 'hover:bg-red-600/20',
-    },
-
-    yellow: {
-      base: 'bg-yellow-50 text-yellow-800 ring-yellow-600/20 ring-1 ring-inset',
-      addons: 'text-yellow-500',
-      action: 'hover:bg-yellow-600/20',
-    },
-    'yellow-solid': {
-      base: 'bg-yellow-100 text-yellow-800',
-      addons: 'text-yellow-500',
-      action: 'hover:bg-yellow-600/20',
-    },
-
-    green: {
-      base: 'bg-emerald-50 text-emerald-700 ring-emerald-600/10 ring-1 ring-inset',
-      addons: 'text-emerald-500',
-      action: 'hover:bg-emerald-600/20',
-    },
-    'green-solid': {
-      base: 'bg-emerald-100 text-emerald-700',
-      addons: 'text-emerald-500',
-      action: 'hover:bg-emerald-600/20',
-    },
+  color: {
+    red: 'bg-red-500/15 text-red-700 data-[interactive]:hover:bg-red-500/20',
+    orange: 'bg-orange-500/15 text-orange-700 data-[interactive]:hover:bg-orange-500/20',
+    amber: 'bg-amber-400/20 text-amber-700 data-[interactive]:hover:bg-amber-400/25',
+    yellow: 'bg-yellow-400/20 text-yellow-700 data-[interactive]:hover:bg-yellow-400/25',
+    lime: 'bg-lime-400/20 text-lime-700 data-[interactive]:hover:bg-lime-500/20',
+    green: 'bg-green-500/15 text-green-700 data-[interactive]:hover:bg-green-500/20',
+    emerald: 'bg-emerald-500/15 text-emerald-700 data-[interactive]:hover:bg-emerald-500/20',
+    teal: 'bg-teal-500/15 text-teal-700 data-[interactive]:hover:bg-teal-500/20',
+    cyan: 'bg-cyan-400/20 text-cyan-700 data-[interactive]:hover:bg-cyan-400/25',
+    sky: 'bg-sky-500/15 text-sky-700 data-[interactive]:hover:bg-sky-500/20',
+    blue: 'bg-blue-500/15 text-blue-700 data-[interactive]:hover:bg-blue-500/20',
+    indigo: 'bg-indigo-500/15 text-indigo-700 data-[interactive]:hover:bg-indigo-500/20',
+    violet: 'bg-violet-500/15 text-violet-700 data-[interactive]:hover:bg-violet-500/20',
+    purple: 'bg-purple-500/15 text-purple-700 data-[interactive]:hover:bg-purple-500/20',
+    fuchsia: 'bg-fuchsia-500/15 text-fuchsia-700 data-[interactive]:hover:bg-fuchsia-500/20',
+    pink: 'bg-pink-500/15 text-pink-700 data-[interactive]:hover:bg-pink-500/20',
+    rose: 'bg-rose-500/15 text-rose-700 data-[interactive]:hover:bg-rose-500/20',
+    slate: 'bg-slate-600/10 text-slate-700 data-[interactive]:hover:bg-slate-600/15',
+    gray: 'bg-gray-600/10 text-gray-700 data-[interactive]:hover:bg-gray-600/15',
+    zinc: 'bg-zinc-600/10 text-zinc-700 data-[interactive]:hover:bg-zinc-600/15',
+    neutral: 'bg-neutral-600/10 text-neutral-700 data-[interactive]:hover:bg-neutral-600/15',
+    stone: 'bg-stone-600/10 text-stone-700 data-[interactive]:hover:bg-stone-600/15',
   },
   default: {
-    size: 'sm',
-    variant: 'gray',
+    size: 'xs',
+    color: 'gray',
   },
 };
