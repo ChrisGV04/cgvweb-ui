@@ -2,8 +2,8 @@
 // @ts-expect-error
 import appConfig from '#build/app.config';
 
+import { formInput } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
-import formInput from '../../ui.config/formInput';
 
 const config = mergeConfig<typeof formInput>(appConfig.ui.strategy, appConfig.ui.formInput, formInput);
 type UiConfig = Partial<typeof config> & { strategy?: Strategy };

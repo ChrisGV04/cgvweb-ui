@@ -12,4 +12,5 @@ export { default as slideover } from './slideover';
 export { default as tooltip } from './tooltip';
 
 // Forms
-export { default as input } from './formInput';
+export { default as formInput } from './formInput';
+export { default as formInputLabel } from './formInputLabel';
