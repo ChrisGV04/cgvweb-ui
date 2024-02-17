@@ -42,6 +42,7 @@
     "@iconify-json/heroicons": "^1.1.20",
     "@nuxt/kit": "^3.10.2",
     "@nuxtjs/tailwindcss": "^6.11.4",
+    "@tailwindcss/forms": "^0.5.7",
     "defu": "^6.1.4",
     "just-omit": "^2.2.0",
     "just-safe-get": "^4.2.0",

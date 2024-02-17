@@ -5,3 +5,11 @@
 select {
   background-image: none;
 }
+
+/* Remove default arrows from number inputs  */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-outer-spin-button,
+input[type='number'] {
+  -webkit-appearance: none !important;
+  -moz-appearance: textfield !important;
+}

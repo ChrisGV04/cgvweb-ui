@@ -10,3 +10,6 @@ export { default as container } from './container';
 export { default as dialog } from './dialog';
 export { default as slideover } from './slideover';
 export { default as tooltip } from './tooltip';
+
+// Forms
+export { default as input } from './formInput';

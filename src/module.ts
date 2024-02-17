@@ -1,6 +1,7 @@
 import type { CollectionNames, IconsPluginOptions } from '@egoist/tailwindcss-icons';
 import { getIconCollections, iconsPlugin } from '@egoist/tailwindcss-icons';
 import { addComponentsDir, addImportsDir, createResolver, defineNuxtModule, installModule } from '@nuxt/kit';
+import twForms from '@tailwindcss/forms';
 import twAnimate from 'tailwindcss-animate';
 import { name, version } from '../package.json';
 import type { DeepPartial, Strategy } from './runtime/types';
@@ -88,7 +89,7 @@ export default defineNuxtModule<ModuleOptions>({
           resolve(runtimeDir, 'components/**/*.{vue,mjs,ts}'),
           resolve(runtimeDir, 'ui.config/**/*.{mjs,js,ts}'),
         ],
-        plugins: [twAnimate],
+        plugins: [twAnimate, twForms],
       },
     });
 
@@ -114,6 +115,12 @@ export default defineNuxtModule<ModuleOptions>({
     });
     addComponentsDir({
       path: resolve(runtimeDir, 'components', 'overlays'),
+      prefix: options.prefix,
+      global: options.global,
+      watch: false,
+    });
+    addComponentsDir({
+      path: resolve(runtimeDir, 'components', 'forms'),
       prefix: options.prefix,
       global: options.global,
       watch: false,

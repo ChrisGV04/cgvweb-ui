@@ -26,6 +26,8 @@ const overlayLinks: DropdownItem[] = [
   { label: 'Tooltip', to: '/tooltip' },
   { label: 'Breakpoint Viewer', to: '/breakpoints' },
 ];
+
+const formLinks: DropdownItem[] = [{ label: 'Input', to: '/input' }];
 </script>
 
 <template>
@@ -49,6 +51,9 @@ const overlayLinks: DropdownItem[] = [
         </UiDropdown>
         <UiDropdown :items="[overlayLinks]">
           <UiButton label="Overlays" variant="black-ghost" right-icon="i-heroicons-chevron-down-20-solid" />
+        </UiDropdown>
+        <UiDropdown :items="[formLinks]">
+          <UiButton label="Forms" variant="black-ghost" right-icon="i-heroicons-chevron-down-20-solid" />
         </UiDropdown>
       </nav>
 
