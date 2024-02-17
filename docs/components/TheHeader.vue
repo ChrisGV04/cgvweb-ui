@@ -39,24 +39,16 @@ const overlayLinks: DropdownItem[] = [
 
       <nav class="hidden lg:flex lg:gap-x-6">
         <UiDropdown :items="[elementsLinks]">
-          <UiButton
-            label="Elements"
-            variant="black-ghost"
-            trailing-icon="i-heroicons-chevron-down-20-solid"
-          />
+          <UiButton label="Elements" variant="black-ghost" right-icon="i-heroicons-chevron-down-20-solid" />
         </UiDropdown>
         <UiDropdown :items="[dataLinks]">
-          <UiButton label="Data" variant="black-ghost" trailing-icon="i-heroicons-chevron-down-20-solid" />
+          <UiButton label="Data" variant="black-ghost" right-icon="i-heroicons-chevron-down-20-solid" />
         </UiDropdown>
         <UiDropdown :items="[layoutLinks]">
-          <UiButton label="Layout" variant="black-ghost" trailing-icon="i-heroicons-chevron-down-20-solid" />
+          <UiButton label="Layout" variant="black-ghost" right-icon="i-heroicons-chevron-down-20-solid" />
         </UiDropdown>
         <UiDropdown :items="[overlayLinks]">
-          <UiButton
-            label="Overlays"
-            variant="black-ghost"
-            trailing-icon="i-heroicons-chevron-down-20-solid"
-          />
+          <UiButton label="Overlays" variant="black-ghost" right-icon="i-heroicons-chevron-down-20-solid" />
         </UiDropdown>
       </nav>
 

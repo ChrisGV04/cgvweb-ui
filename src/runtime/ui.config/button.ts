@@ -1,4 +1,4 @@
-export default {
+export default /*ui*/ {
   base: 'flex-shrink-0 items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75',
   font: 'font-semibold',
   rounded: 'rounded-md',

@@ -10,15 +10,16 @@ import { UiContainer, UiLink } from '#components';
       <code>NuxtLink</code>.
     </p>
 
-    <div class="demo-category-container mt-4">
+    <div id="content" class="demo-category-container mt-4">
       <span class="demo-category-title">Example</span>
 
       <div class="mt-2 flex items-center gap-4">
-        <UiLink to="/link">Default link</UiLink>
-        <UiLink to="/link" active-class="text-primary-500">Active link</UiLink>
-        <UiLink exact-query to="/link?term=query" active-class="text-primary-500"
-          >Active when exact query</UiLink
-        >
+        <UiLink to="/dialog" class="data-[active]:text-primary-700">Default link</UiLink>
+        <UiLink to="/link" class="data-[active]:text-primary-500">Active link</UiLink>
+        <UiLink exact-query to="/link?term=query" class="data-[active]:text-primary-500">Exact query</UiLink>
+        <UiLink exact-hash to="/link#content" class="data-[active]:text-primary-500 text-gray-900">
+          Exact hash
+        </UiLink>
       </div>
     </div>
   </UiContainer>

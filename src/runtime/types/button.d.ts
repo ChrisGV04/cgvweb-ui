@@ -1,29 +1,28 @@
-import type { AppConfig } from "nuxt/schema";
-import { button } from "../ui.config";
-import type { Link } from "./link";
-import type { DeepPartial, ExtractDeepKey, Strategy } from "./utils";
+import type { AppConfig } from 'nuxt/schema';
+import type { PrimitiveProps } from 'radix-vue';
+import { button } from '../ui.config';
+import type { LinkProps } from './link';
+import type { ExtractDeepKey } from './utils';
 
-export type ButtonSize =
-  | keyof typeof button.size
-  | ExtractDeepKey<AppConfig, ["ui", "button", "size"]>;
+export type ButtonSize = keyof typeof button.size | ExtractDeepKey<AppConfig, ['ui', 'button', 'size']>;
 
 export type ButtonVariant =
   | keyof typeof button.variant
-  | ExtractDeepKey<AppConfig, ["ui", "button", "variant"]>;
+  | ExtractDeepKey<AppConfig, ['ui', 'button', 'variant']>;
 
-export interface Button extends Link {
+export interface ButtonProps<T = any> extends LinkProps, PrimitiveProps {
   label?: string;
+  leftIcon?: string;
+  rightIcon?: string;
   loadingIcon?: string;
-  leadingIcon?: string;
-  trailingIcon?: string;
-  type?: HTMLButtonElement["type"];
   loading?: boolean;
   disabled?: boolean;
   truncate?: boolean;
   block?: boolean;
   padded?: boolean;
+  type?: HTMLButtonElement['type'];
   size?: ButtonSize;
   variant?: ButtonVariant;
-  ui?: DeepPartial<typeof button & { strategy?: Strategy }>;
   class?: any;
+  ui?: T;
 }

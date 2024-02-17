@@ -26,19 +26,19 @@ const scrollableRef = ref<HTMLElement | null>(null);
           align="end"
           content="Hello! I'm a tooltip with alignment set to 'end' which makes me align to the right"
         >
-          <UiButton label="Top right" />
+          <UiButton label="Top right" right-icon="i-heroicons-chevron-up-16-solid" />
         </UiTooltip>
 
         <UiTooltip side="right" content="Hello! I'm a tooltip">
-          <UiButton label="Right center" />
+          <UiButton label="Right center" right-icon="i-heroicons-chevron-right-16-solid" />
         </UiTooltip>
 
         <UiTooltip side="bottom" align="start" content="Hello! I'm a tooltip">
-          <UiButton label="Bottom left" />
+          <UiButton label="Bottom left" right-icon="i-heroicons-chevron-down-16-solid" />
         </UiTooltip>
 
         <UiTooltip side="left" content="Hello! I'm a tooltip">
-          <UiButton label="Left center" />
+          <UiButton label="Left center" right-icon="i-heroicons-chevron-left-16-solid" />
         </UiTooltip>
       </div>
     </div>
@@ -63,7 +63,7 @@ const scrollableRef = ref<HTMLElement | null>(null);
     <div class="demo-category-container mt-4 items-start">
       <span class="demo-category-title">Custom text</span>
       <UiTooltip>
-        <UiButton label="Hover me" />
+        <UiButton label="Hover me" class="mt-2" />
 
         <template #content="{ classes }">
           <div :class="classes">This is a tooltip with <i>custom text</i>.</div>

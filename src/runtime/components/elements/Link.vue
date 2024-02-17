@@ -1,81 +1,42 @@
-<script lang="ts">
+<script setup lang="ts">
 import { NuxtLink } from '#components';
-import type { Link } from '#ui/types';
+import { createError, useRoute } from '#imports';
+import type { LinkProps } from '#ui/types';
+import { getNuxtLinkProps } from '#ui/utils/links';
+import { useLink } from '#vue-router';
 import { isEqual } from 'ohash';
-import type { PropType } from 'vue';
-import { defineComponent } from 'vue';
+import { useForwardProps } from 'radix-vue';
+import { computed, withDefaults } from 'vue';
 
-export default defineComponent<Link>({
-  inheritAttrs: false,
-  props: {
-    ...NuxtLink.props,
-    as: {
-      type: [String, Object] as PropType<any>,
-      default: 'button',
-    },
-    disabled: { type: Boolean, default: null },
-    active: { type: Boolean, default: false },
-    exact: { type: Boolean, default: false },
-    exactQuery: { type: Boolean, default: false },
-    exactHash: { type: Boolean, default: false },
-    inactiveClass: { type: String, default: undefined },
-  },
-  setup(props) {
-    function resolveLinkClass(
-      route,
-      $route,
-      { isActive, isExactActive }: { isActive: boolean; isExactActive: boolean },
-    ) {
-      if (props.active) {
-        return props.activeClass;
-      }
-
-      if (props.exactQuery && !isEqual(route.query, $route.query)) {
-        return props.inactiveClass;
-      }
-      if (props.exactHash && route.hash !== $route.hash) {
-        return props.inactiveClass;
-      }
-
-      if (props.exact && isExactActive) {
-        return props.activeClass;
-      }
-
-      if (!props.exact && isActive) {
-        return props.activeClass;
-      }
-
-      return props.inactiveClass;
-    }
-
-    return {
-      resolveLinkClass,
-    };
-  },
+const props = withDefaults(defineProps<LinkProps>(), {
+  exact: false,
+  exactQuery: false,
+  exactHash: false,
+  to: () => undefined as LinkProps['to'],
 });
+
+if (props.to === undefined) throw createError({ fatal: true, message: 'Missing "to" in link' });
+
+const currentRoute = useRoute();
+const { isActive, isExactActive, route } = useLink(props);
+
+const linkStatus = computed<'active' | 'inactive' | 'exact'>(() => {
+  if (props.exactQuery && !isEqual(route.value.query, currentRoute.query)) return 'inactive';
+  if (props.exactHash && route.value.hash !== currentRoute.hash) return 'inactive';
+  if (props.exact && isExactActive.value) return 'exact';
+  return isActive.value ? 'active' : 'inactive';
+});
+
+const linkProps = useForwardProps(() => getNuxtLinkProps(props));
 </script>
 
 <template>
-  <component :is="as" v-if="!to" v-bind="$attrs" :disabled="disabled" :class="inactiveClass">
-    <slot />
-  </component>
   <NuxtLink
-    v-else
-    v-slot="{ route, href, target, rel, navigate, isActive, isExactActive, isExternal }"
-    v-bind="$props"
-    custom
+    v-bind="linkProps"
+    :data-status="linkStatus"
+    :data-active="linkStatus !== 'inactive' ? '' : undefined"
+    :data-inactive="linkStatus === 'inactive' ? '' : undefined"
   >
-    <a
-      v-bind="$attrs"
-      :href="!disabled ? href : undefined"
-      :aria-disabled="disabled ? 'true' : undefined"
-      :role="disabled ? 'link' : undefined"
-      :rel="rel"
-      :target="target"
-      :class="resolveLinkClass(route, $route, { isActive, isExactActive })"
-      @click="(e) => !isExternal && navigate(e)"
-    >
-      <slot v-bind="{ isActive: exact ? isExactActive : isActive }" />
-    </a>
+    <slot :status="linkStatus" />
   </NuxtLink>
 </template>
