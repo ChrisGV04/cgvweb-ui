@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.3.0](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.2.1...v0.3.0) (2024-02-17)
+
+
+### Features
+
+* Rewrite Dialog with Radix UI ([ed4b8b4](https://github.com/ChrisGV04/cgvweb-ui/commit/ed4b8b47a5a3b670715a7aa877aff457c83541fa))
+* Rewrite Slideover with Radix UI ([fa90417](https://github.com/ChrisGV04/cgvweb-ui/commit/fa9041775952dfeba5b2d012cfaceba788507665))
+* Rewrite the Link and Buttons to be more simple ([08e9551](https://github.com/ChrisGV04/cgvweb-ui/commit/08e9551c1cbe3b1fee3862b6e0f6aa3afee780c0))
+* Rewrite Tooltip with Radix UI ([a24dc66](https://github.com/ChrisGV04/cgvweb-ui/commit/a24dc66f41fec798709ff891bd8053b05ed4bf81))
+* Simplify the Badge component ([c6c59b7](https://github.com/ChrisGV04/cgvweb-ui/commit/c6c59b739c10a2977d58ae748a5948e48238de48))
+
+
+### Bug Fixes
+
+* Dialog using wrong useUI key ([fd23a55](https://github.com/ChrisGV04/cgvweb-ui/commit/fd23a55a3353fc46c56f9296ebbb225292bcba31))
+* Link types requiring external dependency ([dcb7a82](https://github.com/ChrisGV04/cgvweb-ui/commit/dcb7a82be6308d38a5090fc7bd96af26ea0650cf))
+* Restore ui props types ([5c4cde1](https://github.com/ChrisGV04/cgvweb-ui/commit/5c4cde100e2b1114d94e9a4a36afeff49ff009cd))
+
 ## [0.2.1](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.2.0...v0.2.1) (2024-02-16)
 
 
