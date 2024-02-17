@@ -2,10 +2,14 @@
 // @ts-expect-error
 import appConfig from '#build/app.config';
 
+import { dropdown } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
-import dropdown from '../../ui.config/dropdown';
 
-const config = mergeConfig<typeof dropdown>(appConfig.ui.strategy, appConfig.ui.dropdown, dropdown);
+const config = mergeConfig<typeof dropdown>(
+  appConfig.ui?.dropdown?.strategy,
+  appConfig.ui?.dropdown,
+  dropdown,
+);
 type UiConfig = Partial<typeof config> & { strategy?: Strategy };
 </script>
 

@@ -2,9 +2,7 @@ import { defineAppConfig } from '#imports';
 
 export default defineAppConfig({
   ui: /*ui*/ {
-    container: {
-      constrained: 'max-w-2xl',
-    },
+    container: { constrained: 'max-w-2xl' },
 
     button: {
       variant: {
@@ -18,9 +16,7 @@ export default defineAppConfig({
           'text-primary-500 underline-offset-4 hover:text-primary-600 hover:underline focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500 disabled:text-primary-500',
       },
 
-      default: {
-        variant: 'primary-solid',
-      },
+      default: { variant: 'primary-solid' },
     },
   },
 });

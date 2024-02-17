@@ -1,6 +1,6 @@
-import { createDefu, defu } from "defu";
-import { extendTailwindMerge } from "tailwind-merge";
-import type { Strategy } from "../types";
+import { createDefu, defu } from 'defu';
+import { extendTailwindMerge } from 'tailwind-merge';
+import type { Strategy } from '../types';
 
 const customTwMerge = extendTailwindMerge<string, string>({
   extend: {
@@ -11,23 +11,18 @@ const customTwMerge = extendTailwindMerge<string, string>({
 });
 
 const defuTwMerge = createDefu((obj, key, value, namespace) => {
-  if (namespace === "default" || namespace.startsWith("default.")) {
+  if (namespace === 'default' || namespace.startsWith('default.')) {
     return false;
   }
-  if (
-    typeof obj[key] === "string" &&
-    typeof value === "string" &&
-    obj[key] &&
-    value
-  ) {
+  if (typeof obj[key] === 'string' && typeof value === 'string' && obj[key] && value) {
     // @ts-ignore
     obj[key] = customTwMerge(obj[key], value);
     return true;
   }
 });
 
-export function mergeConfig<T>(strategy: Strategy, ...configs): T {
-  if (strategy === "override") {
+export function mergeConfig<T>(strategy: Strategy = 'merge', ...configs): T {
+  if (strategy === 'override') {
     return defu({}, ...configs) as T;
   }
 
@@ -42,12 +37,7 @@ export function hexToRgb(hex: string) {
   });
 
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result
-    ? `${parseInt(result[1], 16)} ${parseInt(result[2], 16)} ${parseInt(
-        result[3],
-        16,
-      )}`
-    : null;
+  return result ? `${parseInt(result[1], 16)} ${parseInt(result[2], 16)} ${parseInt(result[3], 16)}` : null;
 }
 
 export function getSlotsChildren(slots: any) {
@@ -55,13 +45,13 @@ export function getSlotsChildren(slots: any) {
   if (children.length) {
     children = children
       .flatMap((c: any) => {
-        if (typeof c.type === "symbol") {
-          if (typeof c.children === "string") {
+        if (typeof c.type === 'symbol') {
+          if (typeof c.children === 'string') {
             // `v-if="false"` or commented node
             return;
           }
           return c.children;
-        } else if (c.type.name === "ContentSlot") {
+        } else if (c.type.name === 'ContentSlot') {
           return c.ctx.slots.default?.();
         }
         return c;
@@ -83,10 +73,7 @@ export const isDeepEqual = (object1: any, object2: any): boolean => {
 
     const areObjects = isObject(value1) && isObject(value2);
 
-    if (
-      (areObjects && !isDeepEqual(value1, value2)) ||
-      (!areObjects && value1 !== value2)
-    ) {
+    if ((areObjects && !isDeepEqual(value1, value2)) || (!areObjects && value1 !== value2)) {
       return false;
     }
   }
@@ -94,5 +81,5 @@ export const isDeepEqual = (object1: any, object2: any): boolean => {
 };
 
 export const isObject = (input: unknown): input is object => {
-  return input != null && typeof input === "object";
+  return input != null && typeof input === 'object';
 };

@@ -6,8 +6,8 @@ import { formInputLabel } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
 
 const config = mergeConfig<typeof formInputLabel>(
-  appConfig.ui.strategy,
-  appConfig.ui.formInputLabel,
+  appConfig.ui?.formInputLabel?.strategy,
+  appConfig.ui?.formInputLabel,
   formInputLabel,
 );
 type UiConfig = Partial<typeof config> & { strategy?: Strategy };
@@ -21,11 +21,7 @@ import { toRef, withDefaults } from 'vue';
 
 const props = withDefaults(
   defineProps<LabelProps & { mandatory?: boolean; error?: boolean; class?: any; ui?: UiConfig }>(),
-  {
-    as: 'label',
-    class: undefined,
-    ui: () => ({}) as UiConfig,
-  },
+  { as: 'label', class: undefined, ui: () => ({}) as UiConfig },
 );
 
 const { ui, attrs } = useUI('formInputLabel', toRef(props, 'ui'), config);

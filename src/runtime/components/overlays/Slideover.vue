@@ -2,10 +2,14 @@
 // @ts-expect-error
 import appConfig from '#build/app.config';
 
+import { slideover } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
-import slideover from '../../ui.config/slideover';
 
-const config = mergeConfig<typeof slideover>(appConfig.ui.strategy, appConfig.ui.slideover, slideover);
+const config = mergeConfig<typeof slideover>(
+  appConfig.ui?.slideover?.strategy,
+  appConfig.ui?.slideover,
+  slideover,
+);
 type UiConfig = Partial<typeof config> & { strategy?: Strategy };
 </script>
 

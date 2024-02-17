@@ -5,7 +5,11 @@ import appConfig from '#build/app.config';
 import { formInput } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
 
-const config = mergeConfig<typeof formInput>(appConfig.ui.strategy, appConfig.ui.formInput, formInput);
+const config = mergeConfig<typeof formInput>(
+  appConfig.ui?.formInput?.strategy,
+  appConfig.ui?.formInput,
+  formInput,
+);
 type UiConfig = Partial<typeof config> & { strategy?: Strategy };
 </script>
 

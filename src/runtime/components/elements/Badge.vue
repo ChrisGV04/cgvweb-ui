@@ -2,10 +2,10 @@
 // @ts-expect-error
 import appConfig from '#build/app.config';
 
+import { badge } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
-import { badge } from '../../ui.config';
 
-const config = mergeConfig<typeof badge>(appConfig.ui.strategy, appConfig.ui.badge, badge);
+const config = mergeConfig<typeof badge>(appConfig.ui?.badge?.strategy, appConfig.ui?.badge, badge);
 type UiConfig = Partial<typeof config> & { strategy?: Strategy };
 </script>
 

@@ -2,10 +2,10 @@
 // @ts-expect-error
 import appConfig from '#build/app.config';
 
+import { tooltip } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
-import tooltip from '../../ui.config/tooltip';
 
-const config = mergeConfig<typeof tooltip>(appConfig.ui.strategy, appConfig.ui.tooltip, tooltip);
+const config = mergeConfig<typeof tooltip>(appConfig.ui?.tooltip?.strategy, appConfig.ui?.tooltip, tooltip);
 type UiConfig = Partial<typeof config> & { strategy?: Strategy };
 </script>
 

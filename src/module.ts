@@ -1,16 +1,15 @@
 import type { CollectionNames, IconsPluginOptions } from '@egoist/tailwindcss-icons';
 import { getIconCollections, iconsPlugin } from '@egoist/tailwindcss-icons';
-import { addComponentsDir, addImportsDir, createResolver, defineNuxtModule, installModule } from '@nuxt/kit';
+import { addComponentsDir, createResolver, defineNuxtModule, installModule } from '@nuxt/kit';
 import twForms from '@tailwindcss/forms';
 import twAnimate from 'tailwindcss-animate';
 import { name, version } from '../package.json';
 import type { DeepPartial, Strategy } from './runtime/types';
 import * as config from './runtime/ui.config';
 
-type UI = {
-  strategy?: Strategy;
-  icons?: { dynamic: boolean };
-} & DeepPartial<typeof config>;
+/** Adds strategy to every key of the object */
+type WithStrategy<Config extends object> = { [Key in keyof Config]: Config[Key] & { strategy?: Strategy } };
+type UI = { icons?: { dynamic: boolean } } & DeepPartial<WithStrategy<typeof config>>;
 
 declare module 'nuxt/schema' {
   interface AppConfigInput {
@@ -125,9 +124,5 @@ export default defineNuxtModule<ModuleOptions>({
       global: options.global,
       watch: false,
     });
-
-    // Composables
-
-    addImportsDir(resolve(runtimeDir, 'composables'));
   },
 });

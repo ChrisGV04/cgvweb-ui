@@ -2,10 +2,14 @@
 // @ts-expect-error
 import appConfig from '#build/app.config';
 
+import { container } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
-import { container } from '../../ui.config';
 
-const config = mergeConfig<typeof container>(appConfig.ui.strategy, appConfig.ui.container, container);
+const config = mergeConfig<typeof container>(
+  appConfig.ui.container.strategy,
+  appConfig.ui.container,
+  container,
+);
 type UiConfig = Partial<typeof config> & { strategy?: Strategy };
 </script>
 
