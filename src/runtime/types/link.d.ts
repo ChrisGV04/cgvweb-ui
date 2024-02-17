@@ -1,8 +1,6 @@
-import { RouteLocationRaw } from '#vue-router';
 import type { NuxtLinkProps } from 'nuxt/app';
 
-export interface LinkProps extends Omit<NuxtLinkProps, 'to'> {
-  to?: RouteLocationRaw;
+export interface LinkProps extends NuxtLinkProps {
   exact?: boolean;
   exactQuery?: boolean;
 
