@@ -14,3 +14,4 @@ export { default as tooltip } from './tooltip';
 // Forms
 export { default as formInput } from './formInput';
 export { default as formInputLabel } from './formInputLabel';
+export { default as formSwitch } from './formSwitch';

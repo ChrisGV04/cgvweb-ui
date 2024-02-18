@@ -27,7 +27,10 @@ const overlayLinks: DropdownItem[] = [
   { label: 'Breakpoint Viewer', to: '/breakpoints' },
 ];
 
-const formLinks: DropdownItem[] = [{ label: 'Input', to: '/input' }];
+const formLinks: DropdownItem[] = [
+  { label: 'Input', to: '/input' },
+  { label: 'Switch', to: '/switch' },
+];
 </script>
 
 <template>
