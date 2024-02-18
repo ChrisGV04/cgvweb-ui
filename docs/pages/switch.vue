@@ -9,8 +9,7 @@ const checked = ref(false);
   <UiContainer class="py-8">
     <h1 class="demo-page-title">Switch</h1>
     <p class="demo-page-description">
-      A basic link with additional options that extend the
-      <code>NuxtLink</code>.
+      A control that allows the user to toggle between checked and not checked.
     </p>
 
     <div class="demo-category-container mt-4">
