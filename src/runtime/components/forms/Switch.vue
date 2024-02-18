@@ -16,6 +16,7 @@ type UiConfig = Partial<typeof config> & { strategy?: Strategy };
 <script setup lang="ts">
 import { useUI } from '#ui/composables/useUI';
 import type { Strategy } from '#ui/types';
+import omit from 'just-omit';
 import {
   SwitchRoot,
   SwitchThumb,
@@ -36,9 +37,7 @@ const emits = defineEmits<SwitchRootEmits>();
 const { ui } = useUI('formSwitch', toRef(props, 'ui'), config);
 
 const delegatedProps = computed(() => {
-  const { class: _, ...delegated } = props;
-
-  return delegated;
+  return omit(props, ['class', 'ui']);
 });
 
 const forwarded = useForwardPropsEmits(delegatedProps, emits);
