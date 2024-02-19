@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { UiContainer, UiFormInputLabel, UiRadioGroup, UiRadioGroupItem } from '#components';
+import { UiContainer, UiFormLabel, UiRadioGroup, UiRadioGroupItem } from '#components';
 import { ref } from 'vue';
 
 const paymentMethod = ref('cash');
@@ -20,11 +20,11 @@ const viewMode = ref('');
       <UiRadioGroup class="mt-2 space-y-2">
         <div class="flex items-center gap-2">
           <UiRadioGroupItem id="yes" value="yes" />
-          <UiFormInputLabel for="yes">Yes</UiFormInputLabel>
+          <UiFormLabel for="yes">Yes</UiFormLabel>
         </div>
         <div class="flex items-center gap-2">
           <UiRadioGroupItem id="no" value="no" />
-          <UiFormInputLabel for="no">No</UiFormInputLabel>
+          <UiFormLabel for="no">No</UiFormLabel>
         </div>
       </UiRadioGroup>
     </div>
@@ -38,11 +38,11 @@ const viewMode = ref('');
       <UiRadioGroup v-model="paymentMethod" class="mt-2 space-y-2">
         <div class="flex items-center gap-2">
           <UiRadioGroupItem id="cash" value="cash" />
-          <UiFormInputLabel for="cash">Efectivo</UiFormInputLabel>
+          <UiFormLabel for="cash">Efectivo</UiFormLabel>
         </div>
         <div class="flex items-center gap-2">
           <UiRadioGroupItem id="card" value="card" />
-          <UiFormInputLabel for="card">Tarjeta</UiFormInputLabel>
+          <UiFormLabel for="card">Tarjeta</UiFormLabel>
         </div>
       </UiRadioGroup>
     </div>
@@ -55,15 +55,15 @@ const viewMode = ref('');
       <UiRadioGroup v-model="viewMode" orientation="horizontal" class="mt-2 flex gap-6">
         <div class="flex items-center gap-2">
           <UiRadioGroupItem id="default" value="default" />
-          <UiFormInputLabel for="default">Predeterminado</UiFormInputLabel>
+          <UiFormLabel for="default">Predeterminado</UiFormLabel>
         </div>
         <div class="flex items-center gap-2">
           <UiRadioGroupItem id="comfortable" value="comfortable" />
-          <UiFormInputLabel for="comfortable">Espaciado</UiFormInputLabel>
+          <UiFormLabel for="comfortable">Espaciado</UiFormLabel>
         </div>
         <div class="flex items-center gap-2">
           <UiRadioGroupItem id="compact" value="compact" />
-          <UiFormInputLabel for="compact">Compacto</UiFormInputLabel>
+          <UiFormLabel for="compact">Compacto</UiFormLabel>
         </div>
       </UiRadioGroup>
     </div>

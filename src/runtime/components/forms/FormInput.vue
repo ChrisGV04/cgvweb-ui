@@ -15,7 +15,7 @@ type UiConfig = Partial<typeof config> & { strategy?: Strategy };
 
 <script setup lang="ts">
 import UiIcon from '#ui/components/elements/Icon.vue';
-import UiInputLabel from '#ui/components/forms/FormInputLabel.vue';
+import UiInputLabel from '#ui/components/forms/FormLabel.vue';
 import { useUI } from '#ui/composables/useUI';
 import type { InputProps, Strategy } from '#ui/types';
 import { useVModel } from '@vueuse/core';

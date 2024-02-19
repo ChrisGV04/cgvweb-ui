@@ -2,13 +2,13 @@
 // @ts-expect-error
 import appConfig from '#build/app.config';
 
-import { formInputLabel } from '#ui/ui.config';
+import { formLabel } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
 
-const config = mergeConfig<typeof formInputLabel>(
-  appConfig.ui?.formInputLabel?.strategy,
-  appConfig.ui?.formInputLabel,
-  formInputLabel,
+const config = mergeConfig<typeof formLabel>(
+  appConfig.ui?.formLabel?.strategy,
+  appConfig.ui?.formLabel,
+  formLabel,
 );
 type UiConfig = Partial<typeof config> & { strategy?: Strategy };
 </script>
@@ -24,7 +24,7 @@ const props = withDefaults(
   { as: 'label', class: undefined, ui: () => ({}) as UiConfig },
 );
 
-const { ui, attrs } = useUI('formInputLabel', toRef(props, 'ui'), config);
+const { ui, attrs } = useUI('formLabel', toRef(props, 'ui'), config);
 </script>
 
 <template>

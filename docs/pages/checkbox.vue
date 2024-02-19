@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { UiBadge, UiCheckbox, UiContainer, UiFormInputLabel } from '#components';
+import { UiBadge, UiCheckbox, UiContainer, UiFormLabel } from '#components';
 import { ref } from 'vue';
 
 const checked = ref(false);
@@ -18,7 +18,7 @@ const indeterminate = ref<boolean | 'indeterminate'>('indeterminate');
 
       <div class="mt-2 flex items-center gap-4">
         <UiCheckbox id="terms" />
-        <UiFormInputLabel for="terms">Accpet terms.</UiFormInputLabel>
+        <UiFormLabel for="terms">Accpet terms.</UiFormLabel>
       </div>
     </div>
 
@@ -27,7 +27,7 @@ const indeterminate = ref<boolean | 'indeterminate'>('indeterminate');
 
       <div class="mt-2 flex items-center gap-4">
         <UiCheckbox id="notifications" v-model:checked="checked" />
-        <UiFormInputLabel for="notifications">Enable notifications</UiFormInputLabel>
+        <UiFormLabel for="notifications">Enable notifications</UiFormLabel>
         <UiBadge :color="checked ? 'green' : 'slate'">{{ checked ? 'On' : 'Off' }}</UiBadge>
       </div>
     </div>
@@ -37,7 +37,7 @@ const indeterminate = ref<boolean | 'indeterminate'>('indeterminate');
 
       <div class="mt-2 flex items-center gap-4">
         <UiCheckbox id="selection" v-model:checked="indeterminate" />
-        <UiFormInputLabel for="selection">Selection</UiFormInputLabel>
+        <UiFormLabel for="selection">Selection</UiFormLabel>
       </div>
     </div>
   </UiContainer>

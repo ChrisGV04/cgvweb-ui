@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { UiBadge, UiContainer, UiFormInputLabel, UiSwitch } from '#components';
+import { UiBadge, UiContainer, UiFormLabel, UiSwitch } from '#components';
 import { ref } from 'vue';
 
 const checked = ref(false);
@@ -16,7 +16,7 @@ const checked = ref(false);
       <span class="demo-category-title">Uncontrolled</span>
 
       <div class="mt-2 flex items-center gap-4">
-        <UiFormInputLabel for="data-saver">Data saver</UiFormInputLabel>
+        <UiFormLabel for="data-saver">Data saver</UiFormLabel>
         <UiSwitch id="data-saver" />
       </div>
     </div>
@@ -26,7 +26,7 @@ const checked = ref(false);
 
       <div class="mt-2 flex items-center gap-4">
         <UiSwitch id="airplane-mode" v-model:checked="checked" />
-        <UiFormInputLabel for="airplane-mode">Airplane mode</UiFormInputLabel>
+        <UiFormLabel for="airplane-mode">Airplane mode</UiFormLabel>
         <UiBadge :color="checked ? 'green' : 'slate'">{{ checked ? 'On' : 'Off' }}</UiBadge>
       </div>
     </div>
