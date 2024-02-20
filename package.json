@@ -32,13 +32,11 @@
     "release": "release-it && npm run build && npm publish"
   },
   "peerDependencies": {
-    "@headlessui/vue": "^1.7.0",
     "@vueuse/core": "^10",
-    "radix-vue": "^1.4.6"
+    "radix-vue": "^1"
   },
   "dependencies": {
     "@egoist/tailwindcss-icons": "^1.7.4",
-    "@floating-ui/vue": "^1.0.6",
     "@iconify-json/heroicons": "^1.1.20",
     "@nuxt/kit": "^3.10.2",
     "@nuxtjs/tailwindcss": "^6.11.4",
@@ -52,7 +50,6 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@headlessui/vue": "^1.7.19",
     "@nuxt/eslint-config": "^0.2.0",
     "@nuxt/module-builder": "^0.5.5",
     "@nuxt/schema": "^3.10.2",

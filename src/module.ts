@@ -55,7 +55,6 @@ export default defineNuxtModule<ModuleOptions>({
     // Transpile runtime
     const runtimeDir = resolve('./runtime');
     nuxt.options.build.transpile.push(runtimeDir);
-    nuxt.options.build.transpile.push('@floating-ui/vue', '@headlessui/vue');
 
     nuxt.options.alias['#ui'] = runtimeDir;
 
