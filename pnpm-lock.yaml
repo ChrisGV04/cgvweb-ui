@@ -29,6 +29,9 @@ importers:
       just-omit:
         specifier: ^2.2.0
         version: 2.2.0
+      just-pick:
+        specifier: ^4.2.0
+        version: 4.2.0
       just-safe-get:
         specifier: ^4.2.0
         version: 4.2.0
@@ -5690,6 +5693,10 @@ packages:
 
   /just-omit@2.2.0:
     resolution: {integrity: sha512-Js7+HxDOGcB3RhI38Mird/RgyMf3t0DAJFda1QWqqlAKTa36NeSYIufJXxrZUbysFTRcTOFcoMCiFK5FwCoI7Q==}
+    dev: false
+
+  /just-pick@4.2.0:
+    resolution: {integrity: sha512-m6bi0P/gFq5GEQJGYfHFsdod6fogViNIhsKbPBYavqF9SKFfMKPz7kf6ROL2PblkOdaib9vN/wJ7VXhCJre5Hw==}
     dev: false
 
   /just-safe-get@4.2.0:

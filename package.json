@@ -43,6 +43,7 @@
     "@tailwindcss/forms": "^0.5.7",
     "defu": "^6.1.4",
     "just-omit": "^2.2.0",
+    "just-pick": "^4.2.0",
     "just-safe-get": "^4.2.0",
     "nuxt-icon": "^0.6.8",
     "tailwind-merge": "^2.2.1",
