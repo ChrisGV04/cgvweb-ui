@@ -6,6 +6,8 @@ import { NuxtPage, TheHeader } from '#components';
   <div>
     <TheHeader />
     <NuxtPage />
+
+    <Body class="selection:bg-primary-200/60 selection:text-primary-800 antialiased" />
   </div>
 </template>
 
