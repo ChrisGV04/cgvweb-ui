@@ -32,6 +32,7 @@ const formLinks: DropdownItem[] = [
   { label: 'Switch', to: '/switch' },
   { label: 'Checkbox', to: '/checkbox' },
   { label: 'Radio Group', to: '/radio' },
+  { label: 'Combobox', to: '/combobox' },
 ];
 </script>
 
