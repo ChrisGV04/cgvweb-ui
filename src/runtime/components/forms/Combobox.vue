@@ -27,20 +27,21 @@ import { computed, defineOptions, ref, toRef, watch, withDefaults } from 'vue';
 
 defineOptions({ inheritAttrs: false });
 const props = withDefaults(defineProps<ComboboxProps<UiConfig>>(), {
-  open: undefined,
-  modelValue: undefined,
-  searchTerm: undefined,
-  emptyMsg: 'No hay coincidencias',
+  suffixIcon: () => config.default.suffixIcon,
+  searchIcon: () => config.default.searchIcon,
   loadingIcon: () => config.default.loadingIcon,
-  triggerIcon: () => config.default.triggerIcon,
   indicatorIcon: () => config.default.indicatorIcon,
+
+  class: undefined,
+  ui: () => ({}) as UiConfig,
   offset: () => config.default.offset,
   side: () => config.default.side,
   align: () => config.default.align,
-  ui: () => ({}) as UiConfig,
-  options: () => [],
+
+  modelValue: undefined,
+  emptyMsg: 'No results',
 });
-const emits = defineEmits<ComboboxRootEmits & { 'click:prefix': []; 'click:suffix': [] }>();
+const emits = defineEmits<ComboboxRootEmits>();
 
 const { ui, attrs } = useUI('combobox', toRef(props, 'ui'), config);
 const numOffset = useToNumber(props.offset);
@@ -50,9 +51,7 @@ const dataAttrs = computed(() => ({
   'data-disabled-mode': props.readOnly ? 'read-only' : props.disabled ? 'disabled' : undefined,
 }));
 
-const rootProps = computed(() =>
-  pick(props, ['defaultOpen', 'defaultValue', 'disabled', 'modelValue', 'multiple', 'name']),
-);
+const rootProps = computed(() => pick(props, ['defaultValue', 'disabled', 'multiple', 'name', 'modelValue']));
 
 const forwarded = useForwardPropsEmits(rootProps, emits);
 
@@ -73,9 +72,6 @@ const itemClasses = computed(() =>
 ///////// CUSTOM LOGIC /////////
 ////////////////////////////////
 
-// TODO: Allow custom values
-// TODO: Create issue for the computed warning. Try to create minimal reproduction
-
 const _term = ref('');
 const _loading = ref(false);
 const _options = ref<ComboboxOptions>(props.options);
@@ -84,7 +80,7 @@ const _options = ref<ComboboxOptions>(props.options);
 const _runFilterFn = useDebounceFn(async (term: string) => {
   try {
     _loading.value = true;
-    const results = await props.filterFunction(term);
+    const results = await props.filterFn(term);
     _loading.value = false;
     _options.value = results;
   } catch (error) {
@@ -121,7 +117,7 @@ watch(_term, async (term) => {
     return;
   }
 
-  if (!props.filterFunction) {
+  if (!props.filterFn) {
     defaultFilterFn(term);
     return;
   }
@@ -129,7 +125,7 @@ watch(_term, async (term) => {
   await _runFilterFn(term);
 });
 
-function findOption(value: string): ComboboxItem | null {
+function findOption(value: any): ComboboxItem | null {
   if (Array.isArray(props.options)) return props.options.find((o) => o.value === value) || null;
 
   // Options is an object with the options groupped
@@ -141,28 +137,42 @@ function findOption(value: string): ComboboxItem | null {
   return null;
 }
 
-function displayValue(selection?: any) {
-  if (!selection) return '';
+const displayValue = computed(() => {
+  if (props.displayFn) return props.displayFn(props.modelValue);
 
-  const option = findOption(selection);
-  if (!option && !fullSelection.value) {
-    console.warn('(UiCombobox): Did not find label for:', selection);
-    return selection;
+  if (Array.isArray(props.modelValue)) {
+    if (!props.modelValue?.length) return props.placeholder || '';
+    return fullSelection.value.map((v) => v.label).join(', ') || props.placeholder || '';
   }
 
-  return option.label || option.value || fullSelection.value.label || fullSelection.value.value;
-}
+  if (!props.modelValue) return props.placeholder || '';
+  return fullSelection.value[0]?.label || props.modelValue;
+});
 
 /** Always store the full option data just in case it's no longer in the options */
-const fullSelection = ref<ComboboxItem | null>(null);
+const fullSelection = ref<ComboboxItem[]>([]);
 
 watch(
   () => props.modelValue,
   (newSelection) => {
+    if (!newSelection) fullSelection.value = [];
+
+    if (Array.isArray(newSelection)) {
+      const options: ComboboxItem[] = [];
+      for (let idx = 0; idx < newSelection.length; idx++) {
+        const s = newSelection[idx];
+        const option = findOption(s);
+        if (option) options.push(option);
+      }
+
+      fullSelection.value = options;
+      return;
+    }
+
     const option = findOption(newSelection);
-    fullSelection.value = option;
+    fullSelection.value = [option];
   },
-  { immediate: true },
+  { immediate: true, deep: true },
 );
 </script>
 
@@ -171,49 +181,33 @@ watch(
     v-model:search-term="_term"
     v-bind="forwarded"
     as="template"
-    :display-value="displayValue"
-    :filter-function="(d) => d"
+    :display-value="() => ''"
+    :filter-function="(v) => v"
   >
-    <div :class="twJoin(ui.anchor.wrapper, props.class, 'group')" v-bind="{ ...dataAttrs, ...attrs }">
+    <div v-bind="{ ...dataAttrs, ...attrs }" :class="twMerge(ui.anchor.wrapper, props.class, 'group')">
       <slot name="label">
         <UiFormLabel v-if="props.label" :for="props.name" :error="props.error" :mandatory="props.mandatory">{{
           props.label
         }}</UiFormLabel>
       </slot>
 
-      <Combobox.Anchor :class="twMerge(ui.anchor.base, ui.anchor.rounded, ui.anchor.ring, ui.anchor.border)">
-        <slot name="prefix">
-          <span
-            v-if="props.prefixText"
-            :class="twMerge(ui.anchor.font.addons, 'ml-3')"
-            @click="emits('click:prefix')"
-            >{{ props.prefixText }}</span
-          >
-          <UiIcon
-            v-else-if="props.prefixIcon"
-            :name="props.prefixIcon"
-            :class="twMerge(ui.anchor.icon, 'ml-3')"
-            @click="emits('click:prefix')"
-          />
-        </slot>
-
-        <Combobox.Input
-          :id="props.name"
-          :name="props.name"
-          :placeholder="props.placeholder"
-          :disabled="props.disabled || props.readOnly"
-          :class="twMerge(ui.anchor.input.base, ui.anchor.input.padding, ui.anchor.font.input)"
-        />
-
-        <span
-          v-if="props.suffixText"
-          :class="twMerge(ui.anchor.font.addons, 'mr-1')"
-          @click="emits('click:suffix')"
-          >{{ props.suffixText }}</span
+      <Combobox.Anchor as-child>
+        <Combobox.Trigger
+          tabindex="0"
+          :class="[ui.anchor.base, ui.anchor.rounded, ui.anchor.ring, ui.anchor.border]"
         >
+          <slot name="prefix">
+            <span v-if="props.prefixText" :class="[ui.anchor.font.addons, 'ml-3']">{{
+              props.prefixText
+            }}</span>
+            <UiIcon v-else-if="props.prefixIcon" :name="props.prefixIcon" :class="[ui.anchor.icon, 'ml-3']" />
+          </slot>
 
-        <Combobox.Trigger class="mr-3 flex">
-          <UiIcon :name="props.triggerIcon" :class="ui.anchor.icon" />
+          <span :class="[ui.anchor.value.base, ui.anchor.value.padding, ui.anchor.font.value]">
+            {{ displayValue }}
+          </span>
+
+          <UiIcon :name="props.suffixIcon" :class="[ui.anchor.icon, 'mr-3']" />
         </Combobox.Trigger>
       </Combobox.Anchor>
 
@@ -230,9 +224,23 @@ watch(
         :side="props.side"
         :align="props.align"
         :side-offset="numOffset"
-        :class="twMerge(ui.content.base, ui.content.border, ui.content.size, ui.content.transition)"
+        :class="[ui.content.base, ui.content.border, ui.content.size, ui.content.transition]"
       >
-        <Combobox.Viewport :class="ui.viewport">
+        <div :class="ui.input.container">
+          <UiIcon :name="props.searchIcon" :class="[ui.input.icon, 'ml-3']" />
+
+          <Combobox.Input
+            :id="props.name"
+            :name="props.name"
+            :placeholder="props.searchPlaceholder"
+            :class="[ui.input.base, ui.input.font]"
+          />
+        </div>
+
+        <Combobox.Viewport
+          :class="ui.viewport"
+          style="max-height: calc(var(--radix-combobox-content-available-height) - 3rem)"
+        >
           <Combobox.Empty as-child>
             <span v-show="!_loading" :class="ui.empty">{{ props.emptyMsg }}</span>
           </Combobox.Empty>

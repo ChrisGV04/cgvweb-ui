@@ -8,16 +8,22 @@ export default /*ui*/ {
     ring: 'focus-within:ring-2 focus-within:ring-primary-600 group-data-[error]:focus-within:ring-red-400',
     border: 'border border-gray-900/10 group-data-[error]:border-red-800',
     font: {
-      input:
-        'text-sm text-gray-900 placeholder:text-gray-400 group-data-[error]:text-red-800 group-data-[error]:placeholder:text-red-500',
-      addons: 'text-sm select-none text-gray-500 peer-focus:text-primary-600 group-data-[error]:text-red-600',
+      value: 'text-sm text-left truncate text-gray-900 group-data-[error]:text-red-800',
       message: 'text-xs text-gray-500 group-data-[error]:text-red-600',
+      addons: 'text-sm select-none text-gray-500 group-data-[error]:text-red-600',
     },
-    input: {
-      base: 'block w-full flex-1 border-0 bg-transparent focus:ring-0 group-data-[disabled-mode=disabled]:cursor-not-allowed',
+    value: {
+      base: 'block h-8 w-full flex-1',
       padding: 'px-2 py-1.5',
     },
-    icon: 'size-4 text-gray-600 peer-focus:text-primary-600 group-data-[error]:text-red-600 group-data-[error]:peer-focus:text-red-600',
+    icon: 'size-4 text-gray-600 group-data-[error]:text-red-600',
+  },
+
+  input: {
+    container: 'flex w-full items-center border-b border-gray-900/5',
+    icon: 'size-4 text-gray-600',
+    base: 'w-full px-2 py-1.5 flex-1 border-0 bg-transparent focus:ring-0 group-data-[disabled-mode=disabled]:cursor-not-allowed',
+    font: 'text-sm text-gray-900 placeholder:text-gray-400 group-data-[error]:text-red-800 group-data-[error]:placeholder:text-red-500',
   },
 
   content: {
@@ -29,7 +35,7 @@ export default /*ui*/ {
   },
 
   viewport: 'p-1',
-  empty: 'px-2 text-sm text-gray-600',
+  empty: 'block px-2 py-1.5 text-sm text-gray-600',
 
   group: {
     label: 'text-xs text-gray-500 px-2 py-1 font-semibold',
@@ -47,8 +53,8 @@ export default /*ui*/ {
   },
 
   loading: {
-    base: 'flex justify-center py-1',
-    icon: 'size-4 text-gray-500 animate-spin',
+    base: 'flex justify-center py-1.5',
+    icon: 'size-5 text-gray-500 animate-spin',
   },
 
   default: {
@@ -56,8 +62,9 @@ export default /*ui*/ {
     align: 'start' as ComboboxContentProps['align'],
     side: 'bottom' as ComboboxContentProps['side'],
 
-    triggerIcon: 'i-heroicons-chevron-down-20-solid',
+    suffixIcon: 'i-heroicons-chevron-down-20-solid',
     indicatorIcon: 'i-heroicons-check-20-solid',
     loadingIcon: 'i-heroicons-arrow-path-20-solid',
+    searchIcon: 'i-heroicons-magnifying-glass-20-solid',
   },
 };

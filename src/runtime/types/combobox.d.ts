@@ -1,4 +1,4 @@
-import type { ComboboxContentProps } from 'radix-vue';
+import type { ComboboxContentProps, ComboboxRootProps } from 'radix-vue';
 
 export interface ComboboxItem {
   value: any;
@@ -11,43 +11,36 @@ export type ComboboxOptions = Record<string, ComboboxItem[]> | ComboboxItem[];
 export interface ComboboxProps<UiConfig = any> {
   name: string;
   label?: string;
-  error?: boolean;
   message?: string;
+  emptyMsg?: string;
+  placeholder?: string;
+  searchPlaceholder?: string;
+
+  error?: boolean;
+  multiple?: boolean;
   readOnly?: boolean;
   disabled?: boolean;
   mandatory?: boolean;
-  placeholder?: string;
-  multiple?: boolean;
-  class?: any;
-  emptyMsg?: string;
 
   prefixIcon?: string;
   prefixText?: string;
-  suffixText?: string;
-  triggerIcon?: string;
-  indicatorIcon?: string;
-  loadingIcon?: string;
+  suffixIcon?: string;
 
-  defaultOpen?: boolean;
-  defaultValue?: any;
+  searchIcon?: string;
+  loadingIcon?: string;
+  indicatorIcon?: string;
+
+  class?: any;
+  ui?: UiConfig;
+
+  options?: ComboboxOptions;
+  modelValue?: ComboboxRootProps['modelValue'];
+  defaultValue?: ComboboxRootProps['defaultValue'];
+
+  displayFn?: (selection: ComboboxRootProps['modelValue']) => string;
+  filterFn?: (term: string) => ComboboxOptions | Promise<ComboboxOptions>;
 
   offset?: number | string;
   align?: ComboboxContentProps['align'];
   side?: ComboboxContentProps['side'];
-
-  ui?: UiConfig;
-
-  /** Controlled input value */
-  modelValue?: any;
-
-  /** Custom filter function  */
-  filterFunction?: (term: string) => ComboboxOptions | Promise<ComboboxOptions>;
-
-  /**
-   * The initial options that can be selected.
-   * If object, the options will be groupped by the key.
-   */
-  options?: ComboboxOptions;
-
-  // TODO: Implement the function to allow custom values
 }
