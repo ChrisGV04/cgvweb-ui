@@ -15,12 +15,14 @@ type UiConfig = Partial<typeof config> & { strategy?: Strategy };
 
 <script setup lang="ts">
 import UiIcon from '#ui/components/elements/Icon.vue';
-import UiFormLabel from '#ui/components/forms/FormLabel.vue';
+import UiFormField from '#ui/components/forms/FormField.vue';
 import { useUI } from '#ui/composables/useUI';
 import type { ComboboxItem, ComboboxOptions, ComboboxProps, Strategy } from '#ui/types';
+import { getUiFormFieldProps } from '#ui/utils/forms';
 import { useDebounceFn, useToNumber } from '@vueuse/core';
+import omit from 'just-omit';
 import pick from 'just-pick';
-import { useForwardPropsEmits, type ComboboxRootEmits } from 'radix-vue';
+import { useForwardProps, useForwardPropsEmits, type ComboboxRootEmits } from 'radix-vue';
 import { Combobox } from 'radix-vue/namespaced';
 import { twJoin, twMerge } from 'tailwind-merge';
 import { computed, defineOptions, ref, toRef, watch, withDefaults } from 'vue';
@@ -43,17 +45,13 @@ const props = withDefaults(defineProps<ComboboxProps<UiConfig>>(), {
 });
 const emits = defineEmits<ComboboxRootEmits>();
 
-const { ui, attrs } = useUI('combobox', toRef(props, 'ui'), config);
+const { ui } = useUI('combobox', toRef(props, 'ui'), config);
 const numOffset = useToNumber(props.offset);
 
-const dataAttrs = computed(() => ({
-  'data-error': props.error ? '' : undefined,
-  'data-disabled-mode': props.readOnly ? 'read-only' : props.disabled ? 'disabled' : undefined,
-}));
-
 const rootProps = computed(() => pick(props, ['defaultValue', 'disabled', 'multiple', 'name', 'modelValue']));
-
 const forwarded = useForwardPropsEmits(rootProps, emits);
+
+const fieldProps = useForwardProps(() => getUiFormFieldProps(omit(props, ['ui'])));
 
 const itemClasses = computed(() =>
   twMerge(
@@ -184,13 +182,7 @@ watch(
     :display-value="() => ''"
     :filter-function="(v) => v"
   >
-    <div v-bind="{ ...dataAttrs, ...attrs }" :class="twMerge(ui.anchor.wrapper, props.class, 'group')">
-      <slot name="label">
-        <UiFormLabel v-if="props.label" :for="props.name" :error="props.error" :mandatory="props.mandatory">{{
-          props.label
-        }}</UiFormLabel>
-      </slot>
-
+    <UiFormField v-bind="fieldProps" :name="props.name">
       <Combobox.Anchor as-child>
         <Combobox.Trigger
           tabindex="0"
@@ -210,13 +202,7 @@ watch(
           <UiIcon :name="props.suffixIcon" :class="[ui.anchor.icon, 'mr-3']" />
         </Combobox.Trigger>
       </Combobox.Anchor>
-
-      <slot name="message">
-        <p v-if="props.message" :id="`${props.name}-msg`" :class="ui.anchor.font.message">
-          {{ props.message }}
-        </p>
-      </slot>
-    </div>
+    </UiFormField>
 
     <Combobox.Portal>
       <Combobox.Content

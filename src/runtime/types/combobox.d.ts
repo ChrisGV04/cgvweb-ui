@@ -1,3 +1,4 @@
+import type { FormFieldProps } from '#ui/types';
 import type { ComboboxContentProps, ComboboxRootProps } from 'radix-vue';
 
 export interface ComboboxItem {
@@ -8,19 +9,12 @@ export interface ComboboxItem {
 
 export type ComboboxOptions = Record<string, ComboboxItem[]> | ComboboxItem[];
 
-export interface ComboboxProps<UiConfig = any> {
-  name: string;
-  label?: string;
-  message?: string;
+export interface ComboboxProps<UiConfig = any> extends Omit<FormFieldProps, 'ui'> {
   emptyMsg?: string;
   placeholder?: string;
   searchPlaceholder?: string;
 
-  error?: boolean;
   multiple?: boolean;
-  readOnly?: boolean;
-  disabled?: boolean;
-  mandatory?: boolean;
 
   prefixIcon?: string;
   prefixText?: string;
@@ -30,7 +24,6 @@ export interface ComboboxProps<UiConfig = any> {
   loadingIcon?: string;
   indicatorIcon?: string;
 
-  class?: any;
   ui?: UiConfig;
 
   options?: ComboboxOptions;

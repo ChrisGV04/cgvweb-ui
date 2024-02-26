@@ -1,24 +1,19 @@
+import type { FormFieldProps } from '#ui/types';
 import type { InputHTMLAttributes } from 'vue';
-import type { PrimitiveProps } from 'radix-vue';
 
-export interface InputProps<UiConfig = any> extends PrimitiveProps {
-  name: string;
-  label?: string;
-  error?: boolean;
-  message?: string;
-  readOnly?: boolean;
-  disabled?: boolean;
-  mandatory?: boolean;
+export interface InputProps<UiConfig = any> extends Omit<FormFieldProps, 'ui'> {
   prefixIcon?: string;
   prefixText?: string;
   suffixIcon?: string;
   suffixText?: string;
   placeholder?: string;
+  type?: InputHTMLAttributes['type'];
+
   /** Controlled input value */
   modelValue?: string | number;
+
   /** Uncontrolled default value */
   defaultValue?: string | number;
-  type?: InputHTMLAttributes['type'];
+
   ui?: UiConfig;
-  class?: any;
 }
