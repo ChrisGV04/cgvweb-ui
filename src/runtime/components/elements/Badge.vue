@@ -12,7 +12,6 @@ type UiConfig = Partial<typeof config> & { strategy?: Strategy };
 <script setup lang="ts">
 import { useUI } from '#ui/composables/useUI';
 import type { BadgeColor, BadgeSize, Strategy } from '#ui/types';
-import { twJoin, twMerge } from 'tailwind-merge';
 import type { PropType } from 'vue';
 import { defineOptions, toRef } from 'vue';
 
@@ -47,7 +46,7 @@ const { ui, attrs } = useUI('badge', toRef(props, 'ui'), config);
   <span
     v-bind="attrs"
     :data-interactive="interactive ? '' : undefined"
-    :class="twMerge(twJoin(ui.base, ui.font, ui.size[props.size], ui.color[props.color]), props.class)"
+    :class="['ui-badge__base', ui.base, ui.size[props.size], ui.color[props.color], props.class]"
   >
     <svg v-if="dot" viewBox="0 0 6 6" aria-hidden="true" fill="currentColor" class="size-1.5">
       <circle cx="3" cy="3" r="3" />
@@ -56,3 +55,13 @@ const { ui, attrs } = useUI('badge', toRef(props, 'ui'), config);
     <slot />
   </span>
 </template>
+
+<style>
+:where(.ui-badge__base) {
+  @apply inline-flex items-center rounded-md font-medium;
+}
+
+:where(.ui-badge__base[data-interactive]) {
+  @apply select-none hover:cursor-pointer;
+}
+</style>

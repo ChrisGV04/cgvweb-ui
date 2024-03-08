@@ -1,6 +1,5 @@
 export default /*ui*/ {
-  base: 'inline-flex items-center rounded-md data-[interactive]:hover:cursor-pointer data-[interactive]:select-none',
-  font: 'font-medium',
+  base: '',
   size: {
     xs: 'text-xs gap-x-1.5 px-1.5 py-0.5',
   },
