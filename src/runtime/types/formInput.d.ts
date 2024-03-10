@@ -1,5 +1,5 @@
-import type { FormFieldProps } from '#ui/types';
 import type { InputHTMLAttributes } from 'vue';
+import type { FormFieldProps } from '../types';
 
 export interface InputProps<UiConfig = any> extends Omit<FormFieldProps, 'ui'> {
   prefixIcon?: string;

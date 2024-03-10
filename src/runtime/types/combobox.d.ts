@@ -1,5 +1,5 @@
-import type { FormFieldProps } from '#ui/types';
 import type { ComboboxContentProps, ComboboxRootProps } from 'radix-vue';
+import type { FormFieldProps } from '../types';
 
 export interface ComboboxItem {
   value: any;
