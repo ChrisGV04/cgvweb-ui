@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import UiBadge from '#ui/components/elements/Badge.vue';
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core';
 import { computed, ref } from 'vue';
-import UiBadge from '../elements/Badge.vue';
 
 const bp = useBreakpoints(breakpointsTailwind);
 const size = computed(() => bp.current().value.at(-1)?.toUpperCase() || 'XS');
