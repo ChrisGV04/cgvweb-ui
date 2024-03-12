@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.3.1](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.3.0...v0.3.1) (2024-03-12)
+
+
+### Features
+
+* Create initial Combobox implementation ([a1d472c](https://github.com/ChrisGV04/cgvweb-ui/commit/a1d472caa3ba9ef8e83d42e65c19c7d8ddfc8f2a))
+* Improve Combobox functionality ([ca83552](https://github.com/ChrisGV04/cgvweb-ui/commit/ca835527533c08849ef47f128b232c1bf12ccdfb))
+* New Checkbox component ([d40b33e](https://github.com/ChrisGV04/cgvweb-ui/commit/d40b33e73a2ece252a3f3ae5a2119edfec6b4ea5))
+* New FormField component ([ae1ccd1](https://github.com/ChrisGV04/cgvweb-ui/commit/ae1ccd1ff127663075447cd4dda359ef58e18b2b))
+* New FormInput and FormInputLabel components ([0e7ba1f](https://github.com/ChrisGV04/cgvweb-ui/commit/0e7ba1ffb962a74788e5085cd60b6dba6c99d721))
+* New RadioGroup components ([3bc176b](https://github.com/ChrisGV04/cgvweb-ui/commit/3bc176bea24384f9932c116cc6620a1ab3fbde71))
+* New Switch component ([ec6d725](https://github.com/ChrisGV04/cgvweb-ui/commit/ec6d725db3d4b1a49d01585246638c987df007e5))
+* Rename FormInputLabel to FormLabel ([1837078](https://github.com/ChrisGV04/cgvweb-ui/commit/18370789931109906eeb053398ff4c4a2a15a854))
+* Set merge strategy per component on app.config ([645006f](https://github.com/ChrisGV04/cgvweb-ui/commit/645006ffa1edd6244a02878c0b8a713433ed09ff))
+
+
+### Bug Fixes
+
+* Form input and label configs not exported ([2b91eff](https://github.com/ChrisGV04/cgvweb-ui/commit/2b91eff6171a6bfb81e6b1740d1d259b04a32ffd))
+* Remove extra props from the SwitchRoot ([43318e0](https://github.com/ChrisGV04/cgvweb-ui/commit/43318e07566b793505b281db4219694ec7511960))
+
 ## [0.3.0](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.2.1...v0.3.0) (2024-02-17)
 
 
