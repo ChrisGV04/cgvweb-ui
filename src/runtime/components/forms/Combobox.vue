@@ -1,23 +1,13 @@
-<script lang="ts">
+<script setup lang="ts">
 // @ts-expect-error
 import appConfig from '#build/app.config';
 
-import { combobox } from '#ui/ui.config';
-import { mergeConfig } from '#ui/utils';
-
-const config = mergeConfig<typeof combobox>(
-  appConfig.ui?.combobox?.strategy,
-  appConfig.ui?.combobox,
-  combobox,
-);
-type UiConfig = Partial<typeof config> & { strategy?: Strategy };
-</script>
-
-<script setup lang="ts">
 import UiIcon from '#ui/components/elements/Icon.vue';
 import UiFormField from '#ui/components/forms/FormField.vue';
 import { useUI } from '#ui/composables/useUI';
 import type { ComboboxItem, ComboboxOptions, ComboboxProps, Strategy } from '#ui/types';
+import { combobox } from '#ui/ui.config';
+import { mergeConfig } from '#ui/utils';
 import { getUiFormFieldProps } from '#ui/utils/forms';
 import { useDebounceFn, useToNumber } from '@vueuse/core';
 import omit from 'just-omit';
@@ -27,26 +17,32 @@ import { Combobox } from 'radix-vue/namespaced';
 import { twJoin, twMerge } from 'tailwind-merge';
 import { computed, defineOptions, ref, toRef, watch, withDefaults } from 'vue';
 
+const config = mergeConfig<typeof combobox>(
+  appConfig.ui?.combobox?.strategy,
+  appConfig.ui?.combobox,
+  combobox,
+);
+type UiConfig = Partial<typeof config> & { strategy?: Strategy };
+
 defineOptions({ inheritAttrs: false });
 const props = withDefaults(defineProps<ComboboxProps<UiConfig>>(), {
-  suffixIcon: () => config.default.suffixIcon,
-  searchIcon: () => config.default.searchIcon,
-  loadingIcon: () => config.default.loadingIcon,
-  indicatorIcon: () => config.default.indicatorIcon,
-
   class: undefined,
   ui: () => ({}) as UiConfig,
-  offset: () => config.default.offset,
-  side: () => config.default.side,
-  align: () => config.default.align,
-
   modelValue: undefined,
   emptyMsg: 'No results',
 });
 const emits = defineEmits<ComboboxRootEmits>();
 
 const { ui } = useUI('combobox', toRef(props, 'ui'), config);
-const numOffset = useToNumber(props.offset);
+
+// With config defaults
+const numOffset = useToNumber(() => props.offset ?? ui.value.default.offset);
+const suffixIcon = computed(() => props.suffixIcon ?? ui.value.default.suffixIcon);
+const searchIcon = computed(() => props.searchIcon ?? ui.value.default.searchIcon);
+const loadingIcon = computed(() => props.loadingIcon ?? ui.value.default.loadingIcon);
+const indicatorIcon = computed(() => props.indicatorIcon ?? ui.value.default.indicatorIcon);
+const side = computed(() => props.side ?? ui.value.default.side);
+const align = computed(() => props.align ?? ui.value.default.align);
 
 const rootProps = computed(() => pick(props, ['defaultValue', 'disabled', 'multiple', 'name', 'modelValue']));
 const forwarded = useForwardPropsEmits(rootProps, emits);
@@ -199,7 +195,7 @@ watch(
             {{ displayValue }}
           </span>
 
-          <UiIcon :name="props.suffixIcon" :class="[ui.anchor.icon, 'mr-3']" />
+          <UiIcon :name="suffixIcon" :class="[ui.anchor.icon, 'mr-3']" />
         </Combobox.Trigger>
       </Combobox.Anchor>
     </UiFormField>
@@ -207,13 +203,13 @@ watch(
     <Combobox.Portal>
       <Combobox.Content
         position="popper"
-        :side="props.side"
-        :align="props.align"
+        :side="side"
+        :align="align"
         :side-offset="numOffset"
         :class="[ui.content.base, ui.content.border, ui.content.size, ui.content.transition]"
       >
         <div :class="ui.input.container">
-          <UiIcon :name="props.searchIcon" :class="[ui.input.icon, 'ml-3']" />
+          <UiIcon :name="searchIcon" :class="[ui.input.icon, 'ml-3']" />
 
           <Combobox.Input
             :id="props.name"
@@ -232,7 +228,7 @@ watch(
           </Combobox.Empty>
 
           <div v-if="_loading" :class="ui.loading.base">
-            <UiIcon :name="props.loadingIcon" :class="ui.loading.icon" />
+            <UiIcon :name="loadingIcon" :class="ui.loading.icon" />
           </div>
 
           <template v-else-if="Array.isArray(_options)">
@@ -244,7 +240,7 @@ watch(
               :class="itemClasses"
             >
               <Combobox.ItemIndicator as-child>
-                <UiIcon :name="props.indicatorIcon" :class="ui.item.indicator" />
+                <UiIcon :name="indicatorIcon" :class="ui.item.indicator" />
               </Combobox.ItemIndicator>
 
               <span :class="ui.item.label">{{ option.label }}</span>
@@ -263,7 +259,7 @@ watch(
                 :class="itemClasses"
               >
                 <Combobox.ItemIndicator as-child>
-                  <UiIcon :name="props.indicatorIcon" :class="ui.item.indicator" />
+                  <UiIcon :name="indicatorIcon" :class="ui.item.indicator" />
                 </Combobox.ItemIndicator>
 
                 <span :class="ui.item.label">{{ option.label }}</span>

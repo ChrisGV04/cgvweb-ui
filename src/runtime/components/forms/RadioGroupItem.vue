@@ -1,9 +1,15 @@
-<script lang="ts">
+<script setup lang="ts">
 // @ts-expect-error
 import appConfig from '#build/app.config';
 
+import { useUI } from '#ui/composables/useUI';
+import type { Strategy } from '#ui/types';
 import { formRadioGroupItem } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
+import omit from 'just-omit';
+import { RadioGroupIndicator, RadioGroupItem, useForwardProps, type RadioGroupItemProps } from 'radix-vue';
+import { twJoin, twMerge } from 'tailwind-merge';
+import { computed, toRef, withDefaults } from 'vue';
 
 const config = mergeConfig<typeof formRadioGroupItem>(
   appConfig.ui?.formRadioGroupItem?.strategy,
@@ -11,20 +17,9 @@ const config = mergeConfig<typeof formRadioGroupItem>(
   formRadioGroupItem,
 );
 type UiConfig = Partial<typeof config> & { strategy?: Strategy };
-</script>
+type Props = RadioGroupItemProps & { class?: any; ui?: UiConfig };
 
-<script setup lang="ts">
-import { useUI } from '#ui/composables/useUI';
-import type { Strategy } from '#ui/types';
-import omit from 'just-omit';
-import { RadioGroupIndicator, RadioGroupItem, type RadioGroupItemProps, useForwardProps } from 'radix-vue';
-import { twJoin, twMerge } from 'tailwind-merge';
-import { computed, toRef, withDefaults } from 'vue';
-
-const props = withDefaults(defineProps<RadioGroupItemProps & { class?: any; ui?: UiConfig }>(), {
-  class: undefined,
-  ui: () => ({}) as UiConfig,
-});
+const props = withDefaults(defineProps<Props>(), { class: undefined, ui: () => ({}) as UiConfig });
 
 const { ui } = useUI('formRadioGroupItem', toRef(props, 'ui'), config);
 

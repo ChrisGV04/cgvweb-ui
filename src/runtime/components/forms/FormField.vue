@@ -1,9 +1,15 @@
-<script lang="ts">
+<script setup lang="ts">
 // @ts-expect-error
 import appConfig from '#build/app.config';
 
+import UiInputLabel from '#ui/components/forms/FormLabel.vue';
+import { useUI } from '#ui/composables/useUI';
+import type { FormFieldProps, Strategy } from '#ui/types';
 import { formField } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
+import { Primitive } from 'radix-vue';
+import { twMerge } from 'tailwind-merge';
+import { computed, toRef, withDefaults } from 'vue';
 
 const config = mergeConfig<typeof formField>(
   appConfig.ui?.formField?.strategy,
@@ -11,15 +17,6 @@ const config = mergeConfig<typeof formField>(
   formField,
 );
 type UiConfig = Partial<typeof config> & { strategy?: Strategy };
-</script>
-
-<script setup lang="ts">
-import UiInputLabel from '#ui/components/forms/FormLabel.vue';
-import { useUI } from '#ui/composables/useUI';
-import type { FormFieldProps, Strategy } from '#ui/types';
-import { Primitive } from 'radix-vue';
-import { twMerge } from 'tailwind-merge';
-import { computed, toRef, withDefaults } from 'vue';
 
 const props = withDefaults(defineProps<FormFieldProps<UiConfig>>(), {
   as: 'div',

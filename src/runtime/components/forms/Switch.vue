@@ -1,21 +1,11 @@
-<script lang="ts">
+<script setup lang="ts">
 // @ts-expect-error
 import appConfig from '#build/app.config';
 
-import { formSwitch } from '#ui/ui.config';
-import { mergeConfig } from '#ui/utils';
-
-const config = mergeConfig<typeof formSwitch>(
-  appConfig.ui?.formSwitch?.strategy,
-  appConfig.ui?.formSwitch,
-  formSwitch,
-);
-type UiConfig = Partial<typeof config> & { strategy?: Strategy };
-</script>
-
-<script setup lang="ts">
 import { useUI } from '#ui/composables/useUI';
 import type { Strategy } from '#ui/types';
+import { formSwitch } from '#ui/ui.config';
+import { mergeConfig } from '#ui/utils';
 import omit from 'just-omit';
 import {
   SwitchRoot,
@@ -26,6 +16,13 @@ import {
 } from 'radix-vue';
 import { twJoin, twMerge } from 'tailwind-merge';
 import { computed, toRef, withDefaults } from 'vue';
+
+const config = mergeConfig<typeof formSwitch>(
+  appConfig.ui?.formSwitch?.strategy,
+  appConfig.ui?.formSwitch,
+  formSwitch,
+);
+type UiConfig = Partial<typeof config> & { strategy?: Strategy };
 
 const props = withDefaults(defineProps<SwitchRootProps & { class?: any; ui?: UiConfig }>(), {
   class: undefined,

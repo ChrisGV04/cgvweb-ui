@@ -1,17 +1,11 @@
-<script lang="ts">
+<script setup lang="ts">
 // @ts-expect-error
 import appConfig from '#build/app.config';
 
-import { tooltip } from '#ui/ui.config';
-import { mergeConfig } from '#ui/utils';
-
-const config = mergeConfig<typeof tooltip>(appConfig.ui?.tooltip?.strategy, appConfig.ui?.tooltip, tooltip);
-type UiConfig = Partial<typeof config> & { strategy?: Strategy };
-</script>
-
-<script setup lang="ts">
 import { useUI } from '#ui/composables/useUI';
 import type { Strategy } from '#ui/types';
+import { tooltip } from '#ui/ui.config';
+import { mergeConfig } from '#ui/utils';
 import { useToNumber } from '@vueuse/core';
 import type { TooltipContentProps } from 'radix-vue';
 import { Tooltip } from 'radix-vue/namespaced';
@@ -19,32 +13,29 @@ import { twMerge } from 'tailwind-merge';
 import type { PropType } from 'vue';
 import { computed, defineOptions, toRef } from 'vue';
 
+const config = mergeConfig<typeof tooltip>(appConfig.ui?.tooltip?.strategy, appConfig.ui?.tooltip, tooltip);
+type UiConfig = Partial<typeof config> & { strategy?: Strategy };
+
 defineOptions({ inheritAttrs: false });
 
 const props = defineProps({
   content: { type: String, default: null },
   disabled: { type: Boolean, default: false },
+  delay: { type: [Number, String], default: undefined },
+  offset: { type: [Number, String], default: undefined },
   collisionBoundary: {
     type: [Object, Array] as PropType<Element | (Element | null)[] | null>,
     default: undefined,
   },
-  delay: {
-    type: [Number, String],
-    default: () => config.default.delay,
-  },
-  offset: {
-    type: [Number, String],
-    default: () => config.default.offset,
-  },
   align: {
     type: String as PropType<TooltipContentProps['align']>,
-    default: () => config.default.align,
-    validate: (value) => ['start', 'center', 'end'].includes(value),
+    default: undefined,
+    validate: (value) => ['start', 'center', 'end', undefined].includes(value),
   },
   side: {
     type: String as PropType<TooltipContentProps['side']>,
-    default: () => config.default.side,
-    validate: (value) => ['top', 'right', 'bottom', 'left'].includes(value),
+    default: undefined,
+    validate: (value) => ['top', 'right', 'bottom', 'left', undefined].includes(value),
   },
   ui: {
     type: Object as PropType<UiConfig>,
@@ -53,8 +44,12 @@ const props = defineProps({
 });
 
 const { ui } = useUI('tooltip', toRef(props, 'ui'), config);
-const numOffset = useToNumber(props.offset);
-const numDelay = useToNumber(props.delay);
+
+// With config defaults
+const numOffset = useToNumber(() => props.offset ?? ui.value.default.offset);
+const numDelay = useToNumber(() => props.delay ?? ui.value.default.delay);
+const align = computed(() => props.align ?? ui.value.default.align);
+const side = computed(() => props.side ?? ui.value.default.side);
 
 const tooltipClasses = computed(() =>
   twMerge(
