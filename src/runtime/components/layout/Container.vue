@@ -11,8 +11,8 @@ import { twJoin, twMerge } from 'tailwind-merge';
 import { toRef, withDefaults } from 'vue';
 
 const config = mergeConfig<typeof container>(
-  appConfig.ui.container.strategy,
-  appConfig.ui.container,
+  appConfig.ui?.container?.strategy,
+  appConfig.ui?.container,
   container,
 );
 type UiConfig = Partial<typeof config> & { strategy?: Strategy };
