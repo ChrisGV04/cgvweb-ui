@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { useElementBounding, useElementVisibility, useToNumber } from '@vueuse/core';
-import { computed, ref } from 'vue';
+import { Primitive, type PrimitiveProps } from 'radix-vue';
+import { computed, ref, withDefaults } from 'vue';
 
-const props = defineProps({
-  speed: { type: [String, Number], default: 20 },
-  reverse: { type: Boolean, default: false },
-  pause: { type: Boolean, default: false },
-});
+type Props = PrimitiveProps & { speed?: string | number; reverse?: boolean; pause?: boolean };
+const props = withDefaults(defineProps<Props>(), { as: 'div', speed: 20 });
 
 const wrapperRef = ref<HTMLElement | null>(null);
 const marqueeRef = ref<HTMLElement | null>(null);
@@ -35,11 +33,13 @@ const isVisible = useElementVisibility(wrapperRef);
 </script>
 
 <template>
-  <div
+  <Primitive
     ref="wrapperRef"
-    class="marquee__wrapper flex select-none overflow-hidden"
+    :as="props.as"
+    :as-child="props.asChild"
     :data-direction="reverse ? 'reverse' : 'forward'"
     :data-paused="!isVisible || pause ? '' : undefined"
+    class="marquee__wrapper flex select-none overflow-hidden"
   >
     <div ref="marqueeRef" class="marquee__content">
       <slot />
@@ -47,7 +47,7 @@ const isVisible = useElementVisibility(wrapperRef);
     <div v-for="i in repeat" :key="i" aria-hidden="true" class="marquee__content">
       <slot />
     </div>
-  </div>
+  </Primitive>
 </template>
 
 <style scoped>
