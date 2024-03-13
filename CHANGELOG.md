@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.4](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.3.3...v0.3.4) (2024-03-13)
+
+
+### Bug Fixes
+
+* **Badge:** Wrong default color ([9f998b1](https://github.com/ChrisGV04/cgvweb-ui/commit/9f998b1e560d7612b0a8b363b3e8c4881aba1ee7))
+* **Container:** Undefined strategy to merge config ([dc9a0d8](https://github.com/ChrisGV04/cgvweb-ui/commit/dc9a0d889e3f4da5bff0db06103cde28780e6ab9))
+
 ## [0.3.3](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.3.2...v0.3.3) (2024-03-13)
 
 
