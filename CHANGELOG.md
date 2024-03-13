@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.3](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.3.2...v0.3.3) (2024-03-13)
+
+
+### Bug Fixes
+
+* Script lang issue with SFC compiler ([#4](https://github.com/ChrisGV04/cgvweb-ui/issues/4)) ([993371b](https://github.com/ChrisGV04/cgvweb-ui/commit/993371bf0a5024ca2ec4aa5da5408ee5a458cf7b))
+
 ## [0.3.2](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.3.1...v0.3.2) (2024-03-12)
 
 ## [0.3.1](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.3.0...v0.3.1) (2024-03-12)
