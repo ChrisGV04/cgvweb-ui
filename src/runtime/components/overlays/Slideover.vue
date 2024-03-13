@@ -1,9 +1,17 @@
-<script lang="ts">
+<script setup lang="ts">
 // @ts-expect-error
 import appConfig from '#build/app.config';
 
+import { useUI } from '#ui/composables/useUI';
+import type { Strategy } from '#ui/types';
 import { slideover } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
+import { useVModel } from '@vueuse/core';
+import type { PopoverContentProps } from 'radix-vue';
+import { Dialog } from 'radix-vue/namespaced';
+import { twJoin, twMerge } from 'tailwind-merge';
+import type { PropType } from 'vue';
+import { computed, defineOptions, toRef } from 'vue';
 
 const config = mergeConfig<typeof slideover>(
   appConfig.ui?.slideover?.strategy,
@@ -11,17 +19,6 @@ const config = mergeConfig<typeof slideover>(
   slideover,
 );
 type UiConfig = Partial<typeof config> & { strategy?: Strategy };
-</script>
-
-<script setup lang="ts">
-import { useUI } from '#ui/composables/useUI';
-import type { Strategy } from '#ui/types';
-import { useVModel } from '@vueuse/core';
-import type { PopoverContentProps } from 'radix-vue';
-import { Dialog } from 'radix-vue/namespaced';
-import { twJoin, twMerge } from 'tailwind-merge';
-import type { PropType } from 'vue';
-import { computed, defineOptions, toRef } from 'vue';
 
 defineOptions({ inheritAttrs: false });
 
@@ -38,7 +35,7 @@ const props = defineProps({
     default: () => ({}) as UiConfig,
   },
 });
-const emits = defineEmits({ 'update:open': (value: boolean) => true });
+const emits = defineEmits<{ (e: 'update:open', value: boolean): void }>();
 
 const $open = useVModel(props, 'open', emits, {
   defaultValue: props.defaultOpen,

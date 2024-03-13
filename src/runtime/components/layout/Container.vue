@@ -1,9 +1,13 @@
-<script lang="ts">
+<script setup lang="ts">
 // @ts-expect-error
 import appConfig from '#build/app.config';
-
+import { useUI } from '#ui/composables/useUI';
+import type { Strategy } from '#ui/types';
 import { container } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
+import { twJoin, twMerge } from 'tailwind-merge';
+import type { PropType } from 'vue';
+import { defineOptions, toRef } from 'vue';
 
 const config = mergeConfig<typeof container>(
   appConfig.ui.container.strategy,
@@ -11,14 +15,6 @@ const config = mergeConfig<typeof container>(
   container,
 );
 type UiConfig = Partial<typeof config> & { strategy?: Strategy };
-</script>
-
-<script setup lang="ts">
-import { useUI } from '#ui/composables/useUI';
-import type { Strategy } from '#ui/types';
-import { twJoin, twMerge } from 'tailwind-merge';
-import type { PropType } from 'vue';
-import { defineOptions, toRef } from 'vue';
 
 defineOptions({ inheritAttrs: false });
 

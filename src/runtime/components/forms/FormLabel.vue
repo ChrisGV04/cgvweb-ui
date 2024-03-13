@@ -1,9 +1,13 @@
-<script lang="ts">
+<script setup lang="ts">
 // @ts-expect-error
 import appConfig from '#build/app.config';
 
+import { useUI } from '#ui/composables/useUI';
+import type { Strategy } from '#ui/types';
 import { formLabel } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
+import { Label, type LabelProps } from 'radix-vue';
+import { toRef, withDefaults } from 'vue';
 
 const config = mergeConfig<typeof formLabel>(
   appConfig.ui?.formLabel?.strategy,
@@ -11,13 +15,6 @@ const config = mergeConfig<typeof formLabel>(
   formLabel,
 );
 type UiConfig = Partial<typeof config> & { strategy?: Strategy };
-</script>
-
-<script setup lang="ts">
-import { useUI } from '#ui/composables/useUI';
-import type { Strategy } from '#ui/types';
-import { Label, type LabelProps } from 'radix-vue';
-import { toRef, withDefaults } from 'vue';
 
 const props = withDefaults(
   defineProps<LabelProps & { mandatory?: boolean; error?: boolean; class?: any; ui?: UiConfig }>(),

@@ -1,22 +1,19 @@
-<script lang="ts">
+<script setup lang="ts">
 // @ts-expect-error
 import appConfig from '#build/app.config';
 
-import { button } from '#ui/ui.config';
-import { mergeConfig } from '#ui/utils';
-
-const config = mergeConfig<typeof button>(appConfig.ui?.button?.strategy, appConfig.ui?.button, button);
-type UiConfig = Partial<typeof config> & { strategy?: Strategy };
-</script>
-
-<script setup lang="ts">
 import UiLink from '#ui/components/elements/Link.vue';
 import { useUI } from '#ui/composables/useUI';
-import type { ButtonProps, ButtonSize, ButtonVariant, Strategy } from '#ui/types';
+import type { ButtonProps, Strategy } from '#ui/types';
+import { button } from '#ui/ui.config';
+import { mergeConfig } from '#ui/utils';
 import { getUiLinkProps } from '#ui/utils/links';
 import { Primitive, useForwardProps } from 'radix-vue';
 import { twJoin, twMerge } from 'tailwind-merge';
 import { computed, defineOptions, toRef, withDefaults } from 'vue';
+
+const config = mergeConfig<typeof button>(appConfig.ui?.button?.strategy, appConfig.ui?.button, button);
+type UiConfig = Partial<typeof config> & { strategy?: Strategy };
 
 defineOptions({ inheritAttrs: false });
 
@@ -24,18 +21,16 @@ const props = withDefaults(defineProps<ButtonProps<UiConfig>>(), {
   as: 'button',
   type: 'button',
   padded: true,
-  class: undefined,
-  label: undefined,
-  leftIcon: undefined,
-  rightIcon: undefined,
   to: () => undefined as ButtonProps['to'],
-  size: () => config.default.size as ButtonSize,
-  variant: () => config.default.variant as ButtonVariant,
-  loadingIcon: () => config.default.loadingIcon,
   ui: () => ({}) as UiConfig,
 });
 
 const { ui, attrs } = useUI('button', toRef(props, 'ui'), config);
+
+// With config defaults
+const size = computed(() => props.size ?? ui.value.default.size);
+const variant = computed(() => props.variant ?? ui.value.default.variant);
+const loadingIcon = computed(() => props.loadingIcon ?? ui.value.default.loadingIcon);
 
 const baseClasses = computed(() =>
   twMerge(
@@ -44,23 +39,23 @@ const baseClasses = computed(() =>
       ui.value.font,
       ui.value.rounded,
       ui.value.transition,
-      ui.value.size[props.size],
-      ui.value.gap[props.size],
-      props.padded && ui.value.padding[props.size],
-      ui.value.variant[props.variant],
+      ui.value.size[size.value],
+      ui.value.gap[size.value],
+      props.padded && ui.value.padding[size.value],
+      ui.value.variant[variant.value],
       props.block ? 'w-full flex justify-center items-center' : 'inline-flex items-center',
     ),
     props.class,
   ),
 );
 
-const leftIconClasses = computed(() => twJoin(ui.value.icon.base, ui.value.icon.size[props.size]));
+const leftIconClasses = computed(() => twJoin(ui.value.icon.base, ui.value.icon.size[size.value]));
 const rightIconClasses = computed(() =>
-  twJoin(ui.value.icon.base, ui.value.icon.size[props.size], props.loading && 'animate-spin'),
+  twJoin(ui.value.icon.base, ui.value.icon.size[size.value], props.loading && 'animate-spin'),
 );
 
 const rightIconName = computed(() => {
-  if (props.loading) return props.loadingIcon;
+  if (props.loading) return loadingIcon.value;
   return props.rightIcon;
 });
 

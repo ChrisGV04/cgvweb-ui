@@ -23,6 +23,7 @@ const scrollableRef = ref<HTMLElement | null>(null);
 
       <div class="mt-1 flex gap-5">
         <UiTooltip
+          side="top"
           align="end"
           content="Hello! I'm a tooltip with alignment set to 'end' which makes me align to the right"
         >

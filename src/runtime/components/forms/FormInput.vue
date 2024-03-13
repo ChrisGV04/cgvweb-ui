@@ -1,9 +1,19 @@
-<script lang="ts">
+<script setup lang="ts">
 // @ts-expect-error
 import appConfig from '#build/app.config';
 
+import UiIcon from '#ui/components/elements/Icon.vue';
+import UiFormField from '#ui/components/forms/FormField.vue';
+import { useUI } from '#ui/composables/useUI';
+import type { InputProps, Strategy } from '#ui/types';
 import { formInput } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
+import { getUiFormFieldProps } from '#ui/utils/forms';
+import { useVModel } from '@vueuse/core';
+import omit from 'just-omit';
+import { useForwardProps } from 'radix-vue';
+import { twMerge } from 'tailwind-merge';
+import { defineOptions, toRef, withDefaults } from 'vue';
 
 const config = mergeConfig<typeof formInput>(
   appConfig.ui?.formInput?.strategy,
@@ -11,19 +21,6 @@ const config = mergeConfig<typeof formInput>(
   formInput,
 );
 type UiConfig = Partial<typeof config> & { strategy?: Strategy };
-</script>
-
-<script setup lang="ts">
-import UiIcon from '#ui/components/elements/Icon.vue';
-import UiFormField from '#ui/components/forms/FormField.vue';
-import { useUI } from '#ui/composables/useUI';
-import type { InputProps, Strategy } from '#ui/types';
-import { getUiFormFieldProps } from '#ui/utils/forms';
-import { useVModel } from '@vueuse/core';
-import omit from 'just-omit';
-import { useForwardProps } from 'radix-vue';
-import { twMerge } from 'tailwind-merge';
-import { defineOptions, toRef, withDefaults } from 'vue';
 
 defineOptions({ inheritAttrs: false });
 const props = withDefaults(defineProps<InputProps<UiConfig>>(), {
@@ -36,11 +33,11 @@ const props = withDefaults(defineProps<InputProps<UiConfig>>(), {
   defaultValue: undefined,
   ui: () => ({}) as UiConfig,
 });
-const emits = defineEmits({
-  'update:modelValue': (payload: string | number) => true,
-  'click:prefix': () => true,
-  'click:suffix': () => true,
-});
+const emits = defineEmits<{
+  (e: 'update:modelValue', payload: string | number): void;
+  (e: 'click:prefix'): void;
+  (e: 'click:suffix'): void;
+}>();
 
 const $value = useVModel(props, 'modelValue', emits, { passive: true, defaultValue: props.defaultValue });
 
