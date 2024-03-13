@@ -34,7 +34,7 @@ const { ui, attrs } = useUI('badge', toRef(props, 'ui'), config);
 
 // With config defaults
 const size = computed(() => props.size ?? ui.value.default.size);
-const color = computed(() => props.color ?? ui.value.default.size);
+const color = computed(() => props.color ?? ui.value.default.color);
 </script>
 
 <template>
@@ -47,6 +47,8 @@ const color = computed(() => props.color ?? ui.value.default.size);
       <circle cx="3" cy="3" r="3" />
     </svg>
 
-    <slot />
+    <slot>
+      {{ label }}
+    </slot>
   </span>
 </template>
