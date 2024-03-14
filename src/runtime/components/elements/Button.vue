@@ -65,6 +65,7 @@ const linkProps = useForwardProps(() => getUiLinkProps(props));
 <template>
   <Primitive
     v-bind="{ ...attrs, ...linkProps }"
+    :type="props.type"
     :as-child="asChild"
     :as="props.to ? UiLink : as"
     :class="baseClasses"
