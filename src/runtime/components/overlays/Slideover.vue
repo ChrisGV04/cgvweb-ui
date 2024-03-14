@@ -6,11 +6,12 @@ import { useUI } from '#ui/composables/useUI';
 import type { Strategy } from '#ui/types';
 import { slideover } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
-import { useVModel } from '@vueuse/core';
+import { uiToTransitionProps } from '#ui/utils/transitions';
+import { usePreferredReducedMotion, useVModel } from '@vueuse/core';
 import type { PopoverContentProps } from 'radix-vue';
 import { Dialog } from 'radix-vue/namespaced';
-import { twJoin, twMerge } from 'tailwind-merge';
-import type { PropType } from 'vue';
+import { twMerge } from 'tailwind-merge';
+import type { PropType, TransitionProps } from 'vue';
 import { computed, defineOptions, toRef } from 'vue';
 
 const config = mergeConfig<typeof slideover>(
@@ -35,7 +36,13 @@ const props = defineProps({
     default: () => ({}) as UiConfig,
   },
 });
-const emits = defineEmits<{ (e: 'update:open', value: boolean): void }>();
+const emits = defineEmits<{
+  (e: 'update:open', value: boolean): void;
+  (e: 'before-enter'): void;
+  (e: 'after-enter'): void;
+  (e: 'before-leave'): void;
+  (e: 'after-leave'): void;
+}>();
 
 const $open = useVModel(props, 'open', emits, {
   defaultValue: props.defaultOpen,
@@ -44,47 +51,74 @@ const $open = useVModel(props, 'open', emits, {
 
 const { ui } = useUI('slideover', toRef(props, 'ui'), config);
 
-const containerClasses = computed(() => {
+// Disable transitions when prefered reduced motion
+const reduceMotion = usePreferredReducedMotion();
+const overlayTransition = computed(() =>
+  reduceMotion.value === 'no-preference' ? uiToTransitionProps(ui.value.overlay.transition) : {},
+);
+
+const containerValues = computed<{ classes: string; transition: TransitionProps }>(() => {
   let position = '';
+  let outPos = '';
 
   switch (props.side) {
     case 'top':
-      position = 'inset-x-0 top-0 data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top';
+      position = 'inset-x-0 top-0';
+      outPos = '-translate-y-full';
       break;
     case 'bottom':
-      position =
-        'inset-x-0 bottom-0 data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom';
+      position = 'inset-x-0 bottom-0';
+      outPos = 'translate-y-full';
       break;
     case 'left':
-      position =
-        'inset-y-0 left-0 h-full w-3/4 data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:max-w-sm';
+      position = 'inset-y-0 left-0 h-full w-3/4 sm:max-w-sm';
+      outPos = '-translate-x-full';
       break;
     case 'right':
-      position =
-        'inset-y-0 right-0 h-full w-3/4 data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-md';
+      position = 'inset-y-0 right-0 h-full w-3/4 sm:max-w-sm';
+      outPos = 'translate-x-full';
       break;
     default:
       break;
   }
 
-  return twMerge(twJoin(ui.value.container, ui.value.transition), position, ui.value.size);
+  return {
+    classes: twMerge(ui.value.container, position, ui.value.size),
+    transition:
+      reduceMotion.value === 'reduce'
+        ? {}
+        : {
+            enterActiveClass: ui.value.transition.enterActive,
+            leaveActiveClass: ui.value.transition.leaveActive,
+            enterFromClass: outPos,
+            leaveToClass: outPos,
+          },
+  };
 });
 </script>
 
 <template>
   <Dialog.Root v-model:open="$open">
-    <Dialog.Trigger as-child>
-      <slot name="trigger" :open="$open">
-        <UiButton label="Open" />
-      </slot>
+    <Dialog.Trigger v-if="$slots.trigger" as-child>
+      <slot name="trigger" :open="$open" />
     </Dialog.Trigger>
 
     <Dialog.Portal>
-      <Dialog.Overlay :class="ui.overlay" />
+      <Transition v-bind="overlayTransition">
+        <Dialog.Overlay :class="ui.overlay.base" />
+      </Transition>
 
-      <Dialog.Content :data-side="props.side" :class="containerClasses">
-        <slot name="content" />
-      </Dialog.Content>
+      <Transition
+        v-bind="containerValues.transition"
+        @before-enter="emits('before-enter')"
+        @after-enter="emits('after-enter')"
+        @before-leave="emits('before-leave')"
+        @after-leave="emits('after-leave')"
+      >
+        <Dialog.Content :data-side="props.side" :class="containerValues.classes">
+          <slot name="content" />
+        </Dialog.Content>
+      </Transition>
     </Dialog.Portal>
   </Dialog.Root>
 </template>
