@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.5](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.3.4...v0.3.5) (2024-03-14)
+
+
+### Features
+
+* **Overlays:** Improve the Dialog and Slideover triggers and transitions ([#6](https://github.com/ChrisGV04/cgvweb-ui/issues/6)) ([f8edf2b](https://github.com/ChrisGV04/cgvweb-ui/commit/f8edf2b3c8df5a5c64d8540240035800fb7be2b6))
+
+
+### Bug Fixes
+
+* **Button:** Type attribute not being applied ([#5](https://github.com/ChrisGV04/cgvweb-ui/issues/5)) ([1056a9f](https://github.com/ChrisGV04/cgvweb-ui/commit/1056a9f8516cf3d1cba267edcc0043072dbcf172))
+
 ## [0.3.4](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.3.3...v0.3.4) (2024-03-13)
 
 
