@@ -6,11 +6,11 @@ import { useUI } from '#ui/composables/useUI';
 import type { Strategy } from '#ui/types';
 import { dialog } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
-import { useVModel } from '@vueuse/core';
+import { uiToTransitionProps } from '#ui/utils/transitions';
+import { usePreferredReducedMotion, useVModel } from '@vueuse/core';
 import { Dialog } from 'radix-vue/namespaced';
-import { twMerge } from 'tailwind-merge';
 import type { PropType } from 'vue';
-import { defineOptions, toRef } from 'vue';
+import { computed, defineOptions, toRef } from 'vue';
 
 const config = mergeConfig<typeof dialog>(appConfig.ui?.dialog?.strategy, appConfig.ui?.dialog, dialog);
 type UiConfig = Partial<typeof config> & { strategy?: Strategy };
@@ -25,7 +25,13 @@ const props = defineProps({
     default: () => ({}) as UiConfig,
   },
 });
-const emits = defineEmits<{ (e: 'update:open', value: boolean): void }>();
+const emits = defineEmits<{
+  (e: 'update:open', value: boolean): void;
+  (e: 'before-enter'): void;
+  (e: 'after-enter'): void;
+  (e: 'before-leave'): void;
+  (e: 'after-leave'): void;
+}>();
 
 const $open = useVModel(props, 'open', emits, {
   defaultValue: props.defaultOpen,
@@ -33,22 +39,39 @@ const $open = useVModel(props, 'open', emits, {
 });
 
 const { ui } = useUI('dialog', toRef(props, 'ui'), config);
+
+// Disable transitions when prefered reduced motion
+const reduceMotion = usePreferredReducedMotion();
+const contentTransition = computed(() =>
+  reduceMotion.value === 'no-preference' ? uiToTransitionProps(ui.value.transition) : {},
+);
+const overlayTransition = computed(() =>
+  reduceMotion.value === 'no-preference' ? uiToTransitionProps(ui.value.overlay.transition) : {},
+);
 </script>
 
 <template>
   <Dialog.Root v-model:open="$open">
-    <Dialog.Trigger as-child>
-      <slot name="trigger" :open="$open">
-        <UiButton label="Open" />
-      </slot>
+    <Dialog.Trigger v-if="$slots.trigger" as-child>
+      <slot name="trigger" :open="$open" />
     </Dialog.Trigger>
 
     <Dialog.Portal>
-      <Dialog.Overlay :class="ui.overlay" />
+      <Transition v-bind="overlayTransition">
+        <Dialog.Overlay :class="ui.overlay.base" />
+      </Transition>
 
-      <Dialog.Content :class="twMerge(ui.container, ui.size, ui.transition)">
-        <slot name="content" />
-      </Dialog.Content>
+      <Transition
+        v-bind="contentTransition"
+        @before-enter="emits('before-enter')"
+        @after-enter="emits('after-enter')"
+        @before-leave="emits('before-leave')"
+        @after-leave="emits('after-leave')"
+      >
+        <Dialog.Content :class="[ui.container, ui.size]">
+          <slot name="content" />
+        </Dialog.Content>
+      </Transition>
     </Dialog.Portal>
   </Dialog.Root>
 </template>

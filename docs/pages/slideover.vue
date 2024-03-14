@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { UiButton, UiContainer, UiSlideover } from '#components';
-import { DialogClose, DialogTitle } from 'radix-vue';
+import { DialogClose, DialogDescription, DialogTitle } from 'radix-vue';
 </script>
 
 <template>
@@ -19,11 +19,11 @@ import { DialogClose, DialogTitle } from 'radix-vue';
         <div class="px-6 py-8">
           <DialogTitle class="text-xl font-medium text-gray-900">This is a slideover</DialogTitle>
 
-          <p class="mt-3 text-gray-600">
+          <DialogDescription class="mt-3 text-gray-600">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Earum fugit impedit, natus, ea libero
             vitae soluta expedita ratione mollitia fuga similique, dicta aliquam? Distinctio nulla, vel
             quibusdam eligendi nostrum perferendis!
-          </p>
+          </DialogDescription>
 
           <DialogClose as-child>
             <UiButton label="Close dialog" class="mt-4" />

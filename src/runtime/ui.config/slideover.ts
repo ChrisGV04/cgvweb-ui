@@ -1,8 +1,19 @@
 export default /*ui*/ {
   container: 'fixed z-50 bg-white shadow-xl',
   size: '',
-  overlay:
-    'fixed inset-0 z-40 bg-black/70 backdrop-blur-sm backdrop-filter duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
-  transition:
-    'transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500',
+  overlay: {
+    base: 'fixed inset-0 z-40 bg-black/70 backdrop-blur-sm backdrop-filter',
+    transition: {
+      enterActive: 'ease-out duration-200',
+      enterFrom: 'opacity-0',
+      enterTo: 'opacity-100',
+      leaveActive: 'ease-in duration-200',
+      leaveFrom: 'opacity-100',
+      leaveTo: 'opacity-0',
+    },
+  },
+  transition: {
+    enterActive: 'transition-transform ease-in-out duration-500',
+    leaveActive: 'transition-transform ease-in-out duration-300',
+  },
 };
