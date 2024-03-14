@@ -37,15 +37,14 @@ const { ui } = useUI('dialog', toRef(props, 'ui'), config);
 
 <template>
   <Dialog.Root v-model:open="$open">
-    <Dialog.Trigger as-child>
-      <slot name="trigger" :open="$open">
-        <UiButton label="Open" />
-      </slot>
+    <Dialog.Trigger v-if="$slots.trigger" as-child>
+      <slot name="trigger" :open="$open" />
     </Dialog.Trigger>
 
     <Dialog.Portal>
       <Dialog.Overlay :class="ui.overlay" />
 
+      <!-- TODO: Use Transition for animation hooks (after-leave, before-enter, etc) -->
       <Dialog.Content :class="twMerge(ui.container, ui.size, ui.transition)">
         <slot name="content" />
       </Dialog.Content>
