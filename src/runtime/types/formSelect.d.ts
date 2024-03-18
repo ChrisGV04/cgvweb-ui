@@ -1,4 +1,4 @@
-import type { FormFieldProps } from '#ui/types';
+import type { FormFieldProps } from './formField';
 import type { SelectContentProps, SelectRootProps } from 'radix-vue';
 
 export interface FormSelectItem {
