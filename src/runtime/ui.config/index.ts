@@ -18,4 +18,5 @@ export { default as formField } from './formField';
 export { default as formInput } from './formInput';
 export { default as formLabel } from './formLabel';
 export { default as formRadioGroupItem } from './formRadioGroupItem';
+export { default as formSelect } from './formSelect';
 export { default as formSwitch } from './formSwitch';
