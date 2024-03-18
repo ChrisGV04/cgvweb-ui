@@ -4,5 +4,6 @@ export * from './combobox';
 export * from './dropdown';
 export * from './formField';
 export * from './formInput';
+export * from './formSelect';
 export * from './link';
 export * from './utils';

@@ -29,6 +29,7 @@ const overlayLinks: DropdownItem[] = [
 
 const formLinks: DropdownItem[] = [
   { label: 'Input', to: '/input' },
+  { label: 'Select', to: '/select' },
   { label: 'Switch', to: '/switch' },
   { label: 'Checkbox', to: '/checkbox' },
   { label: 'Radio Group', to: '/radio' },
