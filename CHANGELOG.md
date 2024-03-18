@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.6](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.3.5...v0.3.6) (2024-03-18)
+
+
+### Features
+
+* **FormSelect:** New component ([#7](https://github.com/ChrisGV04/cgvweb-ui/issues/7)) ([ba7fbde](https://github.com/ChrisGV04/cgvweb-ui/commit/ba7fbde1f0b2067f415243082ad3fe90ffec9a52))
+
 ## [0.3.5](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.3.4...v0.3.5) (2024-03-14)
 
 
