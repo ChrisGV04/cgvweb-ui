@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.7](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.3.6...v0.3.7) (2024-03-19)
+
+
+### Bug Fixes
+
+* Form select type file import ([e848917](https://github.com/ChrisGV04/cgvweb-ui/commit/e8489171e1b915ced8ac7dfb6129da30e449005a))
+* **FormSelect:** Content size wrap and overflow ([769a400](https://github.com/ChrisGV04/cgvweb-ui/commit/769a400eed43219e5a2fe5c1e97073b1586f3b55))
+
 ## [0.3.6](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.3.5...v0.3.6) (2024-03-18)
 
 
