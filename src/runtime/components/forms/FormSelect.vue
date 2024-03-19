@@ -118,7 +118,10 @@ const itemClasses = computed(() =>
 
         <Select.Viewport
           :class="ui.viewport"
-          style="max-height: calc(var(--radix-select-content-available-height) - 3rem)"
+          style="
+            max-height: calc(var(--radix-select-content-available-height) - 3rem);
+            max-width: calc(var(--radix-select-content-available-width) - 2rem);
+          "
         >
           <template v-if="Array.isArray(options)">
             <Select.Item

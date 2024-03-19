@@ -6,32 +6,36 @@ import { ref } from 'vue';
 const country = ref<string>();
 
 const optionsList: FormSelectOptions = [
-  { label: 'México', value: 'mx' },
-  { label: 'United States', value: 'us' },
-  { label: 'Canada', value: 'ca' },
-  { label: 'Brazil', value: 'br' },
-  { label: 'Argentina', value: 'ar', disabled: true },
-  { label: 'Germany', value: 'de' },
-  { label: 'Spain', value: 'es' },
-  { label: 'Switzerland', value: 'sw' },
-  { label: 'France', value: 'fr' },
-  { label: 'England', value: 'en' },
+  { label: '🇦🇷 Argentina', value: 'ar' },
+  { label: '🇧🇷 Brazil', value: 'br' },
+  { label: '🇨🇦 Canada', value: 'ca' },
+  { label: '🏴󠁧󠁢󠁥󠁮󠁧󠁿 England', value: 'en' },
+  { label: '🇫🇷 France', value: 'fr' },
+  { label: '🇩🇪 Germany', value: 'de' },
+  { label: '🇲🇽 México', value: 'mx' },
+  { label: '🇪🇸 Spain', value: 'es', disabled: true },
+  { label: '🇨🇭 Switzerland', value: 'sw' },
+  { label: '🇺🇸 United States', value: 'us' },
 ];
 
-const groupList: FormSelectOptions = {
-  America: [
-    { label: 'México', value: 'mx' },
-    { label: 'United States', value: 'us' },
-    { label: 'Canada', value: 'ca' },
-    { label: 'Brazil', value: 'br' },
-    { label: 'Argentina', value: 'ar' },
+const framework = ref<string>();
+const frameworkOptions: FormSelectOptions = {
+  'Front-End': [
+    { label: 'Nuxt.js', value: 'nuxt' },
+    { label: 'Next.js', value: 'next' },
+    { label: 'SvelteKit', value: 'sveltkit' },
+    { label: 'Solid.js', value: 'solid' },
+    { label: 'Quik', value: 'quick' },
+    { label: 'HTML, CSS & Vanilla JavaScript', value: 'classic' },
   ],
-  Europe: [
-    { label: 'Germany', value: 'de' },
-    { label: 'Spain', value: 'es' },
-    { label: 'Switzerland', value: 'sw' },
-    { label: 'France', value: 'fr' },
-    { label: 'England', value: 'en' },
+  'Back-End': [
+    { label: 'Express.js', value: 'express' },
+    { label: 'Fastify', value: 'fastify' },
+    { label: 'Nest.js', value: 'nest' },
+    { label: 'Django', value: 'django' },
+    { label: 'Ruby on Rails', value: 'ruby' },
+    { label: 'Golang', value: 'golang' },
+    { label: 'HTMX', value: 'htmx' },
   ],
 };
 </script>
@@ -60,17 +64,17 @@ const groupList: FormSelectOptions = {
 
     <div class="demo-category-container mt-6">
       <span class="demo-category-title"
-        >Groupped <code class="demo-code-line">"{{ country }}"</code></span
+        >Groupped <code class="demo-code-line">"{{ framework }}"</code></span
       >
 
       <UiFormSelect
-        v-model="country"
+        v-model="framework"
         class="mt-2"
         name="country-2"
-        label="Country"
-        placeholder="Select your favorite country"
-        prefix-icon="i-heroicons-globe-alt-20-solid"
-        :options="groupList"
+        label="Framework"
+        placeholder="Select your favorite framework"
+        prefix-icon="i-heroicons-wrench-screwdriver-20-solid"
+        :options="frameworkOptions"
       />
     </div>
   </UiContainer>
