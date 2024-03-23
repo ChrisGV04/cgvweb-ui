@@ -57,8 +57,8 @@ async function handleConfirm() {
   loading.value = true;
 
   try {
-    await props.confirmBtn.action();
-    $open.value = false;
+    const shouldClose = await props.confirmBtn.action();
+    if (shouldClose !== false) $open.value = false;
   } catch (error) {
     console.error('Unhandled error on alert dialog:', error);
   }

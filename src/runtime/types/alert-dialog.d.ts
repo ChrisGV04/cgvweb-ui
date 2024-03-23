@@ -20,7 +20,7 @@ export interface AlertDialogProps<T> {
   confirmBtn?: {
     label?: string;
     variant?: ButtonVariant;
-    action?: (() => void) | (() => Promise<void>);
+    action?: (() => boolean | void) | (() => Promise<boolean | void>);
   };
   cancelBtn?: {
     label?: string;
