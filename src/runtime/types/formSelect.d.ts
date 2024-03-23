@@ -10,6 +10,8 @@ export interface FormSelectItem {
 export type FormSelectOptions = Record<string, FormSelectItem[]> | FormSelectItem[];
 
 export interface FormSelectProps<UiConfig = any> extends SelectRootProps, Omit<FormFieldProps, 'ui'> {
+  defaultValue?: any;
+  modelValue?: any;
   placeholder?: string;
 
   prefixIcon?: string;

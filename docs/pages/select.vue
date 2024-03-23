@@ -3,9 +3,10 @@ import { UiContainer, UiFormSelect } from '#components';
 import type { FormSelectOptions } from '#ui/types';
 import { ref } from 'vue';
 
-const country = ref<string>();
+const country = ref<string | null>();
 
 const optionsList: FormSelectOptions = [
+  { label: 'None', value: null },
   { label: '🇦🇷 Argentina', value: 'ar' },
   { label: '🇧🇷 Brazil', value: 'br' },
   { label: '🇨🇦 Canada', value: 'ca' },
