@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.10](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.3.9...v0.3.10) (2024-03-23)
+
+
+### Features
+
+* **FormSelect:** Allow any kind of model value ([11eb35a](https://github.com/ChrisGV04/cgvweb-ui/commit/11eb35a3761ab4c5364b60f87c5e3fca6d84a649))
+
 ## [0.3.9](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.3.8...v0.3.9) (2024-03-23)
 
 
