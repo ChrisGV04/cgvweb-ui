@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.9](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.3.8...v0.3.9) (2024-03-23)
+
+
+### Features
+
+* **AlertDialog:** Allow submit action to choose if closes the dialog ([75e452a](https://github.com/ChrisGV04/cgvweb-ui/commit/75e452a7813606ea4e0bf068892b3ccbf1c1f37e))
+
 ## [0.3.8](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.3.7...v0.3.8) (2024-03-23)
 
 
