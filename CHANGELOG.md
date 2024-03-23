@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.8](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.3.7...v0.3.8) (2024-03-23)
+
+
+### Features
+
+* **AlertDialog:** New component ([#8](https://github.com/ChrisGV04/cgvweb-ui/issues/8)) ([2d0db2a](https://github.com/ChrisGV04/cgvweb-ui/commit/2d0db2a936f2e36f17475d75829abc293f8dd2f8))
+
 ## [0.3.7](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.3.6...v0.3.7) (2024-03-19)
 
 
