@@ -21,6 +21,7 @@ const dataLinks: DropdownItem[] = [
 const layoutLinks: DropdownItem[] = [{ label: 'Marquee', to: '/marquee' }];
 
 const overlayLinks: DropdownItem[] = [
+  { label: 'Alert Dialog', to: '/alert-dialog' },
   { label: 'Dialog', to: '/dialog' },
   { label: 'Slideover', to: '/slideover' },
   { label: 'Tooltip', to: '/tooltip' },

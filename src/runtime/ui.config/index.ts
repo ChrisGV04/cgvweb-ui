@@ -7,6 +7,7 @@ export { default as dropdown } from './dropdown';
 export { default as container } from './container';
 
 // Overlays
+export { default as alertDialog } from './alert-dialog';
 export { default as dialog } from './dialog';
 export { default as slideover } from './slideover';
 export { default as tooltip } from './tooltip';

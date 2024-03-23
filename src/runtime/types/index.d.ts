@@ -1,3 +1,4 @@
+export * from './alert-dialog';
 export * from './badge';
 export * from './button';
 export * from './combobox';
@@ -6,4 +7,5 @@ export * from './formField';
 export * from './formInput';
 export * from './formSelect';
 export * from './link';
+export * from './overlays';
 export * from './utils';
