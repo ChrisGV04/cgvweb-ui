@@ -80,10 +80,7 @@ const itemClasses = computed(() =>
     <UiFormField v-bind="fieldProps" :name="props.name">
       <Select.Trigger as-child>
         <slot name="trigger">
-          <button
-            v-bind="attrs"
-            :class="[ui.trigger.base, ui.trigger.rounded, ui.trigger.ring, ui.trigger.border]"
-          >
+          <button v-bind="attrs" :class="[ui.trigger.base, ui.trigger.rounded, ui.trigger.ring]">
             <slot name="prefix">
               <span v-if="props.prefixText" :class="[ui.trigger.font.addons, 'ml-3']">{{
                 props.prefixText

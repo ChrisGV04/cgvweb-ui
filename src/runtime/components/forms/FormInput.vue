@@ -48,7 +48,7 @@ const fieldProps = useForwardProps(() => getUiFormFieldProps(omit(props, ['ui'])
 
 <template>
   <UiFormField v-bind="fieldProps" :name="props.name">
-    <div :class="twMerge(ui.base, ui.rounded, ui.ring, ui.border)">
+    <div :class="twMerge(ui.base, ui.rounded, ui.ring)">
       <slot name="prefix">
         <span v-if="props.prefixText" :class="twMerge(ui.addons, 'ml-3')" @click="emits('click:prefix')">{{
           props.prefixText

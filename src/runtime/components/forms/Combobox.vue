@@ -180,10 +180,7 @@ watch(
   >
     <UiFormField v-bind="fieldProps" :name="props.name">
       <Combobox.Anchor as-child>
-        <Combobox.Trigger
-          tabindex="0"
-          :class="[ui.anchor.base, ui.anchor.rounded, ui.anchor.ring, ui.anchor.border]"
-        >
+        <Combobox.Trigger tabindex="0" :class="[ui.anchor.base, ui.anchor.rounded, ui.anchor.ring]">
           <slot name="prefix">
             <span v-if="props.prefixText" :class="[ui.anchor.font.addons, 'ml-3']">{{
               props.prefixText

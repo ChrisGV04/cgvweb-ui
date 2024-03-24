@@ -4,8 +4,7 @@ export default /*ui*/ {
   anchor: {
     base: 'flex w-full items-center bg-white group-data-[error]:bg-red-50',
     rounded: 'rounded-lg',
-    ring: 'focus-within:ring-2 focus-within:ring-primary-600 group-data-[error]:focus-within:ring-red-400',
-    border: 'border border-gray-900/10 group-data-[error]:border-red-800',
+    ring: 'ring-1 ring-gray-900/[8%] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 group-data-[error]:ring-red-800',
     icon: 'size-4 text-gray-600 group-data-[error]:text-red-600',
     font: {
       value: 'text-sm text-left truncate text-gray-900 group-data-[error]:text-red-800',
