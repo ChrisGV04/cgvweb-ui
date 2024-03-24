@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.4.0...v0.4.1) (2024-03-24)
+
+
+### Bug Fixes
+
+* **AlertDialog:** Avoid using block on buttons ([576e89a](https://github.com/ChrisGV04/cgvweb-ui/commit/576e89a3e004099bf334a7663de90f7eeb2b3ac1))
+
 ## [0.4.0](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.3.10...v0.4.0) (2024-03-24)
 
 
