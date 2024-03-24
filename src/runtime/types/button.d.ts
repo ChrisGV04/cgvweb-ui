@@ -18,7 +18,6 @@ export interface ButtonProps<T = any> extends LinkProps, PrimitiveProps {
   loading?: boolean;
   disabled?: boolean;
   truncate?: boolean;
-  block?: boolean;
   padded?: boolean;
   type?: HTMLButtonElement['type'];
   size?: ButtonSize;

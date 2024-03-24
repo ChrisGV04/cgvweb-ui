@@ -43,7 +43,6 @@ const baseClasses = computed(() =>
       ui.value.gap[size.value],
       props.padded && ui.value.padding[size.value],
       ui.value.variant[variant.value],
-      props.block ? 'w-full flex justify-center items-center' : 'inline-flex items-center',
     ),
     props.class,
   ),
