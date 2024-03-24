@@ -78,23 +78,31 @@ const itemClasses = computed(() =>
 <template>
   <Select.Root v-bind="forwarded">
     <UiFormField v-bind="fieldProps" :name="props.name">
-      <Select.Trigger
-        v-bind="attrs"
-        :class="[ui.trigger.base, ui.trigger.rounded, ui.trigger.ring, ui.trigger.border]"
-      >
-        <slot name="prefix">
-          <span v-if="props.prefixText" :class="[ui.trigger.font.addons, 'ml-3']">{{
-            props.prefixText
-          }}</span>
-          <UiIcon v-else-if="props.prefixIcon" :name="props.prefixIcon" :class="[ui.trigger.icon, 'ml-3']" />
+      <Select.Trigger as-child>
+        <slot name="trigger">
+          <button
+            v-bind="attrs"
+            :class="[ui.trigger.base, ui.trigger.rounded, ui.trigger.ring, ui.trigger.border]"
+          >
+            <slot name="prefix">
+              <span v-if="props.prefixText" :class="[ui.trigger.font.addons, 'ml-3']">{{
+                props.prefixText
+              }}</span>
+              <UiIcon
+                v-else-if="props.prefixIcon"
+                :name="props.prefixIcon"
+                :class="[ui.trigger.icon, 'ml-3']"
+              />
+            </slot>
+
+            <Select.Value
+              :placeholder="props.placeholder"
+              :class="[ui.trigger.value.base, ui.trigger.value.padding, ui.trigger.font.value]"
+            />
+
+            <UiIcon :name="suffixIcon" :class="[ui.trigger.icon, 'mr-3']" />
+          </button>
         </slot>
-
-        <Select.Value
-          :placeholder="props.placeholder"
-          :class="[ui.trigger.value.base, ui.trigger.value.padding, ui.trigger.font.value]"
-        />
-
-        <UiIcon :name="suffixIcon" :class="[ui.trigger.icon, 'mr-3']" />
       </Select.Trigger>
     </UiFormField>
 

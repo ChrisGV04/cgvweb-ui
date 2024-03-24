@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { UiContainer, UiFormSelect } from '#components';
+import { UiContainer, UiFormSelect, UiButton } from '#components';
+import { SelectValue } from 'radix-vue';
 import type { FormSelectOptions } from '#ui/types';
 import { ref } from 'vue';
 
@@ -77,6 +78,25 @@ const frameworkOptions: FormSelectOptions = {
         prefix-icon="i-heroicons-wrench-screwdriver-20-solid"
         :options="frameworkOptions"
       />
+    </div>
+
+    <div class="demo-category-container mt-6">
+      <span class="demo-category-title">Custom trigger</span>
+
+      <UiFormSelect
+        v-model="framework"
+        class="mt-2"
+        name="country-2"
+        label="Framework"
+        prefix-icon="i-heroicons-wrench-screwdriver-20-solid"
+        :options="frameworkOptions"
+      >
+        <template #trigger>
+          <UiButton block>
+            <SelectValue placeholder="Select your favorite framework" />
+          </UiButton>
+        </template>
+      </UiFormSelect>
     </div>
   </UiContainer>
 </template>
