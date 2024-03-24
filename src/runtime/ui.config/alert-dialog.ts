@@ -6,8 +6,8 @@ export default /*ui*/ {
   title: 'text-center text-lg font-medium text-gray-900 sm:text-left sm:text-xl',
   description: 'mt-1 text-center text-gray-600 sm:text-left',
   actions: {
-    container: 'mt-4 flex flex-col gap-2 sm:flex-row',
-    btnSize: 'sm:w-max',
+    container: 'mt-4 flex flex-col gap-2 sm:flex-row sm:justify-start',
+    buttons: '',
   },
   variant: {
     danger: {

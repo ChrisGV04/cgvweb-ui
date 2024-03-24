@@ -102,9 +102,8 @@ async function handleConfirm() {
             <div :class="ui.actions.container">
               <UiButton
                 v-if="props.confirmBtn"
-                block
                 :loading="loading"
-                :class="ui.actions.btnSize"
+                :class="ui.actions.buttons"
                 :label="props.confirmBtn.label"
                 :variant="props.confirmBtn.variant"
                 @click="handleConfirm"
@@ -112,9 +111,8 @@ async function handleConfirm() {
 
               <AlertDialog.Cancel v-if="props.cancelBtn" as-child>
                 <UiButton
-                  block
                   :disabled="loading"
-                  :class="ui.actions.btnSize"
+                  :class="ui.actions.buttons"
                   :label="props.cancelBtn.label"
                   :variant="props.cancelBtn.variant"
                   @click="$open = false"
