@@ -92,7 +92,7 @@ const frameworkOptions: FormSelectOptions = {
         :options="frameworkOptions"
       >
         <template #trigger>
-          <UiButton block>
+          <UiButton>
             <SelectValue placeholder="Select your favorite framework" />
           </UiButton>
         </template>
