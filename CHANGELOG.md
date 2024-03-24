@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.0](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.3.10...v0.4.0) (2024-03-24)
+
+
+### Features
+
+* **Button:** Remove block prop to make more flexible ([936b401](https://github.com/ChrisGV04/cgvweb-ui/commit/936b4011914f33dbef8dd6f968dbb494f4930f82))
+* **FormSelect:** Allow custom trigger ([5abda13](https://github.com/ChrisGV04/cgvweb-ui/commit/5abda133a20ffae6a36d054a3826ccb21a6d3b47))
+
 ## [0.3.10](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.3.9...v0.3.10) (2024-03-23)
 
 
