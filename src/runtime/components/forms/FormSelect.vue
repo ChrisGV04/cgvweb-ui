@@ -106,6 +106,7 @@ const itemClasses = computed(() =>
     <Select.Portal>
       <Select.Content
         position="popper"
+        style="max-width: calc(var(--radix-select-content-available-width) - 2rem)"
         :side="side"
         :align="align"
         :side-offset="numOffset"
@@ -123,10 +124,7 @@ const itemClasses = computed(() =>
 
         <Select.Viewport
           :class="ui.viewport"
-          style="
-            max-height: calc(var(--radix-select-content-available-height) - 3rem);
-            max-width: calc(var(--radix-select-content-available-width) - 2rem);
-          "
+          style="max-height: calc(var(--radix-select-content-available-height) - 3rem)"
         >
           <template v-if="Array.isArray(options)">
             <Select.Item
