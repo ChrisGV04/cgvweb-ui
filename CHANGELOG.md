@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.4.2](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.4.1...v0.4.2) (2024-04-01)
+
+
+### Features
+
+* **Forms:** Replace borders with shadows ([4b12d21](https://github.com/ChrisGV04/cgvweb-ui/commit/4b12d21d6fb43d3cbfc755bd202e914b406c5ea3))
+
+
+### Bug Fixes
+
+* **FormSelect:** Max width on content element ([64261b1](https://github.com/ChrisGV04/cgvweb-ui/commit/64261b1ccf5984fe28f48861d3fa06832cd65bbc))
+
 ## [0.4.1](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.4.0...v0.4.1) (2024-03-24)
 
 
