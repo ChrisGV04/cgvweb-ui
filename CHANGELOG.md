@@ -1,5 +1,7 @@
 # Changelog
 
+## [0.4.3](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.4.2...v0.4.3) (2024-04-04)
+
 ## [0.4.2](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.4.1...v0.4.2) (2024-04-01)
 
 
