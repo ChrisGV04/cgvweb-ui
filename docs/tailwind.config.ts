@@ -12,5 +12,5 @@ export default <Partial<Config>>{
       colors: { primary: sky },
     },
   },
-  plugins: [require('@tailwindcss/typography'), require('tailwindcss-animate')],
+  plugins: [require('@tailwindcss/typography')],
 };
