@@ -93,6 +93,9 @@ importers:
       release-it:
         specifier: ^17.2.1
         version: 17.2.1(typescript@5.4.5)
+      typescript:
+        specifier: ^5.4.5
+        version: 5.4.5
       vue-tsc:
         specifier: ^2.0.15
         version: 2.0.15(typescript@5.4.5)

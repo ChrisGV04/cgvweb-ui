@@ -1,5 +1,5 @@
 export default /*ui*/ {
-  base: 'inline-flex shrink-0 items-center justify-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75',
+  base: 'inline-flex shrink-0 items-center justify-center select-none focus:outline-none disabled:cursor-not-allowed disabled:opacity-75',
   font: 'font-semibold',
   rounded: 'rounded-md',
   transition: 'transition-colors duration-100',

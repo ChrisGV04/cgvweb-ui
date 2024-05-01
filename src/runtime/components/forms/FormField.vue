@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// @ts-expect-error
+// @ts-expect-error This import only exists after build
 import appConfig from '#build/app.config';
 
 import UiInputLabel from '#ui/components/forms/FormLabel.vue';

@@ -25,7 +25,7 @@ export const useUI = <T>(
     return mergeConfig<T>(
       _ui?.strategy || 'merge',
       _ui || {},
-      process.dev ? get(appConfig.ui, key, {}) : {},
+      import.meta.dev ? get(appConfig.ui, key, {}) : {},
       _config || {},
     );
   });

@@ -9,10 +9,8 @@ const props = defineProps({
 });
 const appConfig = useAppConfig();
 
-const isDynamic = computed<boolean>(
-  // @ts-ignore
-  () => props.dynamic || !!appConfig.ui?.icons?.dynamic,
-);
+// @ts-expect-error For some reason, the icons are not included in the appConfig.ui type
+const isDynamic = computed<boolean>(() => props.dynamic || !!appConfig.ui?.icons?.dynamic);
 </script>
 
 <template>

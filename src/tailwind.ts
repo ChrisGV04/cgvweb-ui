@@ -12,14 +12,12 @@ export default async function installTailwind(
   const runtimeDir = resolve('./runtime');
 
   // 1. register hook
-  // @ts-ignore
   nuxt.hook('tailwindcss:config', function (tailwindConfig) {
     tailwindConfig.theme = tailwindConfig.theme || {};
     tailwindConfig.plugins = tailwindConfig.plugins || [];
     tailwindConfig.theme.extend = tailwindConfig.theme.extend || {};
     tailwindConfig.theme.extend.colors = tailwindConfig.theme.extend.colors || {};
 
-    // @ts-ignore
     nuxt.options.appConfig.ui = { strategy: 'merge' };
   });
 
@@ -27,7 +25,8 @@ export default async function installTailwind(
   const configTemplate = addTemplate({
     filename: 'nuxtui-tailwind.config.cjs',
     write: true,
-    getContents: ({ nuxt }) => `
+    // eslint
+    getContents: (_) => `
       const { defaultExtractor: createDefaultExtractor } = require('tailwindcss/lib/lib/defaultExtractor.js')
       const { iconsPlugin, getIconCollections } = require('@egoist/tailwindcss-icons')
 

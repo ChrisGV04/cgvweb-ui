@@ -5,7 +5,7 @@ import type { Strategy } from '../types';
 const customTwMerge = extendTailwindMerge<string, string>({
   extend: {
     classGroups: {
-      icons: [(classPart: string) => /^i-/.test(classPart)],
+      icons: [(classPart: string) => classPart.startsWith('i-')],
     },
   },
 });
@@ -15,7 +15,7 @@ const defuTwMerge = createDefu((obj, key, value, namespace) => {
     return false;
   }
   if (typeof obj[key] === 'string' && typeof value === 'string' && obj[key] && value) {
-    // @ts-ignore
+    // @ts-expect-error Use of arbitrary keys
     obj[key] = customTwMerge(obj[key], value);
     return true;
   }
@@ -37,7 +37,9 @@ export function hexToRgb(hex: string) {
   });
 
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result ? `${parseInt(result[1], 16)} ${parseInt(result[2], 16)} ${parseInt(result[3], 16)}` : null;
+  return result
+    ? `${Number.parseInt(result[1], 16)} ${Number.parseInt(result[2], 16)} ${Number.parseInt(result[3], 16)}`
+    : null;
 }
 
 export function getSlotsChildren(slots: any) {

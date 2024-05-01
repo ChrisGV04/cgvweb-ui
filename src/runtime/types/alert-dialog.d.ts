@@ -1,5 +1,5 @@
 import type { AppConfig } from 'nuxt/schema';
-import { alertDialog } from '../ui.config';
+import type { alertDialog } from '../ui.config';
 import type { ButtonVariant } from './button';
 import type { ExtractDeepKey } from './utils';
 

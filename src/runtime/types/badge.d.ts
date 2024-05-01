@@ -1,5 +1,5 @@
 import type { AppConfig } from 'nuxt/schema';
-import { badge } from '../ui.config';
+import type { badge } from '../ui.config';
 import type { ExtractDeepKey } from './utils';
 import type { PrimitiveProps } from 'radix-vue';
 

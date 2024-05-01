@@ -25,7 +25,7 @@ const duration = computed(
 
 const repeat = computed(() => {
   const times = Math.ceil(wrapperWidth.value / marqueeWidth.value);
-  if (times === Infinity || isNaN(times)) return 1;
+  if (times === Number.POSITIVE_INFINITY || Number.isNaN(times)) return 1;
   return times;
 });
 

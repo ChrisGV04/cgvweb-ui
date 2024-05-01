@@ -2,7 +2,7 @@ import type { CollectionNames, IconsPluginOptions } from '@egoist/tailwindcss-ic
 import { addComponentsDir, createResolver, defineNuxtModule, installModule } from '@nuxt/kit';
 import { name, version } from '../package.json';
 import type { DeepPartial, Strategy } from './runtime/types';
-import * as config from './runtime/ui.config';
+import type * as config from './runtime/ui.config';
 import installTailwind from './tailwind';
 
 /** Adds strategy to every key of the object */

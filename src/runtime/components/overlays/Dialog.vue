@@ -1,9 +1,9 @@
 <script setup lang="ts">
-// @ts-expect-error
+// @ts-expect-error This import only exists after build
 import appConfig from '#build/app.config';
 
 import { useUI } from '#ui/composables/useUI';
-import type { Strategy } from '#ui/types';
+import type { Strategy, UiOverlayEmits } from '#ui/types';
 import { dialog } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
 import { uiToTransitionProps } from '#ui/utils/transitions';
@@ -25,13 +25,7 @@ const props = defineProps({
     default: () => ({}) as UiConfig,
   },
 });
-const emits = defineEmits<{
-  (e: 'update:open', value: boolean): void;
-  (e: 'before-enter'): void;
-  (e: 'after-enter'): void;
-  (e: 'before-leave'): void;
-  (e: 'after-leave'): void;
-}>();
+const emits = defineEmits<UiOverlayEmits & { (e: 'update:open', value: boolean): void }>();
 
 const $open = useVModel(props, 'open', emits, {
   defaultValue: props.defaultOpen,

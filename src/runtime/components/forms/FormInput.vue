@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// @ts-expect-error
+// @ts-expect-error This import only exists after build
 import appConfig from '#build/app.config';
 
 import UiIcon from '#ui/components/elements/Icon.vue';
@@ -35,8 +35,7 @@ const props = withDefaults(defineProps<InputProps<UiConfig>>(), {
 });
 const emits = defineEmits<{
   (e: 'update:modelValue', payload: string | number): void;
-  (e: 'click:prefix'): void;
-  (e: 'click:suffix'): void;
+  (e: 'click:prefix' | 'click:suffix'): void;
 }>();
 
 const $value = useVModel(props, 'modelValue', emits, { passive: true, defaultValue: props.defaultValue });

@@ -1,6 +1,6 @@
 import type { AppConfig } from 'nuxt/schema';
 import type { PrimitiveProps } from 'radix-vue';
-import { button } from '../ui.config';
+import type { button } from '../ui.config';
 import type { LinkProps } from './link';
 import type { ExtractDeepKey } from './utils';
 

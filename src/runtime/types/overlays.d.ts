@@ -1,6 +1,1 @@
-export type UiOverlayEmits = {
-  (e: 'before-enter'): void;
-  (e: 'after-enter'): void;
-  (e: 'before-leave'): void;
-  (e: 'after-leave'): void;
-};
+export type UiOverlayEmits = { (e: 'before-enter' | 'after-enter' | 'before-leave' | 'after-leave'): void };
