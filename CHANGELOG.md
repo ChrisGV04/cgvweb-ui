@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.5.0](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.4.3...v0.5.0) (2024-05-01)
+
+
+### Features
+
+* Implement tailwind HMR ([736dd28](https://github.com/ChrisGV04/cgvweb-ui/commit/736dd288c8fa87c9f900d4540780b080ca1e7d22))
+
+
+### Bug Fixes
+
+* Install pathe to prevent import inline external ([bbd5d39](https://github.com/ChrisGV04/cgvweb-ui/commit/bbd5d39e105a7bd763bbd6b3546132d0172317a8))
+
 ## [0.4.3](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.4.2...v0.4.3) (2024-04-04)
 
 ## [0.4.2](https://github.com/ChrisGV04/cgvweb-ui/compare/v0.4.1...v0.4.2) (2024-04-01)
