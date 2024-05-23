@@ -1,15 +1,16 @@
 <script setup lang="ts">
+import type { Strategy, UiOverlayEmits } from '#ui/types';
+import type { PropType } from 'vue';
+
 // @ts-expect-error This import only exists after build
 import appConfig from '#build/app.config';
 
 import { useUI } from '#ui/composables/useUI';
-import type { Strategy, UiOverlayEmits } from '#ui/types';
 import { dialog } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
 import { uiToTransitionProps } from '#ui/utils/transitions';
 import { usePreferredReducedMotion, useVModel } from '@vueuse/core';
 import { Dialog } from 'radix-vue/namespaced';
-import type { PropType } from 'vue';
 import { computed, defineOptions, toRef } from 'vue';
 
 const config = mergeConfig<typeof dialog>(appConfig.ui?.dialog?.strategy, appConfig.ui?.dialog, dialog);

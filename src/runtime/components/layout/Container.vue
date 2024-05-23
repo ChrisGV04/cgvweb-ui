@@ -1,12 +1,14 @@
 <script setup lang="ts">
+import type { Strategy } from '#ui/types';
+import type { PrimitiveProps } from 'radix-vue';
+
 // @ts-expect-error This import only exists after build
 import appConfig from '#build/app.config';
 
 import { useUI } from '#ui/composables/useUI';
-import type { Strategy } from '#ui/types';
 import { container } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
-import { Primitive, type PrimitiveProps } from 'radix-vue';
+import { Primitive } from 'radix-vue';
 import { twJoin, twMerge } from 'tailwind-merge';
 import { toRef, withDefaults } from 'vue';
 

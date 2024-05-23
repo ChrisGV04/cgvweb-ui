@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import type { PrimitiveProps } from 'radix-vue';
+
 import { useElementBounding, useElementVisibility, useToNumber } from '@vueuse/core';
-import { Primitive, type PrimitiveProps } from 'radix-vue';
+import { Primitive } from 'radix-vue';
 import { computed, ref, withDefaults } from 'vue';
 
 type Props = PrimitiveProps & { speed?: string | number; reverse?: boolean; pause?: boolean };

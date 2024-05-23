@@ -1,19 +1,21 @@
 <script setup lang="ts">
+import type { Strategy } from '#ui/types';
+import type { FormSelectProps } from '#ui/types/formSelect';
+import type { SelectRootEmits } from 'radix-vue';
+
 // @ts-expect-error This import only exists after build
 import appConfig from '#build/app.config';
 
 import UiIcon from '#ui/components/elements/Icon.vue';
 import UiFormField from '#ui/components/forms/FormField.vue';
 import { useUI } from '#ui/composables/useUI';
-import type { Strategy } from '#ui/types';
-import type { FormSelectProps } from '#ui/types/formSelect';
 import { formSelect } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
 import { getUiFormFieldProps } from '#ui/utils/forms';
 import { useToNumber } from '@vueuse/core';
 import omit from 'just-omit';
 import pick from 'just-pick';
-import { useForwardProps, useForwardPropsEmits, type SelectRootEmits } from 'radix-vue';
+import { useForwardProps, useForwardPropsEmits } from 'radix-vue';
 import { Select } from 'radix-vue/namespaced';
 import { twJoin, twMerge } from 'tailwind-merge';
 import { computed, defineOptions, toRef, withDefaults } from 'vue';
@@ -59,7 +61,7 @@ const rootProps = computed(() =>
 );
 const forwarded = useForwardPropsEmits(rootProps, emits);
 
-const fieldProps = useForwardProps(() => getUiFormFieldProps(omit(props, ['ui'])));
+const fieldProps = useForwardProps<any>(() => getUiFormFieldProps(omit(props, ['ui'])));
 
 const itemClasses = computed(() =>
   twMerge(

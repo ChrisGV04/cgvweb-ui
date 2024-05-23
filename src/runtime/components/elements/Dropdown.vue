@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import type { DropdownItem, Strategy } from '#ui/types';
+import type { DropdownMenuContentProps } from 'radix-vue';
+import type { PropType } from 'vue';
+
 // @ts-expect-error This import only exists after build
 import appConfig from '#build/app.config';
 
@@ -7,12 +11,9 @@ import { mergeConfig } from '#ui/utils';
 
 import { navigateTo } from '#imports';
 import { useUI } from '#ui/composables/useUI';
-import type { DropdownItem, Strategy } from '#ui/types';
 import { useToNumber, useVModel } from '@vueuse/core';
-import type { DropdownMenuContentProps } from 'radix-vue';
 import { DropdownMenu } from 'radix-vue/namespaced';
 import { twJoin, twMerge } from 'tailwind-merge';
-import type { PropType } from 'vue';
 import { computed, defineOptions, toRef } from 'vue';
 import UiButton from './Button.vue';
 import UiIcon from './Icon.vue';

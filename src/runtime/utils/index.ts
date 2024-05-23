@@ -1,6 +1,7 @@
+import type { Strategy } from '../types';
+
 import { createDefu, defu } from 'defu';
 import { extendTailwindMerge } from 'tailwind-merge';
-import type { Strategy } from '../types';
 
 const customTwMerge = extendTailwindMerge<string, string>({
   extend: {

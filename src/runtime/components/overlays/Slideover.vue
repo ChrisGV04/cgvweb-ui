@@ -1,17 +1,18 @@
 <script setup lang="ts">
+import type { Strategy, UiOverlayEmits } from '#ui/types';
+import type { PopoverContentProps } from 'radix-vue';
+import type { PropType, TransitionProps } from 'vue';
+
 // @ts-expect-error This import only exists after build
 import appConfig from '#build/app.config';
 
 import { useUI } from '#ui/composables/useUI';
-import type { Strategy, UiOverlayEmits } from '#ui/types';
 import { slideover } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
 import { uiToTransitionProps } from '#ui/utils/transitions';
 import { usePreferredReducedMotion, useVModel } from '@vueuse/core';
-import type { PopoverContentProps } from 'radix-vue';
 import { Dialog } from 'radix-vue/namespaced';
 import { twMerge } from 'tailwind-merge';
-import type { PropType, TransitionProps } from 'vue';
 import { computed, defineOptions, toRef } from 'vue';
 
 const config = mergeConfig<typeof slideover>(

@@ -1,11 +1,12 @@
 <script setup lang="ts">
+import type { InputProps, Strategy } from '#ui/types';
+
 // @ts-expect-error This import only exists after build
 import appConfig from '#build/app.config';
 
 import UiIcon from '#ui/components/elements/Icon.vue';
 import UiFormField from '#ui/components/forms/FormField.vue';
 import { useUI } from '#ui/composables/useUI';
-import type { InputProps, Strategy } from '#ui/types';
 import { formInput } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
 import { getUiFormFieldProps } from '#ui/utils/forms';
@@ -42,7 +43,7 @@ const $value = useVModel(props, 'modelValue', emits, { passive: true, defaultVal
 
 const { ui, attrs } = useUI('formInput', toRef(props, 'ui'), config);
 
-const fieldProps = useForwardProps(() => getUiFormFieldProps(omit(props, ['ui'])));
+const fieldProps = useForwardProps<any>(() => getUiFormFieldProps(omit(props, ['ui'])));
 </script>
 
 <template>

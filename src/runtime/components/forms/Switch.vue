@@ -1,21 +1,17 @@
 <script setup lang="ts">
+import type { Strategy } from '#ui/types';
+import type { SwitchRootEmits, SwitchRootProps } from 'radix-vue';
+
 // @ts-expect-error This import only exists after build
 import appConfig from '#build/app.config';
 
 import { useUI } from '#ui/composables/useUI';
-import type { Strategy } from '#ui/types';
 import { formSwitch } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
 import omit from 'just-omit';
-import {
-  SwitchRoot,
-  SwitchThumb,
-  useForwardPropsEmits,
-  type SwitchRootEmits,
-  type SwitchRootProps,
-} from 'radix-vue';
+import { SwitchRoot, SwitchThumb, useForwardPropsEmits } from 'radix-vue';
 import { twJoin, twMerge } from 'tailwind-merge';
-import { computed, toRef, withDefaults } from 'vue';
+import { toRef, withDefaults } from 'vue';
 
 const config = mergeConfig<typeof formSwitch>(
   appConfig.ui?.formSwitch?.strategy,
@@ -33,11 +29,7 @@ const emits = defineEmits<SwitchRootEmits>();
 
 const { ui } = useUI('formSwitch', toRef(props, 'ui'), config);
 
-const delegatedProps = computed(() => {
-  return omit(props, ['class', 'ui']);
-});
-
-const forwarded = useForwardPropsEmits(delegatedProps, emits);
+const forwarded = useForwardPropsEmits(() => omit(props, ['class', 'ui']), emits);
 </script>
 
 <template>

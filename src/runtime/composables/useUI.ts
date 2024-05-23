@@ -1,8 +1,10 @@
+import type { Ref } from 'vue';
+import type { Strategy } from '../types';
+
 import { useAppConfig } from '#imports';
 import omit from 'just-omit';
 import get from 'just-safe-get';
-import { computed, toValue, useAttrs, type Ref } from 'vue';
-import type { Strategy } from '../types';
+import { computed, toValue, useAttrs } from 'vue';
 import { mergeConfig } from '../utils';
 
 /**

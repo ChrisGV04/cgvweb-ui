@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import type { LinkProps } from '#ui/types';
+
 import { NuxtLink } from '#components';
 import { createError, useRoute } from '#imports';
-import type { LinkProps } from '#ui/types';
 import { getNuxtLinkProps } from '#ui/utils/links';
 import { useLink } from '#vue-router';
 import { isEqual } from 'ohash';

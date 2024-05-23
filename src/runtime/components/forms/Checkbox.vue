@@ -1,13 +1,14 @@
 <script setup lang="ts">
+import type { Strategy } from '#ui/types';
+import type { CheckboxRootEmits, CheckboxRootProps } from 'radix-vue';
+
 // @ts-expect-error This import only exists after build
 import appConfig from '#build/app.config';
 
 import { useUI } from '#ui/composables/useUI';
-import type { Strategy } from '#ui/types';
 import { checkbox } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
 import omit from 'just-omit';
-import type { CheckboxRootEmits, CheckboxRootProps } from 'radix-vue';
 import { CheckboxIndicator, CheckboxRoot, useForwardPropsEmits } from 'radix-vue';
 import { twJoin, twMerge } from 'tailwind-merge';
 import { computed, toRef, withDefaults } from 'vue';
@@ -34,11 +35,10 @@ const { ui } = useUI('checkbox', toRef(props, 'ui'), config);
 const checkedIcon = computed(() => props.checkedIcon ?? ui.value.default.checkedIcon);
 const indeterminateIcon = computed(() => props.indeterminateIcon ?? ui.value.default.indeterminateIcon);
 
-const delegatedProps = computed(() => {
-  return omit(props, ['class', 'ui', 'checkedIcon', 'indeterminateIcon']);
-});
-
-const forwarded = useForwardPropsEmits(delegatedProps, emits);
+const forwarded = useForwardPropsEmits(
+  () => omit(props, ['class', 'ui', 'checkedIcon', 'indeterminateIcon']),
+  emits,
+);
 </script>
 
 <template>

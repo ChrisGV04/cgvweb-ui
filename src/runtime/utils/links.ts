@@ -1,7 +1,8 @@
-import { NuxtLink } from '#components';
-import UiLink from '#ui/components/elements/Link.vue';
 import type { LinkProps } from '#ui/types';
 import type { NuxtLinkProps } from 'nuxt/app';
+
+import { NuxtLink } from '#components';
+import UiLink from '#ui/components/elements/Link.vue';
 
 export const getNuxtLinkProps = (props: any): NuxtLinkProps => {
   const keys = Object.keys(NuxtLink.props);

@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import type { BadgeProps, Strategy } from '#ui/types';
+
 // @ts-expect-error This import only exists after build
 import appConfig from '#build/app.config';
 
 import { useUI } from '#ui/composables/useUI';
-import type { BadgeProps, Strategy } from '#ui/types';
 import { badge } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
 import { Primitive } from 'radix-vue';

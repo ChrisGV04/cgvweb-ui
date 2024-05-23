@@ -1,16 +1,17 @@
 <script setup lang="ts">
+import type { Strategy } from '#ui/types';
+import type { TooltipContentProps } from 'radix-vue';
+import type { PropType } from 'vue';
+
 // @ts-expect-error This import only exists after build
 import appConfig from '#build/app.config';
 
 import { useUI } from '#ui/composables/useUI';
-import type { Strategy } from '#ui/types';
 import { tooltip } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
 import { useToNumber } from '@vueuse/core';
-import type { TooltipContentProps } from 'radix-vue';
 import { Tooltip } from 'radix-vue/namespaced';
 import { twMerge } from 'tailwind-merge';
-import type { PropType } from 'vue';
 import { computed, defineOptions, toRef } from 'vue';
 
 const config = mergeConfig<typeof tooltip>(appConfig.ui?.tooltip?.strategy, appConfig.ui?.tooltip, tooltip);

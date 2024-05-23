@@ -1,8 +1,8 @@
+import type { ModuleOptions } from './module';
+
 import { addTemplate, createResolver, installModule, useNuxt } from '@nuxt/kit';
 import { defu } from 'defu';
 import { join } from 'pathe';
-
-import type { ModuleOptions } from './module';
 
 export default async function installTailwind(
   moduleOptions: ModuleOptions,

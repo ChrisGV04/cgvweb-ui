@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import type { FormFieldProps, Strategy } from '#ui/types';
+
 // @ts-expect-error This import only exists after build
 import appConfig from '#build/app.config';
 
 import UiInputLabel from '#ui/components/forms/FormLabel.vue';
 import { useUI } from '#ui/composables/useUI';
-import type { FormFieldProps, Strategy } from '#ui/types';
 import { formField } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
 import { Primitive } from 'radix-vue';

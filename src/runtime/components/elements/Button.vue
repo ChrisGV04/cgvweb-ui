@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import type { ButtonProps, Strategy } from '#ui/types';
+
 // @ts-expect-error This import only exists after build
 import appConfig from '#build/app.config';
 
 import UiLink from '#ui/components/elements/Link.vue';
 import { useUI } from '#ui/composables/useUI';
-import type { ButtonProps, Strategy } from '#ui/types';
 import { button } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
 import { getUiLinkProps } from '#ui/utils/links';

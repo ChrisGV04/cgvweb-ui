@@ -1,18 +1,20 @@
 <script setup lang="ts">
+import type { ComboboxItem, ComboboxOptions, ComboboxProps, Strategy } from '#ui/types';
+import type { ComboboxRootEmits } from 'radix-vue';
+
 // @ts-expect-error This import only exists after build
 import appConfig from '#build/app.config';
 
 import UiIcon from '#ui/components/elements/Icon.vue';
 import UiFormField from '#ui/components/forms/FormField.vue';
 import { useUI } from '#ui/composables/useUI';
-import type { ComboboxItem, ComboboxOptions, ComboboxProps, Strategy } from '#ui/types';
 import { combobox } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
 import { getUiFormFieldProps } from '#ui/utils/forms';
 import { useDebounceFn, useToNumber } from '@vueuse/core';
 import omit from 'just-omit';
 import pick from 'just-pick';
-import { useForwardProps, useForwardPropsEmits, type ComboboxRootEmits } from 'radix-vue';
+import { useForwardProps, useForwardPropsEmits } from 'radix-vue';
 import { Combobox } from 'radix-vue/namespaced';
 import { twJoin, twMerge } from 'tailwind-merge';
 import { computed, defineOptions, ref, toRef, watch, withDefaults } from 'vue';
@@ -47,7 +49,7 @@ const align = computed(() => props.align ?? ui.value.default.align);
 const rootProps = computed(() => pick(props, ['defaultValue', 'disabled', 'multiple', 'name', 'modelValue']));
 const forwarded = useForwardPropsEmits(rootProps, emits);
 
-const fieldProps = useForwardProps(() => getUiFormFieldProps(omit(props, ['ui'])));
+const fieldProps = useForwardProps<any>(() => getUiFormFieldProps(omit(props, ['ui'])));
 
 const itemClasses = computed(() =>
   twMerge(

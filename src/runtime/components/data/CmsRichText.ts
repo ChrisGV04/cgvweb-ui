@@ -1,4 +1,5 @@
 import type { PropType, SlotsType, VNode, VNodeArrayChildren } from 'vue';
+
 import { defineComponent, h } from 'vue';
 
 type RichTextElement =

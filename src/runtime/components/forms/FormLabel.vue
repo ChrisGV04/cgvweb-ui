@@ -1,12 +1,14 @@
 <script setup lang="ts">
+import type { Strategy } from '#ui/types';
+import type { LabelProps } from 'radix-vue';
+
 // @ts-expect-error This import only exists after build
 import appConfig from '#build/app.config';
 
 import { useUI } from '#ui/composables/useUI';
-import type { Strategy } from '#ui/types';
 import { formLabel } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
-import { Label, type LabelProps } from 'radix-vue';
+import { Label } from 'radix-vue';
 import { toRef, withDefaults } from 'vue';
 
 const config = mergeConfig<typeof formLabel>(

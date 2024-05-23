@@ -1,10 +1,7 @@
 <script setup lang="ts">
-import {
-  RadioGroupRoot,
-  useForwardPropsEmits,
-  type RadioGroupRootEmits,
-  type RadioGroupRootProps,
-} from 'radix-vue';
+import type { RadioGroupRootEmits, RadioGroupRootProps } from 'radix-vue';
+
+import { RadioGroupRoot, useForwardPropsEmits } from 'radix-vue';
 
 const props = defineProps<RadioGroupRootProps>();
 const emits = defineEmits<RadioGroupRootEmits>();

@@ -1,13 +1,15 @@
 <script setup lang="ts">
+import type { Strategy } from '#ui/types';
+import type { RadioGroupItemProps } from 'radix-vue';
+
 // @ts-expect-error This import only exists after build
 import appConfig from '#build/app.config';
 
 import { useUI } from '#ui/composables/useUI';
-import type { Strategy } from '#ui/types';
 import { formRadioGroupItem } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
 import omit from 'just-omit';
-import { RadioGroupIndicator, RadioGroupItem, useForwardProps, type RadioGroupItemProps } from 'radix-vue';
+import { RadioGroupIndicator, RadioGroupItem, useForwardProps } from 'radix-vue';
 import { twJoin, twMerge } from 'tailwind-merge';
 import { computed, toRef, withDefaults } from 'vue';
 

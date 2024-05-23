@@ -1,5 +1,6 @@
-import UiFormField from '#ui/components/forms/FormField.vue';
 import type { FormFieldProps } from '#ui/types';
+
+import UiFormField from '#ui/components/forms/FormField.vue';
 
 export const getUiFormFieldProps = (props: any): FormFieldProps => {
   const keys = Object.keys(UiFormField.props);

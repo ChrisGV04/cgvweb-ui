@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import type { AlertDialogProps, Strategy, UiOverlayEmits } from '#ui/types';
+
 // @ts-expect-error This import only exists after build
 import appConfig from '#build/app.config';
 
 import UiButton from '#ui/components/elements/Button.vue';
 import { useUI } from '#ui/composables/useUI';
-import type { AlertDialogProps, Strategy, UiOverlayEmits } from '#ui/types';
 import { alertDialog } from '#ui/ui.config';
 import { mergeConfig } from '#ui/utils';
 import { uiToTransitionProps } from '#ui/utils/transitions';
